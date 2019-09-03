@@ -17,7 +17,7 @@ from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register, errors_handler
 
 
-@register(pattern=".whois(?: |$)(.*)", outgoing=True)
+@register(pattern=".info(?: |$)(.*)", outgoing=True)
 @errors_handler
 async def who(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
@@ -150,7 +150,7 @@ async def fetch_info(replied_user, event):
 
 
 CMD_HELP.update({
-    "whois":
-    ".whois <username> or reply to someones text with .whois\
+    "info":
+    ".info <username> or reply to someones text with .whois\
     \nUsage: Gets info of an user."
 })
