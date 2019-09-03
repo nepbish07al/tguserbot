@@ -126,24 +126,25 @@ async def pipcheck(pip):
             await pip.edit("`Use .help pip to see an example`")
 
 
-@register(outgoing=True, pattern="^.alive$")
+@register(outgoing=True, pattern="^.status$")
 @errors_handler
 async def amireallyalive(alive):
     """ For .alive command, check if the bot is running.  """
     if not alive.text[0].isalpha() and alive.text[0] not in ("/", "#", "@",
                                                              "!"):
         await alive.edit("`"
-                         "My bot is running \n\n"
+                         "System Status: "
+                         f"Online \n \n"
                          f"Telethon version: {version.__version__} \n"
                          f"Python: {python_version()} \n"
                          f"User: {DEFAULTUSER}"
                          "`")
 
 
-@register(outgoing=True, pattern="^.aliveu")
+@register(outgoing=True, pattern="^.username$")
 @errors_handler
 async def amireallyaliveuser(username):
-    """ For .aliveu command, change the username in the .alive command. """
+    """ For .username command, change the username in the .status command. """
     if not username.text[0].isalpha() and username.text[0] not in ("/", "#",
                                                                    "@", "!"):
         message = username.text
@@ -156,7 +157,7 @@ async def amireallyaliveuser(username):
         await username.edit("`" f"{output}" "`")
 
 
-@register(outgoing=True, pattern="^.resetalive$")
+@register(outgoing=True, pattern="^.resetstatus$")
 @errors_handler
 async def amireallyalivereset(ureset):
     """ For .resetalive command, reset the username in the .alive command. """
@@ -176,11 +177,11 @@ CMD_HELP.update(
     {"pip": ".pip <module(s)>\
     \nUsage: Does a search of pip modules(s)."})
 CMD_HELP.update({
-    "alive":
-    ".alive\
-    \nUsage: Type .alive to see wether your bot is working or not.\
-    \n\n.aliveu <text>\
-    \nUsage: Changes the 'user' in alive to the text you want.\
-    \n\n.resetalive\
+    "status":
+    ".status\
+    \nUsage: Type .status to see wether your bot is working or not.\
+    \n\n.username <text>\
+    \nUsage: Changes the 'user' in username to the text you want.\
+    \n\n.resetstatus\
     \nUsage: Resets the user to default."
 })
