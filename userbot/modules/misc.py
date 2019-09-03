@@ -58,7 +58,7 @@ async def killdabot(event):
     """ For .shutdown command, shut the bot down."""
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
                                                              "!"):
-        await event.edit("`Goodbye *Windows XP shutdown sound*....`")
+        await event.edit("Powering off.")
         if BOTLOG:
             await event.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n"
                                             "Bot shut down")
@@ -70,7 +70,7 @@ async def killdabot(event):
 async def killdabot(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
                                                              "!"):
-        await event.edit("`BRB... *PornHub intro*`")
+        await event.edit("Rebooting.")
         if BOTLOG:
             await event.client.send_message(BOTLOG_CHATID, "#RESTART \n"
                                             "Bot Restarted")
@@ -79,50 +79,6 @@ async def killdabot(event):
         execl(sys.executable, sys.executable, *sys.argv)
         # Shut the existing one down
         exit()
-
-
-@register(outgoing=True, pattern="^.community$")
-@errors_handler
-async def bot_community(community):
-    """ For .support command, just returns the group link. """
-    if not community.text[0].isalpha() and community.text[0] not in ("/", "#",
-                                                                     "@", "!"):
-        await community.edit(
-            "Join RaphielGang's awesome userbot community: @userbot_support"
-            "\nDo note that Paperplane Extended is an unoficial fork of their "
-            "Paperplane project and it may get limited or no support for bugs."
-        )
-
-
-@register(outgoing=True, pattern="^.support$")
-@errors_handler
-async def bot_support(wannahelp):
-    """ For .support command, just returns the group link. """
-    if not wannahelp.text[0].isalpha() and wannahelp.text[0] not in ("/", "#",
-                                                                     "@", "!"):
-        await wannahelp.edit(
-            "Join the Paperplane Extended Channel: @PaperplaneExtended")
-
-
-@register(outgoing=True, pattern="^.creator$")
-@errors_handler
-async def creator(e):
-    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        await e.edit("[AvinashReddy3108](https://t.me/AvinashReddy3108)")
-
-
-@register(outgoing=True, pattern="^.readme$")
-@errors_handler
-async def reedme(e):
-    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        await e.edit(
-            "Here's something for you to read:\n"
-            "\n[Paperplane Extended's README.md file](https://github.com/AvinashReddy3108/PaperplaneExtended/blob/sql-extended/README.md)"
-            "\n[Setup Guide - Basic](https://telegra.ph/How-to-host-a-Telegram-Userbot-07-24)"
-            "\n[Setup Guide - Google Drive](https://telegra.ph/How-To-Setup-GDrive-07-27)"
-            "\n[Setup Guide - LastFM Module](https://telegra.ph/How-to-set-up-LastFM-module-for-Paperplane-userbot-08-10)"
-        )
-
 
 # Copyright (c) Gegham Zakaryan | 2019
 @register(outgoing=True, pattern="^.repeat (.*)")
@@ -139,17 +95,6 @@ async def repeat(rep):
             replyText += toBeRepeated + "\n"
 
         await rep.edit(replyText)
-
-
-@register(outgoing=True, pattern="^.repo$")
-@errors_handler
-async def repo_is_here(wannasee):
-    """ For .repo command, just returns the repo URL. """
-    if not wannasee.text[0].isalpha() and wannasee.text[0] not in ("/", "#",
-                                                                   "@", "!"):
-        await wannasee.edit(
-            "Click [here](https://github.com/AvinashReddy3108/PaperplaneExtended) to open Paperplane Extended's GitHub page."
-        )
 
 
 @register(outgoing=True, pattern="^.json$")
@@ -188,41 +133,14 @@ CMD_HELP.update({
 CMD_HELP.update({
     'sleep':
     '.sleep <seconds>\
-\nUsage: Userbots get tired too. Let yours snooze for a few seconds.'
+\nUsage: Simply .sleep to sleep for the designated time in seconds'
 })
 
 CMD_HELP.update({
     "shutdown":
     ".shutdown\
-\nUsage: Sometimes you need to shut down your bot. Sometimes you just hope to\
-hear Windows XP shutdown sound... but you don't."
+\nUsage: Simply .shutdown, equivalent to CTRL-C in terminal"
 })
-
-CMD_HELP.update(
-    {'support': ".support\
-\nUsage: If you need help, use this command."})
-
-CMD_HELP.update({
-    'community':
-    ".community\
-\nUsage: Join the awesome Paperplane userbot community !!"
-})
-
-CMD_HELP.update({
-    'repo':
-    '.repo\
-\nUsage: If you are curious what makes the userbot work, this is what you need.'
-})
-
-CMD_HELP.update({
-    "readme":
-    ".readme\
-\nUsage: Provide links to setup the userbot and it's modules."
-})
-
-CMD_HELP.update(
-    {"creator": ".creator\
-\nUsage: Know who created this awesome userbot !!"})
 
 CMD_HELP.update({
     "repeat":
@@ -231,7 +149,7 @@ CMD_HELP.update({
 })
 
 CMD_HELP.update({"restart": ".restart\
-\nUsage: Restart the bot !!"})
+\nUsage: Restarts"})
 
 CMD_HELP.update({
     "json":

@@ -81,51 +81,6 @@ async def bot_ver(event):
             )
 
 
-@register(outgoing=True, pattern="^.pip(?: |$)(.*)")
-@errors_handler
-async def pipcheck(pip):
-    """ For .pip command, do a pip search. """
-    if not pip.text[0].isalpha() and pip.text[0] not in ("/", "#", "@", "!"):
-        pipmodule = pip.pattern_match.group(1)
-        if pipmodule:
-            await pip.edit("`Searching . . .`")
-            invokepip = f"pip3 search {pipmodule}"
-            pipc = await asyncrunapp(
-                invokepip,
-                stdout=asyncPIPE,
-                stderr=asyncPIPE,
-            )
-
-            stdout, stderr = await pipc.communicate()
-            pipout = str(stdout.decode().strip()) \
-                + str(stderr.decode().strip())
-
-            if pipout:
-                if len(pipout) > 4096:
-                    await pip.edit("`Output too large, sending as file`")
-                    file = open("output.txt", "w+")
-                    file.write(pipout)
-                    file.close()
-                    await pip.client.send_file(
-                        pip.chat_id,
-                        "output.txt",
-                        reply_to=pip.id,
-                    )
-                    remove("output.txt")
-                    return
-                await pip.edit("**Query: **\n`"
-                               f"{invokepip}"
-                               "`\n**Result: **\n`"
-                               f"{pipout}"
-                               "`")
-            else:
-                await pip.edit("**Query: **\n`"
-                               f"{invokepip}"
-                               "`\n**Result: **\n`No Result Returned/False`")
-        else:
-            await pip.edit("`Use .help pip to see an example`")
-
-
 @register(outgoing=True, pattern="^.status$")
 @errors_handler
 async def amireallyalive(alive):
@@ -140,48 +95,13 @@ async def amireallyalive(alive):
                          f"User: {DEFAULTUSER}"
                          "`")
 
-
-@register(outgoing=True, pattern="^.username$")
-@errors_handler
-async def amireallyaliveuser(username):
-    """ For .username command, change the username in the .status command. """
-    if not username.text[0].isalpha() and username.text[0] not in ("/", "#",
-                                                                   "@", "!"):
-        message = username.text
-        output = '.aliveu [new user without brackets] nor can it be empty'
-        if not (message == '.aliveu' or message[7:8] != ' '):
-            newuser = message[8:]
-            global DEFAULTUSER
-            DEFAULTUSER = newuser
-            output = 'Successfully changed user to ' + newuser + '!'
-        await username.edit("`" f"{output}" "`")
-
-
-@register(outgoing=True, pattern="^.resetstatus$")
-@errors_handler
-async def amireallyalivereset(ureset):
-    """ For .resetalive command, reset the username in the .alive command. """
-    if not ureset.text[0].isalpha() and ureset.text[0] not in ("/", "#", "@",
-                                                               "!"):
-        global DEFAULTUSER
-        DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
-        await ureset.edit("`" "Successfully reset user for alive!" "`")
-
-
 CMD_HELP.update(
     {"sysd": ".sysd\
     \nUsage: Shows system information using neofetch."})
 CMD_HELP.update({"botver": ".botver\
     \nUsage: Shows the userbot version."})
-CMD_HELP.update(
-    {"pip": ".pip <module(s)>\
-    \nUsage: Does a search of pip modules(s)."})
 CMD_HELP.update({
     "status":
     ".status\
-    \nUsage: Type .status to see wether your bot is working or not.\
-    \n\n.username <text>\
-    \nUsage: Changes the 'user' in username to the text you want.\
-    \n\n.resetstatus\
-    \nUsage: Resets the user to default."
+    \nUsage: Type .status to see wether your bot is working or not."
 })
