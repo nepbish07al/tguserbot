@@ -41,7 +41,7 @@ async def sleepybot(time):
             await time.reply("Syntax: `.sleep [seconds]`")
         else:
             counter = int(time.pattern_match.group(1))
-            await time.edit("`I am sulking and snoozing....`")
+            await time.edit("Sleeping...")
             sleep(2)
             if BOTLOG:
                 await time.client.send_message(
@@ -51,34 +51,17 @@ async def sleepybot(time):
                 )
             sleep(counter)
 
-
 @register(outgoing=True, pattern="^.shutdown$")
 @errors_handler
 async def killdabot(event):
     """ For .shutdown command, shut the bot down."""
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
                                                              "!"):
-        await event.edit("Powering off.")
+        await event.edit("Powering off...")
         if BOTLOG:
             await event.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n"
                                             "Bot shut down")
         await event.client.disconnect()
-
-
-@register(outgoing=True, pattern="^.restart$")
-@errors_handler
-async def killdabot(event):
-    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
-                                                             "!"):
-        await event.edit("Rebooting.")
-        if BOTLOG:
-            await event.client.send_message(BOTLOG_CHATID, "#RESTART \n"
-                                            "Bot Restarted")
-        await event.client.disconnect()
-        # Spin a new instance of bot
-        execl(sys.executable, sys.executable, *sys.argv)
-        # Shut the existing one down
-        exit()
 
 # Copyright (c) Gegham Zakaryan | 2019
 @register(outgoing=True, pattern="^.repeat (.*)")
@@ -147,9 +130,6 @@ CMD_HELP.update({
     ".repeat <no.> <text>\
 \nUsage: Repeats the text for a number of times. Don't confuse this with spam tho."
 })
-
-CMD_HELP.update({"restart": ".restart\
-\nUsage: Restarts"})
 
 CMD_HELP.update({
     "json":
