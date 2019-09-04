@@ -73,7 +73,7 @@ async def neardc(event):
 async def pingme(pong):
     """ FOr .pingme command, ping the userbot from any chat.  """
     if not pong.text[0].isalpha() and pong.text[0] not in ("/", "#", "@", "!"):
-		hostname = "1.1.1.1" #cloudfare's stable dns server
+        hostname = "1.1.1.1" #cloudfare's stable dns server
         start = datetime.now()
         response = os.system("ping -c 1 " + hostname)
         end = datetime.now()
