@@ -10,6 +10,7 @@ from datetime import datetime
 
 import os
 import speedtest
+import subprocess
 from telethon import functions
 from userbot import CMD_HELP
 from userbot.events import register, errors_handler
@@ -73,11 +74,13 @@ async def neardc(event):
 async def pingme(pong):
     """ FOr .pingme command, ping the userbot from any chat.  """
     if not pong.text[0].isalpha() and pong.text[0] not in ("/", "#", "@", "!"):
-        hostname = "1.1.1.1" #cloudfare's stable dns server
-        start = datetime.now()
-        response = os.system("ping -c 1 " + hostname)
-        end = datetime.now()
-        duration = (end - start).microseconds / 1000
+        #hostname = "1.1.1.1" #cloudfare's stable dns server
+        #start = datetime.now()
+        #response = os.system("ping -c 1 " + hostname)
+        #end = datetime.now()
+        #duration = (end - start).microseconds / 1000
+        duration = 0
+        out = subprocess.run(['ping', '-c', '1', '1.1.1.1'], capture_output=True)
         await pong.edit("Ping speed: %sms" % (duration))
 
 
