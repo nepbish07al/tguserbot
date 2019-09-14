@@ -83,7 +83,7 @@ async def pingme(pong):
         duration = 0
         out = subprocess.check_output("ping -c 1 1.1.1.1", shell=True)
         listOut = out.splitlines()
-        splitOut = listOut[1].split(" ")
+        splitOut = listOut[1].split(' ')
         for line in splitOut:
             match = re.search('time=P(\d+)', line)
             if match:
