@@ -86,7 +86,7 @@ async def pingme(pong):
         splitOut = listOut[1].split(' ')
         stringtocut = ""
         for line in splitOut:
-            if(line.startswith('time='):
+            if(line.startswith('time=')):
                 stringtocut=line
         print(stringtocut)
         await pong.edit("Ping speed: %sms" % (duration))
