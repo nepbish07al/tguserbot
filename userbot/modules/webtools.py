@@ -89,7 +89,7 @@ async def pingme(pong):
             if(line.startswith('time=')):
                 stringtocut=line
         newstr=stringtocut.split(' ')
-        duration = (float) newstr[1]
+        duration = float(newstr[1])
         await pong.edit("Ping speed: %sms" % (duration))
 
 
