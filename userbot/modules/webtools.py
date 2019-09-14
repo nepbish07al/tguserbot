@@ -80,7 +80,7 @@ async def pingme(pong):
         #end = datetime.now()
         #duration = (end - start).microseconds / 1000
         duration = 0
-        out = subprocess.run('ping -c 1 1.1.1.1', stdout=subprocess.PIPE)
+        out = subprocess.check_output("ping -c 1 1.1.1.1", shell=True)
         await pong.edit("Ping speed: %sms" % (duration))
 
 
