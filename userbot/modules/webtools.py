@@ -81,6 +81,7 @@ async def pingme(pong):
         #duration = (end - start).microseconds / 1000
         duration = 0
         out = subprocess.check_output("ping -c 1 1.1.1.1", shell=True)
+        print(out)
         await pong.edit("Ping speed: %sms" % (duration))
 
 
