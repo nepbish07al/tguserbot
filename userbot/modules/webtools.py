@@ -87,7 +87,7 @@ async def pingme(pong):
         for line in splitOut:
             match = re.search('time=P(\d+)', line)
             if match:
-                print match.group()
+                print(match.group())
         await pong.edit("Ping speed: %sms" % (duration))
 
 
