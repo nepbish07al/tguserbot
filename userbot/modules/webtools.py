@@ -8,6 +8,7 @@
 
 from datetime import datetime
 
+import re
 import os
 import speedtest
 import subprocess
@@ -81,7 +82,12 @@ async def pingme(pong):
         #duration = (end - start).microseconds / 1000
         duration = 0
         out = subprocess.check_output("ping -c 1 1.1.1.1", shell=True)
-        print(out)
+        listOut = out.splitlines()
+        splitOut = listOut[1].split(" ")
+        for line in splitOut:
+            match = re.search('time=P(\d+)', line)
+            if match:
+                print match.group(1)
         await pong.edit("Ping speed: %sms" % (duration))
 
 
