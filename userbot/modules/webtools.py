@@ -81,7 +81,7 @@ async def pingme(pong):
         #end = datetime.now()
         #duration = (end - start).microseconds / 1000
         duration = 0
-        out = subprocess.check_output("ping -c 1 1.1.1.1", shell=True)
+        out = subprocess.check_output("ping -c 1 1.1.1.1", shell=True).decode()
         listOut = out.splitlines()
         splitOut = listOut[1].split(' ')
         for line in splitOut:
