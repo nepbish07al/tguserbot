@@ -84,10 +84,11 @@ async def pingme(pong):
         out = subprocess.check_output("ping -c 1 1.1.1.1", shell=True).decode()
         listOut = out.splitlines()
         splitOut = listOut[1].split(' ')
+        stringtocut = ""
         for line in splitOut:
-            match = re.search('time=P(\d+)', line)
-            if match:
-                print(match.group(1))
+            if(line.startswith('time='):
+                stringtocut=line
+        print(stringtocut)
         await pong.edit("Ping speed: %sms" % (duration))
 
 
