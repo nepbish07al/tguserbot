@@ -8,7 +8,6 @@
 
 from datetime import datetime
 
-import re
 import os
 import speedtest
 import subprocess
