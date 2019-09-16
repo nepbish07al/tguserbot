@@ -135,7 +135,7 @@ async def fetch_info(replied_user, event):
     caption += f"Data Centre ID: {dc_id}\n"
     caption += f"Number of Profile Pics: {replied_user_profile_photos_count}\n"
     caption += f"Permanent Link To Profile: "
-    caption += f"<a href=\"tg://user?id={user_id}\">{first_name}</a>"
+    caption += f"<a href=\"tg://user?id={user_id}\">{first_name}</a>\n"
     caption += f"Is Bot: {is_bot}\n"
     caption += f"Is Restricted: {restricted}\n"
     caption += f"Is Verified by Telegram: {verified}\n"
