@@ -92,13 +92,6 @@ async def amireallyalive(alive):
     
     if not alive.text[0].isalpha() and alive.text[0] not in ("/", "#", "@",
                                                              "!"):
-        client(SendMediaRequest(
-            peer=client.get_me(),
-            media=InputMediaDocument(
-                id='CAADAgAD0QMAAjq5FQKizo2AiTQCBQI'
-            )
-       ))
-        
         await alive.edit("`"
                          "System Status: "
                          f"Online \n \n"
