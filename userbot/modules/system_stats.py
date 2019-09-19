@@ -9,8 +9,10 @@ from asyncio import create_subprocess_shell as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 from platform import python_version, uname
 from shutil import which
-from os import remove
+from os import remove, system
 from telethon import version
+from subprocess import check_output
+from telethon.tl.types import User, Chat, Channel
 
 from userbot import CMD_HELP, ALIVE_NAME
 from userbot.events import register, errors_handler
@@ -85,6 +87,9 @@ async def bot_ver(event):
 @errors_handler
 async def amireallyalive(alive):
     """ For .alive command, check if the bot is running.  """
+    
+    rtt = check_output("ping -c 1 1.1.1.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
+    
     if not alive.text[0].isalpha() and alive.text[0] not in ("/", "#", "@",
                                                              "!"):
         await alive.edit("`"
@@ -92,8 +97,10 @@ async def amireallyalive(alive):
                          f"Online \n \n"
                          f"Telethon version: {version.__version__} \n"
                          f"Python: {python_version()} \n"
-                         f"User: {DEFAULTUSER}"
+                         f"User: {DEFAULTUSER}\n"
+                         f"RTT: {rtt}"
                          "`")
+
 
 CMD_HELP.update(
     {"sysd": ".sysd\
