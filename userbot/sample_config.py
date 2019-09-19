@@ -53,7 +53,7 @@ class Config(object):
     G_DRIVE_CLIENT_SECRET = None # Google Drive Module
     G_DRIVE_AUTH_TOKEN_DATA = None # Google Drive Module
     GDRIVE_FOLDER_ID = None # Google Drive Module
-    GREET_STICKER='CAADAgAD0QMAAjq5FQKizo2AiTQCBQI'
+    GREET_STICKER='CAADAgAD0QMAAjq5FQKizo2AiTQCBQI' # Comming soon
 
 class Development(Config):
     LOGGER = True
