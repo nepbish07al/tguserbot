@@ -70,18 +70,8 @@ async def neardc(event):
                          f"This Datacenter : `{result.this_dc}`")
 
 
-@register(outgoing=True, pattern="^.ping$")
-@errors_handler
-async def pingme(pong):
-    """ For .ping command, ping the userbot to Telegram server from any chat.  """
-    start = datetime.now()
-    await pong.edit("`Pinging...`")
-    end = datetime.now()
-    duration = (end - start).microseconds / 1000
-    await pong.edit("`Ping to Telegram server\n%sms`" % (duration)) 
-
 #Kanged from @prototype74's userbot        
-@register(outgoing=True, pattern="^.rtt$")
+@register(outgoing=True, pattern="^.ping$")
 @errors_handler
 async def rtt(ping):
     """ For .rtt command, get current round-trip time from any chat.  """
@@ -98,8 +88,5 @@ CMD_HELP.update({
 })
 CMD_HELP.update(
     {"ping": ".ping\
-    \nUsage: Shows how long it takes to ping the Telegram server."})
-CMD_HELP.update(
-    {"ping": ".rtt\
-    \nUsage: Shows how long it takes to get an acknowledgment from your bot."
-})
+    \nUsage: Pings cloudfare's 1.0.0.1"})
+
