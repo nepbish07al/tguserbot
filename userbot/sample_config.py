@@ -22,7 +22,7 @@ class Config(object):
     # Required - Telegram App KEY and HASH
     API_KEY =  None
     API_HASH = None
-    HOMIE_STRING = ""
+    HOMIE_LIST = []
     
     # Optional
     STRING_SESSION = None # Userbot Session String
