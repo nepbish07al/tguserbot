@@ -64,7 +64,7 @@ async def neardc(event):
                      f"Nearest Datacenter : `{result.nearest_dc}`\n"
                      f"This Datacenter : `{result.this_dc}`")
 
-
+#Kanged .rtt from @prototype74, thanks homie
 @register(outgoing=True, pattern="^.ping$")
 @errors_handler
 async def pingme(pong):
