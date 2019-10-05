@@ -68,20 +68,9 @@ async def neardc(event):
 @register(outgoing=True, pattern="^.ping$")
 @errors_handler
 async def pingme(pong):
-    """ For .ping command, ping the userbot to Telegram server from any chat.  """
-    start = datetime.now()
-    await pong.edit("`Pinging...`")
-    end = datetime.now()
-    duration = (end - start).microseconds / 1000
-    await pong.edit("`Ping to Telegram server\n%sms`" % (duration)) 
-
-        
-@register(outgoing=True, pattern="^.rtt$")
-@errors_handler
-async def rtt(ping):
     """ For .rtt command, get current round-trip time from any chat.  """
-    duration = check_output("ping -c 1 1.1.1.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
-    await ping.edit("`Round-trip time\n%s`" % (duration))
+    duration = check_output("ping -c 1 1.0.0.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
+    await pong.edit("`Ping speed is: %s`" % (duration))
 
 
 CMD_HELP.update(
@@ -92,8 +81,4 @@ CMD_HELP.update(
     \nUsage: Finds the nearest datacenter from your server."})
 CMD_HELP.update(
     {"ping": ".ping\
-    \nUsage: Shows how long it takes to ping the Telegram server."})
-CMD_HELP.update(
-    {"ping": ".rtt\
-    \nUsage: Shows how long it takes to get an acknowledgment from your bot."
-})
+    \nUsage: Shows your real time ping"})
