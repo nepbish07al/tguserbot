@@ -80,12 +80,6 @@ async def pingme(pong):
     duration = (end - start).microseconds / 1000
     await pong.edit("`Ping to Telegram server\n%sms`" % (duration)) 
 
-@register(outgoing=True, pattern="^.cping$")
-@errors_handler
-async def cping(ping):
-	await ping.edit("`"+ping.text[0]+"`")
-    #check_output("ping -c 1 1.0.0.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
-
 #Kanged from @prototype74's userbot        
 @register(outgoing=True, pattern="^.rtt$")
 @errors_handler
