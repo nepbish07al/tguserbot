@@ -71,7 +71,7 @@ async def neardc(event):
 
 
 #Kanged from @prototype74's userbot        
-@register(outgoing=True, pattern="^.ping$")
+@register(outgoing=True, pattern="^.rtt$")
 @errors_handler
 async def rtt(ping):
     """ For .rtt command, get current round-trip time from any chat.  """
