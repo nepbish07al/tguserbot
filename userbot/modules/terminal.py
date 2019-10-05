@@ -139,8 +139,6 @@ async def terminal_runner(term):
                 "Terminal Command " + command + " was executed sucessfully",
             )
 
-
-CMD_HELP.update({"eval": ".eval 2 + 3\nUsage: Evalute mini-expressions."})
 CMD_HELP.update(
     {"exec": ".exec print('hello')\nUsage: Execute small python scripts."})
 CMD_HELP.update(
