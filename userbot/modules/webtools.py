@@ -70,12 +70,7 @@ async def neardc(event):
                          f"This Datacenter : `{result.this_dc}`")
 
 
-<<<<<<< HEAD
-#Kanged from @prototype74's userbot        
-@register(outgoing=True, pattern="^.rtt$")
-=======
 @register(outgoing=True, pattern="^.ping$")
->>>>>>> parent of 2dfd17b... webtools: removal of .ping and renaming .rtt to .ping
 @errors_handler
 async def pingme(pong):
     """ For .ping command, ping the userbot to Telegram server from any chat.  """
