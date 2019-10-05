@@ -74,11 +74,8 @@ async def neardc(event):
 @errors_handler
 async def pingme(pong):
     """ For .ping command, ping the userbot to Telegram server from any chat.  """
-    start = datetime.now()
-    await pong.edit("`Pinging...`")
-    end = datetime.now()
-    duration = (end - start).microseconds / 1000
-    await pong.edit("`Ping to Telegram server\n%sms`" % (duration)) 
+    duration = check_output("ping -c 1 1.0.0.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
+    await ping.edit("`Round-trip time\n%s`" % (duration))
 
 #Kanged from @prototype74's userbot        
 @register(outgoing=True, pattern="^.rtt$")
