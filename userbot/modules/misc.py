@@ -9,13 +9,9 @@
 from random import randint
 from time import sleep
 from os import execl
-import sys
-import os
 import io
-import sys
 import json
-from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
-from userbot.events import register
+from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot
 from userbot.events import register, errors_handler
 
 
@@ -23,12 +19,15 @@ from userbot.events import register, errors_handler
 @errors_handler
 async def randomise(items):
     """ For .random command, get a random item from the list of items. """
-    if not items.text[0].isalpha() and items.text[0] not in ("/", "#", "@",
-                                                             "!"):
-        itemo = (items.text[8:]).split()
-        index = randint(1, len(itemo) - 1)
-        await items.edit("**Query: **\n`" + items.text[8:] +
-                         "`\n**Output: **\n`" + itemo[index] + "`")
+    itemo = (items.text[8:]).split()
+    if len(itemo) < 2:
+        await items.edit(
+            "`2 or more items are required! Check .help random for more info.`"
+        )
+        return
+    index = randint(1, len(itemo) - 1)
+    await items.edit("**Query: **\n`" + items.text[8:] + "`\n**Output: **\n`" +
+                     itemo[index] + "`")
 
 
 @register(outgoing=True, pattern="^.sleep( [0-9]+)?$")
@@ -36,75 +35,71 @@ async def randomise(items):
 async def sleepybot(time):
     """ For .sleep command, let the userbot snooze for a few second. """
     message = time.text
-    if not message[0].isalpha() and message[0] not in ("/", "#", "@", "!"):
-        if " " not in time.pattern_match.group(1):
-            await time.reply("Syntax: `.sleep [seconds]`")
-        else:
-            counter = int(time.pattern_match.group(1))
-            await time.edit("Sleeping...")
-            sleep(2)
-            if BOTLOG:
-                await time.client.send_message(
-                    BOTLOG_CHATID,
-                    "You put the bot to sleep for " + str(counter) +
-                    " seconds",
-                )
-            sleep(counter)
+    if " " not in time.pattern_match.group(1):
+        await time.reply("Syntax: `.sleep [seconds]`")
+    else:
+        counter = int(time.pattern_match.group(1))
+        await time.edit("`I am sulking and snoozing....`")
+        sleep(2)
+        if BOTLOG:
+            await time.client.send_message(
+                BOTLOG_CHATID,
+                "You put the bot to sleep for " + str(counter) + " seconds",
+            )
+        sleep(counter)
+        await time.edit("`OK, I'm awake now.`")
+
 
 @register(outgoing=True, pattern="^.shutdown$")
 @errors_handler
 async def killdabot(event):
     """ For .shutdown command, shut the bot down."""
-    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
-                                                             "!"):
-        await event.edit("Powering off...")
-        if BOTLOG:
-            await event.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n"
-                                            "Bot shut down")
-        await event.client.disconnect()
+    await event.edit("`kthxbye *Putin hand sticker*....`")
+    if BOTLOG:
+        await event.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n"
+                                        "Bot shut down")
+    await bot.disconnect()
+
 
 # Copyright (c) Gegham Zakaryan | 2019
 @register(outgoing=True, pattern="^.repeat (.*)")
 @errors_handler
 async def repeat(rep):
-    if not rep.text[0].isalpha() and rep.text[0] not in ("/", "#", "@", "!"):
-        cnt, txt = rep.pattern_match.group(1).split(' ', 1)
-        replyCount = int(cnt)
-        toBeRepeated = txt
+    cnt, txt = rep.pattern_match.group(1).split(' ', 1)
+    replyCount = int(cnt)
+    toBeRepeated = txt
 
-        replyText = toBeRepeated + "\n"
+    replyText = toBeRepeated + "\n"
 
-        for i in range(0, replyCount - 1):
-            replyText += toBeRepeated + "\n"
+    for i in range(0, replyCount - 1):
+        replyText += toBeRepeated + "\n"
 
-        await rep.edit(replyText)
+    await rep.edit(replyText)
 
 
-@register(outgoing=True, pattern="^.json$")
+@register(outgoing=True, pattern="^.raw$")
 @errors_handler
-async def json(event):
-    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
-                                                             "!"):
-        the_real_message = None
-        reply_to_id = None
-        if event.reply_to_msg_id:
-            previous_message = await event.get_reply_message()
-            the_real_message = previous_message.stringify()
-            reply_to_id = event.reply_to_msg_id
-        else:
-            the_real_message = event.stringify()
-            reply_to_id = event.message.id
-
-        with io.BytesIO(str.encode(the_real_message)) as out_file:
-            out_file.name = "message.json"
-            await event.client.send_file(
-                event.chat_id,
-                out_file,
-                force_document=True,
-                allow_cache=False,
-                reply_to=reply_to_id,
-                caption="`Here's the decoded message data !!`")
-            await event.delete()
+async def raw(event):
+    the_real_message = None
+    reply_to_id = None
+    if event.reply_to_msg_id:
+        previous_message = await event.get_reply_message()
+        the_real_message = previous_message.stringify()
+        reply_to_id = event.reply_to_msg_id
+    else:
+        the_real_message = event.stringify()
+        reply_to_id = event.message.id
+    with io.BytesIO(str.encode(the_real_message)) as out_file:
+        out_file.name = "raw_message_data.txt"
+        await event.edit(
+            "`Check the userbot log for the decoded message data !!`")
+        await event.client.send_file(
+            BOTLOG_CHATID,
+            out_file,
+            force_document=True,
+            allow_cache=False,
+            reply_to=reply_to_id,
+            caption="`Here's the decoded message data !!`")
 
 
 CMD_HELP.update({
@@ -116,13 +111,14 @@ CMD_HELP.update({
 CMD_HELP.update({
     'sleep':
     '.sleep <seconds>\
-\nUsage: Simply .sleep to sleep for the designated time in seconds'
+\nUsage: Userbots get tired too. Let yours snooze for a few seconds.'
 })
 
 CMD_HELP.update({
     "shutdown":
     ".shutdown\
-\nUsage: Simply .shutdown, equivalent to CTRL-C in terminal"
+\nUsage: Sometimes you need to shut down your bot. Sometimes you just hope to\
+hear Windows XP shutdown sound... but you don't."
 })
 
 CMD_HELP.update({
@@ -132,7 +128,7 @@ CMD_HELP.update({
 })
 
 CMD_HELP.update({
-    "json":
-    ".json\
-\nUsage: Get detailed JSON formatted data about replied message"
+    "raw":
+    ".raw\
+\nUsage: Get detailed JSON-like formatted data about replied message."
 })
