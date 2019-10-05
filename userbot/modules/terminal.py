@@ -3,6 +3,8 @@
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
 #
+#
+# Eval command has been removed, module renamed terminal
 """ Userbot module for executing code and terminal commands from Telegram. """
 
 import asyncio

@@ -2,6 +2,8 @@
 #
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
+#
+# removed .kickme
 """ Userbot module containing userid, chatid and log commands"""
 
 from time import sleep

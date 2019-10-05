@@ -5,6 +5,8 @@
 #
 # The entire source code is OSSRPL except 'whois' which is MPL
 # License: MPL and OSSRPL
+#
+# Removed user picture
 """ Userbot module for getiing info about any user on Telegram(including you!). """
 
 import os
