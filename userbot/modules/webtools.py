@@ -57,7 +57,7 @@ def speed_convert(size):
     return f"{round(size, 2)} {units[zero]}"
 
 
-@register(outgoing=True, pattern="^.nearestdc$")
+@register(outgoing=True, pattern="^.neardc$")
 @errors_handler
 async def neardc(event):
     if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
@@ -72,20 +72,21 @@ async def neardc(event):
 @register(outgoing=True, pattern="^.ping$")
 @errors_handler
 async def pingme(pong):
-    """ FOr .pingme command, ping the userbot from any chat.  """
-    if not pong.text[0].isalpha() and pong.text[0] not in ("/", "#", "@", "!"):
-        out = subprocess.check_output("ping -c 1 1.1.1.1", shell=True).decode()
-        listOut = out.splitlines()
-        splitOut = listOut[1].split(' ')
-        stringtocut = ""
-        for line in splitOut:
-            if(line.startswith('time=')):
-                stringtocut=line
-                break
-        newstr=stringtocut.split('=')
-        duration = float(newstr[1])
-        await pong.edit("Ping speed: %sms" % (duration))
+    """ For .ping command, ping the userbot to Telegram server from any chat.  """
+    start = datetime.now()
+    await pong.edit("`Pinging...`")
+    end = datetime.now()
+    duration = (end - start).microseconds / 1000
+    await pong.edit("`Ping to Telegram server\n%sms`" % (duration)) 
 
+
+#Kanged from @prototype74's userbot        
+@register(outgoing=True, pattern="^.rtt$")
+@errors_handler
+async def rtt(ping):
+    """ For .rtt command, get current round-trip time from any chat.  """
+    duration = check_output("ping -c 1 1.0.0.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
+    await ping.edit("`Round-trip time\n%s`" % (duration))
 
 CMD_HELP.update(
     {"speed": ".speed\
@@ -95,8 +96,10 @@ CMD_HELP.update({
     ".nearestdc\
     \nUsage: Finds the nearest datacenter from your server."
 })
-CMD_HELP.update({
-    "ping":
-    ".ping\
-    \nUsage: Shows how long it takes to ping your bot."
+CMD_HELP.update(
+    {"ping": ".ping\
+    \nUsage: Shows how long it takes to ping the Telegram server."})
+CMD_HELP.update(
+    {"ping": ".rtt\
+    \nUsage: Shows how long it takes to get an acknowledgment from your bot."
 })
