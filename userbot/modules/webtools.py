@@ -83,7 +83,7 @@ async def pingme(pong):
 @register(outgoing=True, pattern="^.cping$")
 @errors_handler
 async def cping(ping):
-	print(ping.text[0])
+	await ping.edit("`"+ping.text[0]+"`")
     #check_output("ping -c 1 1.0.0.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
 
 #Kanged from @prototype74's userbot        
