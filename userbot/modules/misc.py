@@ -4,6 +4,8 @@
 # you may not use this file except in compliance with the License.
 #
 # You can find misc modules, which dont fit in anything xD
+#
+# removed repeat and restart
 """ Userbot module for other small commands. """
 
 from random import randint
@@ -63,23 +65,6 @@ async def killdabot(event):
                                             "Bot shut down")
         await event.client.disconnect()
 
-# Copyright (c) Gegham Zakaryan | 2019
-@register(outgoing=True, pattern="^.repeat (.*)")
-@errors_handler
-async def repeat(rep):
-    if not rep.text[0].isalpha() and rep.text[0] not in ("/", "#", "@", "!"):
-        cnt, txt = rep.pattern_match.group(1).split(' ', 1)
-        replyCount = int(cnt)
-        toBeRepeated = txt
-
-        replyText = toBeRepeated + "\n"
-
-        for i in range(0, replyCount - 1):
-            replyText += toBeRepeated + "\n"
-
-        await rep.edit(replyText)
-
-
 @register(outgoing=True, pattern="^.json$")
 @errors_handler
 async def json(event):
@@ -123,12 +108,6 @@ CMD_HELP.update({
     "shutdown":
     ".shutdown\
 \nUsage: Simply .shutdown, equivalent to CTRL-C in terminal"
-})
-
-CMD_HELP.update({
-    "repeat":
-    ".repeat <no.> <text>\
-\nUsage: Repeats the text for a number of times. Don't confuse this with spam tho."
 })
 
 CMD_HELP.update({
