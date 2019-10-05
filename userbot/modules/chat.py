@@ -69,18 +69,6 @@ async def log(log_text):
         await log_text.delete()
 
 
-@register(outgoing=True, pattern="^.kickme$")
-@errors_handler
-async def kickme(leave):
-    """ Basically it's .kickme command """
-    if not leave.text[0].isalpha() and leave.text[0] not in ("/", "#", "@",
-                                                             "!"):
-        await leave.edit("`Nope, no, no, I go away`")
-        sleep(2)
-        await leave.delete()
-        await bot(LeaveChannelRequest(leave.chat_id))
-
-
 @register(outgoing=True, pattern="^.unmutechat$")
 @errors_handler
 async def unmute_chat(unm_e):
@@ -143,8 +131,6 @@ CMD_HELP.update({
 \nUsage: Fetches the ID of the user in reply, if its a forwarded message, finds the ID for the source.\
 \n\n.log\
 \nUsage: Forwards the message you've replied to in your bot logs group.\
-\n\n.kickme\
-\nUsage: Leave from a targeted group.\
 \n\n.unmutechat\
 \nUsage: Unmutes a muted chat.\
 \n\n.mutechat\
