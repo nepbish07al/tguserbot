@@ -22,10 +22,6 @@ class Config(object):
     # Required - Telegram App KEY and HASH
     API_KEY =  None
     API_HASH = None
-<<<<<<< HEAD
-    HOMIE_LIST = 
-=======
->>>>>>> parent of 547be81... Merged most of it with @prototype74
     
     # Optional
     STRING_SESSION = None # Userbot Session String

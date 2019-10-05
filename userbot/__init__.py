@@ -50,12 +50,7 @@ if ENV:
     # Logging channel/group configuration.
     BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID", "0"))
 
-<<<<<<< HEAD
-# Logging channel/group configuration.
-BOTLOG_CHATID = os.environ.get("BOTLOG_CHATID", None)
-=======
     BOTLOG = sb(os.environ.get("BOTLOG", "False"))
->>>>>>> parent of 547be81... Merged most of it with @prototype74
 
     # Bleep Blop, this is a bot ;)
     PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN", "False"))
@@ -69,16 +64,8 @@ BOTLOG_CHATID = os.environ.get("BOTLOG_CHATID", None)
     # OCR API key
     OCR_SPACE_API_KEY = os.environ.get("OCR_SPACE_API_KEY", None)
 
-<<<<<<< HEAD
-# Homie list. Everyone in homie list will not be affected by bans, kick and other negative stuff
-GET_HOMIES = os.environ.get("HOMIE_LIST", str).split(' ')
-HOMIE_LIST = []
-for homie in GET_HOMIES:
-    HOMIE_LIST.append(int(homie))
-=======
     # remove.bg API key
     REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
->>>>>>> parent of 547be81... Merged most of it with @prototype74
 
     # Chrome Driver and Headless Google Chrome Binaries
     CHROME_DRIVER = os.environ.get("CHROME_DRIVER", None)
