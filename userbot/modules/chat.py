@@ -17,8 +17,7 @@ from userbot.events import register, errors_handler
 @errors_handler
 async def useridgetter(target):
     """ For .userid command, returns the ID of the target user. """
-    if not target.text[0].isalpha() and target.text[0] not in ("/", "#", "@",
-                                                               "!"):
+    if not target.text[0].isalpha() and target.text[0] in ("."):
         message = await target.get_reply_message()
         if message:
             if not message.forward:
@@ -42,7 +41,7 @@ async def useridgetter(target):
 @errors_handler
 async def chatidgetter(chat):
     """ For .chatid, returns the ID of the chat you are in at that moment. """
-    if not chat.text[0].isalpha() and chat.text[0] not in ("/", "#", "@", "!"):
+    if not chat.text[0].isalpha() and chat.text[0] in ("."):
         await chat.edit("Chat ID: `" + str(chat.chat_id) + "`")
 
 
@@ -50,8 +49,7 @@ async def chatidgetter(chat):
 @errors_handler
 async def log(log_text):
     """ For .log command, forwards a message or the command argument to the bot logs group """
-    if not log_text.text[0].isalpha() and log_text.text[0] not in ("/", "#",
-                                                                   "@", "!"):
+    if not log_text.text[0].isalpha() and log_text.text[0] in ("."):
         if BOTLOG:
             if log_text.reply_to_msg_id:
                 reply_msg = await log_text.get_reply_message()
@@ -75,8 +73,7 @@ async def log(log_text):
 @errors_handler
 async def unmute_chat(unm_e):
     """ For .unmutechat command, unmute a muted chat. """
-    if not unm_e.text[0].isalpha() and unm_e.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not unm_e.text[0].isalpha() and unm_e.text[0] in ("."):
         try:
             from userbot.modules.sql_helper.keep_read_sql import unkread
         except AttributeError:
@@ -92,8 +89,7 @@ async def unmute_chat(unm_e):
 @errors_handler
 async def mute_chat(mute_e):
     """ For .mutechat command, mute any chat. """
-    if not mute_e.text[0].isalpha() and mute_e.text[0] not in ("/", "#", "@",
-                                                               "!"):
+    if not mute_e.text[0].isalpha() and mute_e.text[0] in ("."):
         try:
             from userbot.modules.sql_helper.keep_read_sql import kread
         except AttributeError:
