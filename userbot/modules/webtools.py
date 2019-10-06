@@ -68,9 +68,10 @@ async def neardc(event):
 @register(outgoing=True, pattern="^.ping$")
 @errors_handler
 async def pingme(pong):
-    """ For .rtt command, get current round-trip time from any chat.  """
-    duration = check_output("ping -c 1 1.0.0.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
-    await pong.edit("`Ping speed is: %s`" % (duration))
+    if not pong.text[0].isalpha() and pong.text[0] in ("."):
+	    """ For .rtt command, get current round-trip time from any chat.  """
+        duration = check_output("ping -c 1 1.0.0.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
+        await pong.edit("`Ping speed is: %s`" % (duration))
 
 
 CMD_HELP.update(
