@@ -140,8 +140,7 @@ async def auto_accept(event):
 @errors_handler
 async def notifoff(noff_event):
     """ For .notifoff command, stop getting notifications from unapproved PMs. """
-    if not noff_event.text[0].isalpha() and noff_event.text[0] not in (
-            "/", "#", "@", "!"):
+    if not noff_event.text[0].isalpha() and noff_event.text[0] in ("."):
         try:
             from userbot.modules.sql_helper.globals import addgvar
         except AttributeError:
@@ -155,8 +154,7 @@ async def notifoff(noff_event):
 @errors_handler
 async def notifon(non_event):
     """ For .notifoff command, get notifications from unapproved PMs. """
-    if not non_event.text[0].isalpha() and non_event.text[0] not in ("/", "#",
-                                                                     "@", "!"):
+    if not non_event.text[0].isalpha() and non_event.text[0] in ("."):
         try:
             from userbot.modules.sql_helper.globals import delgvar
         except AttributeError:
@@ -169,8 +167,7 @@ async def notifon(non_event):
 @errors_handler
 async def approvepm(apprvpm):
     """ For .approve command, give someone the permissions to PM you. """
-    if not apprvpm.text[0].isalpha() and apprvpm.text[0] not in ("/", "#", "@",
-                                                                 "!"):
+    if not apprvpm.text[0].isalpha() and apprvpm.text[0] in ("."):
         try:
             from userbot.modules.sql_helper.pm_permit_sql import approve
         except AttributeError:
@@ -212,8 +209,7 @@ async def approvepm(apprvpm):
 @register(outgoing=True, pattern="^.disapprove$")
 @errors_handler
 async def disapprovepm(disapprvpm):
-    if not disapprvpm.text[0].isalpha() and disapprvpm.text[0] not in (
-            "/", "#", "@", "!"):
+    if not disapprvpm.text[0].isalpha() and disapprvpm.text[0] in ("."):
         try:
             from userbot.modules.sql_helper.pm_permit_sql import dissprove
         except BaseException:
@@ -248,8 +244,7 @@ async def disapprovepm(disapprvpm):
 @errors_handler
 async def blockpm(block):
     """ For .block command, block people from PMing you! """
-    if not block.text[0].isalpha() and block.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not block.text[0].isalpha() and block.text[0] in ("."):
 
         await block.edit("`You've been blocked!`")
 
@@ -285,7 +280,7 @@ async def blockpm(block):
 async def unblockpm(unblock):
     """ For .unblock command, let people PMing you again! """
     if not unblock.text[0].isalpha() and unblock.text[0] \
-            not in ("/", "#", "@", "!") and unblock.reply_to_msg_id:
+            in (".") and unblock.reply_to_msg_id:
 
         await unblock.edit("`You have been unblocked.`")
 
