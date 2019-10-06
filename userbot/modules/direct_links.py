@@ -22,8 +22,7 @@ from userbot.events import register, errors_handler
 @errors_handler
 async def direct_link_generator(request):
     """ direct links generator """
-    if not request.text[0].isalpha() and request.text[0] not in ("/", "#", "@",
-                                                                 "!"):
+    if not request.text[0].isalpha() and request.text[0] in ("."):
         textx = await request.get_reply_message()
         message = request.pattern_match.group(1)
         if message:
