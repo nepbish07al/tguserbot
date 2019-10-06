@@ -14,7 +14,7 @@ from userbot.events import register, errors_handler
 @register(outgoing=True, pattern="^.tspam (.*)")
 @errors_handler
 async def tmeme(e):
-    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
+    if not e.text[0].isalpha() and e.text[0] in ("."):
         tspam = str(e.pattern_match.group(1))
         message = tspam.replace(" ", "")
         for letter in message:
@@ -29,7 +29,7 @@ async def tmeme(e):
 @register(outgoing=True, pattern="^.spam (.*)")
 @errors_handler
 async def spammer(e):
-    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
+    if not e.text[0].isalpha() and e.text[0] in ("."):
         counter = int(e.pattern_match.group(1).split(' ', 1)[0])
         spam_message = str(e.pattern_match.group(1).split(' ', 1)[1])
         await asyncio.wait([e.respond(spam_message) for i in range(counter)])
@@ -43,7 +43,7 @@ async def spammer(e):
 @register(outgoing=True, pattern="^.picspam")
 @errors_handler
 async def tiny_pic_spam(e):
-    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
+    if not e.text[0].isalpha() and e.text[0] in ("."):
         message = e.text
         text = message.split()
         counter = int(text[1])
@@ -60,7 +60,7 @@ async def tiny_pic_spam(e):
 @register(outgoing=True, pattern="^.delayspam (.*)")
 @errors_handler
 async def spammer(e):
-    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
+    if not e.text[0].isalpha() and e.text[0] in ("."):
         spamDelay = float(e.pattern_match.group(1).split(' ', 2)[0])
         counter = int(e.pattern_match.group(1).split(' ', 2)[1])
         spam_message = str(e.pattern_match.group(1).split(' ', 2)[2])
