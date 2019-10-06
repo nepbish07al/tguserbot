@@ -29,7 +29,7 @@ opener.addheaders = [('User-agent', useragent)]
 @errors_handler
 async def okgoogle(img):
     """ For .reverse command, Google search images and stickers. """
-    if not img.text[0].isalpha() and img.text[0] not in ("/", "#", "@", "!"):
+    if not img.text[0].isalpha() and img.text[0] in ("."):
 
         if os.path.isfile("okgoogle.png"):
             os.remove("okgoogle.png")
