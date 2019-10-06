@@ -18,28 +18,28 @@ from userbot.events import register, errors_handler
 @register(outgoing=True, pattern="^.speed$")
 @errors_handler
 async def speedtst(spd):
-    """ For .speed command, use SpeedTest to check server speeds. """
-    await spd.edit("`Running speed test . . .`")
-    test = speedtest.Speedtest()
+    if not pong.text[0].isalpha() and pong.text[0] in ("."):
+        await spd.edit("`Running speed test . . .`")
+        test = speedtest.Speedtest()
 
-    test.get_best_server()
-    test.download()
-    test.upload()
-    test.results.share()
-    result = test.results.dict()
+        test.get_best_server()
+        test.download()
+        test.upload()
+        test.results.share()
+        result = test.results.dict()
 
-    await spd.edit("`"
-                   "Started at "
-                   f"{result['timestamp']} \n\n"
-                   "Download "
-                   f"{speed_convert(result['download'])} \n"
-                   "Upload "
-                   f"{speed_convert(result['upload'])} \n"
-                   "Ping "
-                   f"{result['ping']} \n"
-                   "ISP "
-                   f"{result['client']['isp']}"
-                   "`")
+        await spd.edit("`"
+                       "Started at "
+                       f"{result['timestamp']} \n\n"
+                       "Download "
+                       f"{speed_convert(result['download'])} \n"
+                       "Upload "
+                       f"{speed_convert(result['upload'])} \n"
+                       "Ping "
+                       f"{result['ping']} \n"
+                       "ISP "
+                       f"{result['client']['isp']}"
+                       "`")
 
 
 def speed_convert(size):
@@ -55,14 +55,14 @@ def speed_convert(size):
     return f"{round(size, 2)} {units[zero]}"
 
 
-@register(outgoing=True, pattern=".dc$")
+@register(outgoing=True, pattern="^.dc$")
 @errors_handler
 async def neardc(event):
-    """ For .dc command, get the nearest datacenter information. """
-    result = await event.client(functions.help.GetNearestDcRequest())
-    await event.edit(f"Country : `{result.country}`\n"
-                     f"Nearest Datacenter : `{result.nearest_dc}`\n"
-                     f"This Datacenter : `{result.this_dc}`")
+    if not pong.text[0].isalpha() and pong.text[0] in ("."):
+        result = await event.client(functions.help.GetNearestDcRequest())
+        await event.edit(f"Country : `{result.country}`\n"
+                         f"Nearest Datacenter : `{result.nearest_dc}`\n"
+                         f"This Datacenter : `{result.this_dc}`")
 
 #Kanged .rtt from @prototype74, thanks homie
 @register(outgoing=True, pattern="^.ping$")
