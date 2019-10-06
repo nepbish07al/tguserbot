@@ -318,8 +318,7 @@ EMOJI = (
 @register(outgoing=True, pattern=r"^.coinflip (.*)")
 @errors_handler
 async def coin(event):
-    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not event.text[0].isalpha() and event.text[0] in ("."):
         if event.fwd_from:
             return
         r = random.randint(1, 100)
@@ -353,8 +352,7 @@ async def coin(event):
 @register(pattern="^.slap(?: |$)(.*)", outgoing=True)
 @errors_handler
 async def who(event):
-    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not event.text[0].isalpha() and event.text[0] in ("."):
         """ slaps a user, or get slapped if not a reply. """
         if event.fwd_from:
             return
@@ -437,8 +435,7 @@ async def slap(replied_user, event):
 @register(outgoing=True, pattern="^.decide(?: |$)(.*)")
 @errors_handler
 async def decide(event):
-    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not event.text[0].isalpha() and event.text[0] in ("."):
         if event.fwd_from:
             return
         message = event.pattern_match.group(1)
@@ -464,7 +461,7 @@ async def decide(event):
 @errors_handler
 async def insult(e):
     """ I make you cry !! """
-    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
+    if not e.text[0].isalpha() and e.text[0] in ("."):
         await e.edit(random.choice(INSULT_STRINGS))
 
 
@@ -472,7 +469,7 @@ async def insult(e):
 @errors_handler
 async def vapor(vpr):
     """ Vaporize everything! """
-    if not vpr.text[0].isalpha() and vpr.text[0] not in ("/", "#", "@", "!"):
+    if not vpr.text[0].isalpha() and vpr.text[0] in ("."):
         reply_text = list()
         textx = await vpr.get_reply_message()
         message = vpr.pattern_match.group(1)
@@ -499,8 +496,7 @@ async def vapor(vpr):
 @errors_handler
 async def stretch(stret):
     """ Stretch it."""
-    if not stret.text[0].isalpha() and stret.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not stret.text[0].isalpha() and stret.text[0] in ("."):
         textx = await stret.get_reply_message()
         message = stret.text
         message = stret.pattern_match.group(1)
@@ -522,7 +518,7 @@ async def stretch(stret):
 @errors_handler
 async def zal(zgfy):
     """ Invoke the feeling of chaos. """
-    if not zgfy.text[0].isalpha() and zgfy.text[0] not in ("/", "#", "@", "!"):
+    if not zgfy.text[0].isalpha() and zgfy.text[0] in ("."):
         reply_text = list()
         textx = await zgfy.get_reply_message()
         message = zgfy.pattern_match.group(1)
@@ -563,15 +559,13 @@ async def zal(zgfy):
 @errors_handler
 async def hoi(hello):
     """ Greet everyone! """
-    if not hello.text[0].isalpha() and hello.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not hello.text[0].isalpha() and hello.text[0] in ("."):
         await hello.edit(random.choice(HELLOSTR))
 
 @register(outgoing=True, pattern="^.clock$")
 @errors_handler
 async def _(event):
-    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not event.text[0].isalpha() and event.text[0] in ("."):
         if event.fwd_from:
             return
         deq = deque(list("🕙🕘🕗🕖🕕🕔🕓🕒🕑🕐🕛"))
@@ -588,7 +582,7 @@ async def _(event):
 @errors_handler
 async def spongemocktext(mock):
     """ Do it and find the real fun. """
-    if not mock.text[0].isalpha() and mock.text[0] not in ("/", "#", "@", "!"):
+    if not mock.text[0].isalpha() and mock.text[0] in ("."):
         reply_text = list()
         textx = await mock.get_reply_message()
         message = mock.pattern_match.group(1)
@@ -614,8 +608,8 @@ async def spongemocktext(mock):
 @errors_handler
 async def claptext(memereview):
     """ Praise people! """
-    if not memereview.text[0].isalpha() and memereview.text[0] not in (
-            "/", "#", "@", "!"):
+    if not memereview.text[0].isalpha() and memereview.text[0] in (
+            "."):
         textx = await memereview.get_reply_message()
         message = memereview.pattern_match.group(1)
         if message:
@@ -635,7 +629,7 @@ async def claptext(memereview):
 @errors_handler
 async def bluetext(bt_e):
     """ Believe me, you will find this useful. """
-    if not bt_e.text[0].isalpha() and bt_e.text[0] not in ("/", "#", "@", "!"):
+    if not bt_e.text[0].isalpha() and bt_e.text[0] in ("."):
         if await bt_e.get_reply_message():
             await bt_e.edit(
                 "/BLUETEXT /MUST /CLICK.\n"
@@ -645,8 +639,7 @@ async def bluetext(bt_e):
 @register(outgoing=True, pattern="^.lfy (.*)")
 @errors_handler
 async def let_me_google_that_for_you(lmgtfy_q):
-    if not lmgtfy_q.text[0].isalpha() and lmgtfy_q.text[0] not in ("/", "#",
-                                                                   "@", "!"):
+    if not lmgtfy_q.text[0].isalpha() and lmgtfy_q.text[0] in ("."):
         textx = await lmgtfy_q.get_reply_message()
         qry = lmgtfy_q.pattern_match.group(1)
         if qry:
@@ -665,8 +658,7 @@ async def let_me_google_that_for_you(lmgtfy_q):
 @errors_handler
 async def scam(event):
     """ Just a small command to fake chat actions for fun !! """
-    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not event.text[0].isalpha() and event.text[0] in ("."):
         options = [
             'typing', 'contact', 'game', 'location', 'voice', 'round', 'video',
             'photo', 'document', 'cancel'
@@ -702,8 +694,7 @@ async def scam(event):
 @errors_handler
 async def typewriter(typew):
     """ Just a small command to make your keyboard become a typewriter! """
-    if not typew.text[0].isalpha() and typew.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not typew.text[0].isalpha() and typew.text[0] in ("."):
         textx = await typew.get_reply_message()
         message = typew.pattern_match.group(1)
         if message:
