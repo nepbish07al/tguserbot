@@ -49,8 +49,7 @@ async def time_func(tdata):
         2. The default userbot country(set it by using .settime),
         3. The server where the userbot runs.
     """
-    if not tdata.text[0].isalpha() and tdata.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not tdata.text[0].isalpha() and tdata.text[0] in ("."):
         con = tdata.pattern_match.group(1).title()
         tz_num = tdata.pattern_match.group(2)
 
@@ -115,7 +114,7 @@ async def date_func(dat):
         2. The default userbot country(set it by using .settime),
         3. The server where the userbot runs.
     """
-    if not dat.text[0].isalpha() and dat.text[0] not in ("/", "#", "@", "!"):
+    if not dat.text[0].isalpha() and dat.text[0] in ("."):
         con = dat.pattern_match.group(1).title()
         tz_num = dat.pattern_match.group(2)
 
@@ -176,7 +175,7 @@ async def date_func(dat):
 async def set_time_country(loc):
     """ For .settime command, change the default userbot
         country for date and time commands. """
-    if not loc.text[0].isalpha() and loc.text[0] not in ("/", "#", "@", "!"):
+    if not loc.text[0].isalpha() and loc.text[0] in ("."):
         global COUNTRY
         global TZ_NUMBER
         temp_country = loc.pattern_match.group(1).title()
