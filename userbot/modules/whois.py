@@ -22,8 +22,7 @@ from userbot.events import register, errors_handler
 @register(pattern=".info(?: |$)(.*)", outgoing=True)
 @errors_handler
 async def who(event):
-    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not event.text[0].isalpha() and event.text[0] in ("."):
         """ For .whois command, get info about a user. """
         if event.fwd_from:
             return
