@@ -50,7 +50,7 @@ async def parseqr(qr_e):
             return
         soup = BeautifulSoup(t_response, "html.parser")
         qr_contents = soup.find_all("pre")[0].text
-        await qr_e.edit(qr_contents)
+        await qr_e.edit("Decoded message: " + qr_contents)
 
 
 @register(pattern=r".barcode(?: |$)([\s\S]*)", outgoing=True)
