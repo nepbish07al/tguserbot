@@ -24,7 +24,7 @@ from userbot.events import register, errors_handler
 @errors_handler
 async def parseqr(qr_e):
     """ For .decode command, get QR Code/BarCode content from the replied photo. """
-    if not qr_e.text[0].isalpha() and qr_e.text[0] not in ("/", "#", "@", "!"):
+    if not qr_e.text[0].isalpha() and qr_e.text[0] in ("."):
         downloaded_file_name = await qr_e.client.download_media(
             await qr_e.get_reply_message())
         # parse the Official ZXing webpage to decode the QRCode
@@ -57,8 +57,7 @@ async def parseqr(qr_e):
 @errors_handler
 async def barcode(event):
     """ For .barcode command, genrate a barcode containing the given content. """
-    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not event.text[0].isalpha() and event.text[0] in ("."):
         await event.edit("`Processing..`")
         input_str = event.pattern_match.group(1)
         message = "SYNTAX: `.barcode <long text to include>`"
@@ -104,8 +103,7 @@ async def barcode(event):
 @errors_handler
 async def make_qr(makeqr):
     """ For .makeqr command, make a QR Code containing the given content. """
-    if not makeqr.text[0].isalpha() and makeqr.text[0] not in ("/", "#", "@",
-                                                               "!"):
+    if not makeqr.text[0].isalpha() and makeqr.text[0] in ("."):
         if makeqr.fwd_from:
             return
         input_str = makeqr.pattern_match.group(1)
