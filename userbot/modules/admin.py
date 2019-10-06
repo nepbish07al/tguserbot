@@ -73,7 +73,7 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 @errors_handler
 async def set_group_photo(gpic):
     """ For .setgrouppic command, changes the picture of a group """
-    if not gpic.text[0].isalpha() and gpic.text[0] not in ("/", "#", "@", "!"):
+    if not gpic.text[0].isalpha() and gpic.text[0] in ("."):
         replymsg = await gpic.get_reply_message()
         chat = await gpic.get_chat()
         admin = chat.admin_rights
@@ -112,7 +112,7 @@ async def set_group_photo(gpic):
 async def promote(promt):
     """ For .promote command, promotes the replied/tagged person """
     if not promt.text[0].isalpha() \
-            and promt.text[0] not in ("/", "#", "@", "!"):
+            and promt.text[0] in ("."):
         # Get targeted chat
         chat = await promt.get_chat()
         # Grab admin status or creator in a chat
@@ -163,7 +163,7 @@ async def promote(promt):
 @errors_handler
 async def demote(dmod):
     """ For .demote command, demotes the replied/tagged person """
-    if not dmod.text[0].isalpha() and dmod.text[0] not in ("/", "#", "@", "!"):
+    if not dmod.text[0].isalpha() and dmod.text[0] in ("."):
         # Admin right check
         chat = await dmod.get_chat()
         admin = chat.admin_rights
@@ -213,7 +213,7 @@ async def demote(dmod):
 @errors_handler
 async def ban(bon):
     """ For .ban command, bans the replied/tagged person """
-    if not bon.text[0].isalpha() and bon.text[0] not in ("/", "#", "@", "!"):
+    if not bon.text[0].isalpha() and bon.text[0] in ("."):
         # Here laying the sanity check
         chat = await bon.get_chat()
         admin = chat.admin_rights
@@ -269,7 +269,7 @@ async def ban(bon):
 async def nothanos(unbon):
     """ For .unban command, unbans the replied/tagged person """
     if not unbon.text[0].isalpha() and unbon.text[0] \
-            not in ("/", "#", "@", "!"):
+            in ("."):
 
         # Here laying the sanity check
         chat = await unbon.get_chat()
@@ -310,7 +310,7 @@ async def spider(spdr):
     """
     This function is basically muting peeps
     """
-    if not spdr.text[0].isalpha() and spdr.text[0] not in ("/", "#", "@", "!"):
+    if not spdr.text[0].isalpha() and spdr.text[0] in ("."):
         # Check if the function running under SQL mode
         try:
             from userbot.modules.sql_helper.spam_mute_sql import mute
@@ -368,7 +368,7 @@ async def spider(spdr):
 async def unmoot(unmot):
     """ For .unmute command, unmute the replied/tagged person """
     if not unmot.text[0].isalpha() and unmot.text[0] \
-            not in ("/", "#", "@", "!"):
+            in ("."):
 
         # Admin or creator check
         chat = await unmot.get_chat()
@@ -539,7 +539,7 @@ async def gspider(gspdr):
 @errors_handler
 async def rm_deletedacc(show):
     """ For .delusers command, list all the ghost/deleted accounts in a chat. """
-    if not show.text[0].isalpha() and show.text[0] not in ("/", "#", "@", "!"):
+    if not show.text[0].isalpha() and show.text[0] in ("."):
         con = show.pattern_match.group(1)
         del_u = 0
         del_status = "`No deleted accounts found, Group is cleaned as Hell`"
@@ -610,7 +610,7 @@ async def rm_deletedacc(show):
 @errors_handler
 async def get_admin(show):
     """ For .adminlist command, list all of the admins of the chat. """
-    if not show.text[0].isalpha() and show.text[0] not in ("/", "#", "@", "!"):
+    if not show.text[0].isalpha() and show.text[0] in ("."):
         if not show.is_group:
             await show.edit("I don't think this is a group.")
             return
@@ -635,7 +635,7 @@ async def get_admin(show):
 @errors_handler
 async def pin(msg):
     """ For .pin command, pins the replied/tagged message on the top the chat. """
-    if not msg.text[0].isalpha() and msg.text[0] not in ("/", "#", "@", "!"):
+    if not msg.text[0].isalpha() and msg.text[0] in ("."):
         # Admin or creator check
         chat = await msg.get_chat()
         admin = chat.admin_rights
@@ -682,7 +682,7 @@ async def pin(msg):
 @errors_handler
 async def kick(usr):
     """ For .kick command, kicks the replied/tagged person from the group. """
-    if not usr.text[0].isalpha() and usr.text[0] not in ("/", "#", "@", "!"):
+    if not usr.text[0].isalpha() and usr.text[0] in ("."):
         # Admin or creator check
         chat = await usr.get_chat()
         admin = chat.admin_rights
@@ -725,7 +725,7 @@ async def kick(usr):
 @errors_handler
 async def get_users(show):
     """ For .userslist command, list all of the users in a chat. """
-    if not show.text[0].isalpha() and show.text[0] not in ("/", "#", "@", "!"):
+    if not show.text[0].isalpha() and show.text[0] in ("."):
         if not show.is_group:
             await show.edit("Are you sure this is a group?")
             return
