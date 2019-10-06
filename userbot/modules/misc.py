@@ -25,8 +25,7 @@ from userbot.events import register, errors_handler
 @errors_handler
 async def randomise(items):
     """ For .random command, get a random item from the list of items. """
-    if not items.text[0].isalpha() and items.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not items.text[0].isalpha() and items.text[0] in ("."):
         itemo = (items.text[8:]).split()
         index = randint(1, len(itemo) - 1)
         await items.edit("**Query: **\n`" + items.text[8:] +
@@ -38,7 +37,7 @@ async def randomise(items):
 async def sleepybot(time):
     """ For .sleep command, let the userbot snooze for a few second. """
     message = time.text
-    if not message[0].isalpha() and message[0] not in ("/", "#", "@", "!"):
+    if not message[0].isalpha() and message[0] in ("."):
         if " " not in time.pattern_match.group(1):
             await time.reply("Syntax: `.sleep [seconds]`")
         else:
@@ -57,8 +56,7 @@ async def sleepybot(time):
 @errors_handler
 async def killdabot(event):
     """ For .shutdown command, shut the bot down."""
-    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not event.text[0].isalpha() and event.text[0] in ("."):
         await event.edit("Powering off...")
         if BOTLOG:
             await event.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n"
@@ -68,8 +66,7 @@ async def killdabot(event):
 @register(outgoing=True, pattern="^.json$")
 @errors_handler
 async def json(event):
-    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not event.text[0].isalpha() and event.text[0] in ("."):
         the_real_message = None
         reply_to_id = None
         if event.reply_to_msg_id:
