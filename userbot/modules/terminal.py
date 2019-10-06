@@ -19,8 +19,7 @@ from userbot.events import register, errors_handler
 @errors_handler
 async def run(run_q):
     """ For .exec command, which executes the dynamically created program """
-    if not run_q.text[0].isalpha() and run_q.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not run_q.text[0].isalpha() and run_q.text[0] in ("."):
         code = run_q.pattern_match.group(1)
 
         if run_q.is_channel and not run_q.is_group:
@@ -87,7 +86,7 @@ execute. Use .help exec for an example.```")
 @errors_handler
 async def terminal_runner(term):
     """ For .term command, runs bash commands and scripts on your server. """
-    if not term.text[0].isalpha() and term.text[0] not in ("/", "#", "@", "!"):
+    if not term.text[0].isalpha() and term.text[0] in ("."):
         curruser = getuser()
         command = term.pattern_match.group(1)
         try:
