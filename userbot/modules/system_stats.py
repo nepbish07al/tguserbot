@@ -27,7 +27,7 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 @errors_handler
 async def sysdetails(sysd):
     """ For .sysd command, get system info using neofetch. """
-    if not sysd.text[0].isalpha() and sysd.text[0] not in ("/", "#", "@", "!"):
+    if not sysd.text[0].isalpha() and sysd.text[0] in ("."):
         try:
             neo = "neofetch --stdout"
             fetch = await asyncrunapp(
@@ -49,8 +49,7 @@ async def sysdetails(sysd):
 @errors_handler
 async def bot_ver(event):
     """ For .botver command, get the bot version. """
-    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not event.text[0].isalpha() and event.text[0] in ("."):
         if which("git") is not None:
             invokever = "git describe --all --long"
             ver = await asyncrunapp(
@@ -91,8 +90,7 @@ async def amireallyalive(alive):
     
     rtt = check_output("ping -c 1 1.1.1.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
     
-    if not alive.text[0].isalpha() and alive.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not alive.text[0].isalpha() and alive.text[0] in ("."):
         await alive.edit("`"
                          "System Status: "
                          f"Online \n \n"
