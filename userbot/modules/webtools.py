@@ -18,7 +18,7 @@ from userbot.events import register, errors_handler
 @register(outgoing=True, pattern="^.speed$")
 @errors_handler
 async def speedtst(spd):
-    if not pong.text[0].isalpha() and pong.text[0] in ("."):
+    if not spd.text[0].isalpha() and spd.text[0] in ("."):
         await spd.edit("`Running speed test . . .`")
         test = speedtest.Speedtest()
 
@@ -58,7 +58,7 @@ def speed_convert(size):
 @register(outgoing=True, pattern="^.dc$")
 @errors_handler
 async def neardc(event):
-    if not pong.text[0].isalpha() and pong.text[0] in ("."):
+    if not event.text[0].isalpha() and event.text[0] in ("."):
         result = await event.client(functions.help.GetNearestDcRequest())
         await event.edit(f"Country : `{result.country}`\n"
                          f"Nearest Datacenter : `{result.nearest_dc}`\n"
