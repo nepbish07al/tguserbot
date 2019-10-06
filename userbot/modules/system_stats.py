@@ -87,9 +87,6 @@ async def bot_ver(event):
 @errors_handler
 async def amireallyalive(alive):
     """ For .alive command, check if the bot is running.  """
-    
-    
-    
     if not alive.text[0].isalpha() and alive.text[0] in ("."):
         rtt = check_output("ping -c 1 1.1.1.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
         await alive.edit("`"
