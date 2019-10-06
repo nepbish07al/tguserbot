@@ -42,8 +42,7 @@ LANG = "en"
 @register(outgoing=True, pattern="^.currency (.*)")
 @errors_handler
 async def _(event):
-    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not event.text[0].isalpha() and event.text[0] in ("."):
         if event.fwd_from:
             return
         input_str = event.pattern_match.group(1)
@@ -77,8 +76,7 @@ async def _(event):
 @errors_handler
 async def text_to_speech(query):
     """ For .tts command, a wrapper for Google Text-to-Speech. """
-    if not query.text[0].isalpha() and query.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not query.text[0].isalpha() and query.text[0] in ("."):
         textx = await query.get_reply_message()
         message = query.pattern_match.group(1)
         if message:
@@ -128,8 +126,7 @@ async def text_to_speech(query):
 @errors_handler
 async def translateme(trans):
     """ For .trt command, translate the given text using Google Translate. """
-    if not trans.text[0].isalpha() and trans.text[0] not in ("/", "#", "@",
-                                                             "!"):
+    if not trans.text[0].isalpha() and trans.text[0] in ("."):
         translator = Translator()
         textx = await trans.get_reply_message()
         message = trans.pattern_match.group(1)
