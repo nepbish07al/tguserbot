@@ -156,6 +156,9 @@ async def translateme(trans):
                 f"Translated some {source_lan.title()} stuff to {transl_lan.title()} just now.",
             )
 
+def deEmojify(inputString):
+    """ Remove emojis and other non-safe characters from string """
+    return get_emoji_regexp().sub(u'', inputString)
 
 
 CMD_HELP.update({
