@@ -78,7 +78,7 @@ async def pingme(pong):
 async def cping(args):
     if not args.text[0].isalpha() and args.text[0] in ("."):
         commandParser = str(args.message.message).split(' ')
-        if commandParser.len() != 2:
+        if len(commandParser) != 2:
             await args.edit("Bad arguments!")
         else:
             dns = commandParser[1]
