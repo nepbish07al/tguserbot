@@ -82,7 +82,11 @@ async def cping(args):
             await args.edit("`Bad arguments!`")
         else:
             dns = commandParser[1]
-            duration = check_output("ping -c 1 "+dns+" | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
+            try:
+                duration = check_output("ping -c 1 "+dns+" | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
+            except:
+                await args.edit("`There was a problem parsing the IP/Hostname`")
+                return
             await args.edit("`DNS: " + dns +"\n"+"Ping speed: "+duration+"`")
 
 CMD_HELP.update(
