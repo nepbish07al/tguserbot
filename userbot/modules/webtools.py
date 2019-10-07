@@ -73,6 +73,15 @@ async def pingme(pong):
         await pong.edit("`Ping speed is: %s`" % (duration))
 
 
+@register(outgoing=True, pattern="^.cping$")
+@errors_handler
+async def cping(args):
+    if not args.text[0].isalpha() and args.text[0] in ("."):
+        #duration = check_output("ping -c 1 1.0.0.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
+        string = args.split(' ')
+        if string.len() == 2:
+            await args.edit(string[1])
+
 CMD_HELP.update(
     {"speed": ".speed\
     \nUsage: Does a speedtest and shows the results."})
