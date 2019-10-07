@@ -77,8 +77,9 @@ async def pingme(pong):
 @errors_handler
 async def cping(args):
     if not args.text[0].isalpha() and args.text[0] in ("."):
+		dns = args.pattern_match.group(1).title()
         #duration = check_output("ping -c 1 1.0.0.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
-        await args.edit("asd" + args.text)
+        await args.edit("DNS: " + dns)
 
 CMD_HELP.update(
     {"speed": ".speed\
