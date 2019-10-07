@@ -73,7 +73,7 @@ async def pingme(pong):
         await pong.edit("`Ping speed is: %s`" % (duration))
 
 
-@register(outgoing=True, pattern="^.cping(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?")
+@register(outgoing=True, pattern="^.cping(?: |$)?")
 @errors_handler
 async def cping(args):
     if not args.text[0].isalpha() and args.text[0] in ("."):
