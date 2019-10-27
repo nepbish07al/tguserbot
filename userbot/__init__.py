@@ -70,10 +70,10 @@ DB_SERVER = os.environ.get("DB_SERVER", None)
 DB_URI = os.environ.get("DATABASE_URL", None)
 
 # Homie list. Everyone in homie list will not be affected by bans, kick and other negative stuff
-GET_HOMIES = os.environ.get("HOMIE_LIST", []).split()
-HOMIE_LIST = []
-for homie in GET_HOMIES:
-    HOMIE_LIST.append(int(homie))
+#GET_HOMIES = os.environ.get("HOMIE_LIST", []).split()
+#HOMIE_LIST = []
+#for homie in GET_HOMIES:
+#    HOMIE_LIST.append(int(homie))
 
 # OCR API key
 OCR_SPACE_API_KEY = os.environ.get("OCR_SPACE_API_KEY", None)
