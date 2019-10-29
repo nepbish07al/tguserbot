@@ -19,7 +19,6 @@ async def randomise(items):
         await items.edit("**Query: **\n`" + items.text[8:] +
                          "`\n**Output: **\n`" + itemo[index] + "`")
 
-
 @register(outgoing=True, pattern="^.sleep( [0-9]+)?$")
 @errors_handler
 async def sleepybot(time):
@@ -75,7 +74,6 @@ async def json(event):
                 reply_to=reply_to_id,
                 caption="`Here's the decoded message data !!`")
             await event.delete()
-
 
 CMD_HELP.update({
     'random':
