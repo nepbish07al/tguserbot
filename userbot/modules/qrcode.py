@@ -39,7 +39,6 @@ async def parseqr(qr_e):
         qr_contents = soup.find_all("pre")[0].text
         await qr_e.edit("Decoded message: " + qr_contents)
 
-
 @register(pattern=r".barcode(?: |$)([\s\S]*)", outgoing=True)
 @errors_handler
 async def barcode(event):
@@ -85,7 +84,6 @@ async def barcode(event):
             return
         await event.delete()
 
-
 @register(pattern=r".makeqr(?: |$)([\s\S]*)", outgoing=True)
 @errors_handler
 async def make_qr(makeqr):
@@ -129,7 +127,6 @@ async def make_qr(makeqr):
                                       reply_to=reply_msg_id)
         os.remove("img_file.webp")
         await makeqr.delete()
-
 
 CMD_HELP.update({
     'decode':
