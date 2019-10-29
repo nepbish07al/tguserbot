@@ -9,53 +9,40 @@ import sys
 import traceback
 import datetime
 
-
-def register(**args):
-    """ Register a new event. """
+def register(**args): #registers bot events
     pattern = args.get('pattern', None)
     disable_edited = args.get('disable_edited', False)
-
     if pattern is not None and not pattern.startswith('(?i)'):
         args['pattern'] = '(?i)' + pattern
-
     if "disable_edited" in args:
         del args['disable_edited']
-
     def decorator(func):
         if not disable_edited:
             bot.add_event_handler(func, events.MessageEdited(**args))
         bot.add_event_handler(func, events.NewMessage(**args))
-
         return func
-
     return decorator
-
 
 def errors_handler(func):
     async def wrapper(errors):
         try:
             await func(errors)
         except BaseException:
-
             date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
             new = {
                 'error': str(sys.exc_info()[1]),
                 'date': datetime.datetime.now()
             }
-
             text = "**USERBOT ERROR REPORT**\n\n"
-
             link = "[here](https://t.me/PaperplaneExtendedSupport)"
             text += "If you wanna you can report it"
             text += f"- just forward this message {link}.\n"
             text += "Nothing is logged except the fact of error and date\n"
-
             ftext = "\nDisclaimer:\nThis file uploaded ONLY here,"
             ftext += "\nwe logged only fact of error and date,"
             ftext += "\nwe respect your privacy,"
             ftext += "\nyou may not report this error if you've"
             ftext += "\nany confidential data here, no one will see your data\n\n"
-
             ftext += "--------BEGIN USERBOT TRACEBACK LOG--------"
             ftext += "\nDate: " + date
             ftext += "\nGroup ID: " + str(errors.chat_id)
@@ -67,11 +54,8 @@ def errors_handler(func):
             ftext += "\n\nError text:\n"
             ftext += str(sys.exc_info()[1])
             ftext += "\n\n--------END USERBOT TRACEBACK LOG--------"
-
             command = "git log --pretty=format:\"%an: %s\" -5"
-
             ftext += "\n\n\nLast 5 commits:\n"
-
             process = await asyncio.create_subprocess_shell(
                 command,
                 stdout=asyncio.subprocess.PIPE,
@@ -79,19 +63,11 @@ def errors_handler(func):
             stdout, stderr = await process.communicate()
             result = str(stdout.decode().strip()) \
                 + str(stderr.decode().strip())
-
             ftext += result
-
             file = open("error.log", "w+")
             file.write(ftext)
             file.close()
-
             if BOTLOG:
-                await errors.client.send_file(
-                    BOTLOG_CHATID,
-                    "error.log",
-                    caption=text,
-                )
+                await errors.client.send_file(BOTLOG_CHATID, "error.log", caption=text,)
                 return
-
     return wrapper
