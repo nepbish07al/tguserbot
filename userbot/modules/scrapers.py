@@ -1,11 +1,3 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
-#
-# Licensed under the Raphielscape Public License, Version 1.c (the "License");
-# you may not use this file except in compliance with the License.
-#
-# some commands removed
-""" Userbot module containing various scrapers. """
-
 import os
 import shutil
 from bs4 import BeautifulSoup
@@ -31,7 +23,6 @@ from gtts import gTTS
 from emoji import get_emoji_regexp
 from pytube import YouTube
 from pytube.helpers import safe_filename
-
 from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, YOUTUBE_API_KEY, CHROME_DRIVER, GOOGLE_CHROME_BIN
 from userbot.events import register, errors_handler
 
