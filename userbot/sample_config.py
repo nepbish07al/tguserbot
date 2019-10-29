@@ -13,22 +13,18 @@
 
 if not __name__.endswith("sample_config"):
     import sys
-    print("Extend this sample config to a config file, don't just rename and change "
-          "values here. Doing that WILL backfire on you.\nBot quitting.", file=sys.stderr)
+    print("Extend this sample config to a config file, don't just rename and change values here. Doing that WILL backfire on you.\nBot quitting.", file=sys.stderr)
     quit(1)
 
 # Create a new config.py file in same dir and import, then extend this class.
 class Config(object):
-    # Required - Telegram App KEY and HASH
-    API_KEY =  None
-    API_HASH = None
-    
-    # Optional
+    API_KEY =  None # required tg Key
+    API_HASH = None # required tg hash
     STRING_SESSION = None # Userbot Session String
     BOTLOG_CHATID = 0 # Logging channel/group configuration.
     BOTLOG = False # Logging channel/group configuration.
     CONSOLE_LOGGER_VERBOSE = False # Console verbose logging
-    ALIVE_NAME = None # Default .alive name
+    ALIVE_NAME = None # Default .status name
     COUNTRY = "" # Time & Date - Country and Time Zone
     TZ_NUMBER = 1 # Time & Date - Country and Time Zone
     CLEAN_WELCOME = True # Clean Welcome
