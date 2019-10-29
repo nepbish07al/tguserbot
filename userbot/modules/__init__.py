@@ -1,11 +1,4 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
-#
-# Licensed under the Raphielscape Public License, Version 1.c (the "License");
-# you may not use this file except in compliance with the License.
-#
-""" Init file which loads all of the modules """
 from userbot import LOGS
-
 
 def __list_all_modules():
     from os.path import dirname, basename, isfile
@@ -17,7 +10,6 @@ def __list_all_modules():
         if isfile(f) and f.endswith(".py") and not f.endswith("__init__.py")
     ]
     return all_modules
-
 
 ALL_MODULES = sorted(__list_all_modules())
 LOGS.info("Modules to load: %s", str(ALL_MODULES))
