@@ -6,7 +6,7 @@ from telethon.errors import ChatAdminRequiredError
 from telethon.events import ChatAction
 from telethon.tl.types import ChannelParticipantsAdmins, Message, User
 
-from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, ANTI_SPAMBOT, TEMP_DOWNLOAD_DIRECTORY, bot
+from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, bot
 from userbot.events import errors_handler, register
 
 
