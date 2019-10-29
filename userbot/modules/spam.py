@@ -13,9 +13,7 @@ async def tmeme(e):
             await e.respond(letter)
         await e.delete()
         if BOTLOG:
-            await e.client.send_message(
-                BOTLOG_CHATID, "#TSPAM \n\n"
-                "TSpam was executed successfully")
+            await e.client.send_message(BOTLOG_CHATID, "#TSPAM \n\nTSpam was executed successfully")
 
 @register(outgoing=True, pattern="^.spam (.*)")
 @errors_handler
@@ -26,9 +24,7 @@ async def spammer(e):
         await asyncio.wait([e.respond(spam_message) for i in range(counter)])
         await e.delete()
         if BOTLOG:
-            await e.client.send_message(
-                BOTLOG_CHATID, "#SPAM \n\n"
-                "Spam was executed successfully")
+            await e.client.send_message(BOTLOG_CHATID, "#SPAM \n\nSpam was executed successfully")
 
 @register(outgoing=True, pattern="^.picspam")
 @errors_handler
@@ -42,9 +38,7 @@ async def tiny_pic_spam(e):
             await e.client.send_file(e.chat_id, link)
         await e.delete()
         if BOTLOG:
-            await e.client.send_message(
-                BOTLOG_CHATID, "#PICSPAM \n\n"
-                "PicSpam was executed successfully")
+            await e.client.send_message(BOTLOG_CHATID, "#PICSPAM \n\nPicSpam was executed successfully")
 
 @register(outgoing=True, pattern="^.delayspam (.*)")
 @errors_handler
@@ -58,9 +52,7 @@ async def spammer(e):
             await sleep(spamDelay)
         await e.delete()
         if BOTLOG:
-            await e.client.send_message(
-                BOTLOG_CHATID, "#DelaySPAM \n\n"
-                "DelaySpam was executed successfully")
+            await e.client.send_message(BOTLOG_CHATID, "#DelaySPAM \n\nDelaySpam was executed successfully")
 
 CMD_HELP.update({
     "spam":
@@ -72,5 +64,4 @@ CMD_HELP.update({
 \nUsage: As if text spam was not enough !!\
 \n\n.delayspam <delay> <count> <text>\
 \nUsage: .bigspam but with custom delay.\
-\n\n\nNOTE : Spam at your own risk !!"
-})
+\n\n\nNOTE : Spam at your own risk !!"})
