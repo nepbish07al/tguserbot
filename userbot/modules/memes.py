@@ -1,26 +1,12 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
-#
-# Licensed under the Raphielscape Public License, Version 1.c (the "License");
-# you may not use this file except in compliance with the License.
-#
-#
-# customized .insult
-""" Userbot module for having some fun with people. """
-
 import asyncio
 import random
 import re
 import time
-
 from collections import deque
-
 import requests
-
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
-
 from cowpy import cow
-
 from userbot import CMD_HELP
 from userbot.events import register, errors_handler
 
