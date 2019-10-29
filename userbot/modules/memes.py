@@ -10,8 +10,6 @@ from cowpy import cow
 from userbot import CMD_HELP
 from userbot.events import register, errors_handler
 
-# ================= CONSTANT =================
-
 ZALG_LIST = [[
     "̖",
     " ̗",
@@ -175,7 +173,6 @@ INSULT_STRINGS = [
     "You got your head so far up your ass, you can chew food twice.",
 ]
 
-
 HELLOSTR = [
     "Hi !",
     "‘Ello, gov'nor!",
@@ -299,8 +296,6 @@ EMOJI = (
     "\U0001F632",
 )
 
-# ===========================================
-
 @register(outgoing=True, pattern=r"^.coinflip (.*)")
 @errors_handler
 async def coin(event):
@@ -334,7 +329,6 @@ async def coin(event):
         else:
             await event.edit("Gimme another coin, this one fake AF !!")
 
-
 @register(pattern="^.slap(?: |$)(.*)", outgoing=True)
 @errors_handler
 async def who(event):
@@ -357,7 +351,6 @@ async def who(event):
             await event.edit(
                 "`Can't slap this person, need to fetch some sticks and stones !!`"
             )
-
 
 async def get_user(event):
     """ Get the user from argument or replied message. """
@@ -394,7 +387,6 @@ async def get_user(event):
 
     return replied_user
 
-
 async def slap(replied_user, event):
     """ Construct a funny slap sentence !! """
     user_id = replied_user.user.id
@@ -416,7 +408,6 @@ async def slap(replied_user, event):
         victim=slapped, item=item, hits=hit, throws=throw, emoji=emoji)
 
     return caption
-
 
 @register(outgoing=True, pattern="^.decide(?: |$)(.*)")
 @errors_handler
@@ -450,7 +441,6 @@ async def insult(e):
     if not e.text[0].isalpha() and e.text[0] in ("."):
         await e.edit(random.choice(INSULT_STRINGS))
 
-
 @register(outgoing=True, pattern="^.vapor(?: |$)(.*)")
 @errors_handler
 async def vapor(vpr):
@@ -477,7 +467,6 @@ async def vapor(vpr):
 
         await vpr.edit("".join(reply_text))
 
-
 @register(outgoing=True, pattern="^.str(?: |$)(.*)")
 @errors_handler
 async def stretch(stret):
@@ -498,7 +487,6 @@ async def stretch(stret):
         reply_text = re.sub(r"([aeiouAEIOUａｅｉｏｕＡＥＩＯＵаеиоуюяыэё])",
                             (r"\1" * count), message)
         await stret.edit(reply_text)
-
 
 @register(outgoing=True, pattern="^.zal(?: |$)(.*)")
 @errors_handler
@@ -540,7 +528,6 @@ async def zal(zgfy):
 
         await zgfy.edit("".join(reply_text))
 
-
 @register(outgoing=True, pattern="^.hi$")
 @errors_handler
 async def hoi(hello):
@@ -562,7 +549,6 @@ async def _(event):
                 deq.rotate(1)
         except BaseException:
             return
-
 
 @register(outgoing=True, pattern="^.mock(?: |$)(.*)")
 @errors_handler
@@ -589,7 +575,6 @@ async def spongemocktext(mock):
 
         await mock.edit("".join(reply_text))
 
-
 @register(outgoing=True, pattern="^.clap(?: |$)(.*)")
 @errors_handler
 async def claptext(memereview):
@@ -609,7 +594,6 @@ async def claptext(memereview):
         reply_text += message.replace(" ", " 👏 ")
         reply_text += " 👏"
         await memereview.edit(reply_text)
-
 
 @register(outgoing=True, pattern="^.bt$")
 @errors_handler
@@ -638,7 +622,6 @@ async def let_me_google_that_for_you(lmgtfy_q):
         payload = {'format': 'json', 'url': lfy_url}
         r = requests.get('http://is.gd/create.php', params=payload)
         await lmgtfy_q.edit(f"[{query}]({r.json()['shorturl']})")
-
 
 @register(pattern=r".scam(?: |$)(.*)", outgoing=True)
 @errors_handler
@@ -675,7 +658,6 @@ async def scam(event):
         except BaseException:
             return
 
-
 @register(pattern=r".type(?: |$)(.*)", outgoing=True)
 @errors_handler
 async def typewriter(typew):
@@ -703,33 +685,14 @@ async def typewriter(typew):
             await typew.edit(old_text)
             await asyncio.sleep(sleep_time)
 
-
 CMD_HELP.update({
     "memes":
-    ".cowsay\
-\nUsage: cow which says things.\
-\n\n:/\
-\nUsage: Check yourself ;)\
-\n\n-_-\
-\nUsage: Ok...\
-\n\n;_;\
-\nUsage: Like `-_-` but crying.\
-\n\n.cp\
-\nUsage: Copypasta the famous meme\
-\n\n.vapor\
+    ".vapor\
 \nUsage: Vaporize everything!\
 \n\n.str\
 \nUsage: Stretch it.\
-\n\n.10iq\
-\nUsage: You retard !!\
 \n\n.zal\
 \nUsage: Invoke the feeling of chaos.\
-\n\nOof\
-\nUsage: Ooooof\
-\n\n.fp\
-\nUsage: Facepalm :P\
-\n\n.moon\
-\nUsage: kensar moon animation.\
 \n\n.clock\
 \nUsage: kensar clock animation.\
 \n\n.hi\
