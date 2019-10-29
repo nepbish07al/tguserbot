@@ -35,7 +35,6 @@ async def fastpurger(purg):
         await sleep(2)
         await done.delete()
 
-
 @register(outgoing=True, pattern="^.purgeme")
 @errors_handler
 async def purgeme(delme):
@@ -64,7 +63,6 @@ async def purgeme(delme):
         i = 1
         await smsg.delete()
 
-
 @register(outgoing=True, pattern="^.del$")
 @errors_handler
 async def delete_it(delme):
@@ -82,7 +80,6 @@ async def delete_it(delme):
                 if BOTLOG:
                     await delme.client.send_message(
                         BOTLOG_CHATID, "Well, I can't delete a message")
-
 
 @register(outgoing=True, pattern="^.edit")
 @errors_handler
@@ -104,7 +101,6 @@ async def editer(edit):
             await edit.client.send_message(
                 BOTLOG_CHATID, "Edit query was executed successfully")
 
-
 @register(outgoing=True, pattern="^.sd")
 @errors_handler
 async def selfdestruct(destroy):
@@ -120,7 +116,6 @@ async def selfdestruct(destroy):
         if BOTLOG:
             await destroy.client.send_message(BOTLOG_CHATID,
                                               "sd query done successfully")
-
 
 CMD_HELP.update({
     'purge':
