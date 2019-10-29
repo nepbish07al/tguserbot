@@ -102,5 +102,4 @@ CMD_HELP.update({
     ".cascheck [optional <reply/user id/username/chat id/invite link>]\
     \nAllows you to check an user, channel (with admin flag) or a whole group for CAS Banned users.\
     \n\n.casupdate\
-    \nGet the latest CAS CSV list from combot.org. Required for .cascheck."
-})
+    \nGet the latest CAS CSV list from combot.org. Required for .cascheck."})
