@@ -11,8 +11,7 @@ from userbot.events import errors_handler, register
 
 @register(outgoing=True, pattern="^.cascheck ?(.*)")
 @errors_handler
-async def cascheck(cas):
-    """For .cascheck command, check a specific or list all CAS Banned users in a chat."""
+async def cascheck(cas): #checks with combot api for banned users
     if not cas.text[0].isalpha() and cas.text[0] in ("."):
         if cas.reply_to_msg_id:
             replied_msg = await cas.get_reply_message()
@@ -80,8 +79,7 @@ async def cascheck(cas):
 
 @register(outgoing=True, pattern="^.casupdate$")
 @errors_handler
-async def casupdate(down):
-    """For casupdate command, download the latest export.csv from combot.org"""
+async def casupdate(down): #downloads csv from combot export
     if not down.text[0].isalpha() and down.text[0] in ("."):
         url = "https://combot.org/api/cas/export.csv"
         filename = TEMP_DOWNLOAD_DIRECTORY + "/export.csv"
