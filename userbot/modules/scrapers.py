@@ -15,7 +15,6 @@ from emoji import get_emoji_regexp
 from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID
 from userbot.events import register, errors_handler
 
-CARBONLANG = "auto"
 LANG = "en"
 
 @register(outgoing=True, pattern="^.currency (.*)")
