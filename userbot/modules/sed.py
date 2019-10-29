@@ -1,12 +1,3 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
-#
-# Licensed under the Raphielscape Public License, Version 1.c (the "License");
-# you may not use this file except in compliance with the License.
-#
-# The entire source code is OSSRPL except 'sed' which is GPLv3
-# License: GPLv3 and OSSRPL
-""" Userbot command for sed. """
-
 import re
 from sre_constants import error as sre_err
 from userbot import CMD_HELP
