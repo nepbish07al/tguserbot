@@ -10,17 +10,12 @@ from telethon.sessions import StringSession
 
 load_dotenv("config.env")
 
-# Bot Logs setup:
-CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
+CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False")) # Bot Logs setup
 
 if CONSOLE_LOGGER_VERBOSE:
-    basicConfig(
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-        level=DEBUG,
-    )
+    basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=DEBUG)
 else:
-    basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-                level=INFO)
+    basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=INFO)
 LOGS = getLogger(__name__)
 
 if version_info[0] < 3 or version_info[1] < 6:
@@ -31,29 +26,22 @@ if version_info[0] < 3 or version_info[1] < 6:
 ENV = bool(os.environ.get('ENV', False))
 
 if ENV:
-    # Telegram App KEY and HASH
-    API_KEY = os.environ.get("API_KEY", None)
-    API_HASH = os.environ.get("API_HASH", None)
-    # Userbot Session String
-    STRING_SESSION = os.environ.get("STRING_SESSION", None)
-    # Logging channel/group configuration.
-    BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID", "0"))
-    BOTLOG = sb(os.environ.get("BOTLOG", "False"))
-    # Console verbose logging
-    CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
-    # Default .alive name
-    ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
-    # Time & Date - Country and Time Zone
-    COUNTRY = str(os.environ.get("COUNTRY", ""))
-    TZ_NUMBER = int(os.environ.get("TZ_NUMBER", 1))
-    # Clean Welcome
+    API_KEY = os.environ.get("API_KEY", None) #tg API key
+    API_HASH = os.environ.get("API_HASH", None) #tg API hash
+    STRING_SESSION = os.environ.get("STRING_SESSION", None) # Userbot Session String
+    BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID", "0")) # Logging channel/group ID
+    BOTLOG = sb(os.environ.get("BOTLOG", "False")) # Logging channel/group configuration.
+    CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False")) # Console verbose logging
+    ALIVE_NAME = os.environ.get("ALIVE_NAME", None) # Default .alive name
+    COUNTRY = str(os.environ.get("COUNTRY", "")) # time and date country
+    TZ_NUMBER = int(os.environ.get("TZ_NUMBER", 1)) # time and date time zone
     CLEAN_WELCOME = sb(os.environ.get("CLEAN_WELCOME", "True"))
+
 else:
 # importing separate config to be able to keep our shit hidden
     from userbot.config import Development as Config
     API_KEY = Config.API_KEY
     API_HASH = Config.API_HASH
-
     if not API_KEY:
         import sys
         print("Your API_KEY is not defined", file=sys.stderr)
@@ -62,7 +50,6 @@ else:
         import sys
         print("Your API_HASH is not defined", file=sys.stderr)
         quit(1)
-            
     STRING_SESSION = Config.STRING_SESSION
     BOTLOG_CHATID = int(Config.BOTLOG_CHATID)
     BOTLOG = Config.BOTLOG
@@ -72,15 +59,12 @@ else:
     TZ_NUMBER = int(Config.TZ_NUMBER)
     CLEAN_WELCOME = Config.CLEAN_WELCOME
 
-TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY",
-                                         "./downloads")
+TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./downloads")
 
 # 'bot' variable
 if STRING_SESSION:
-    # pylint: disable=invalid-name
     bot = TelegramClient(StringSession(STRING_SESSION), API_KEY, API_HASH)
 else:
-    # pylint: disable=invalid-name
     bot = TelegramClient("userbot", API_KEY, API_HASH)
 
 # Global Variables
