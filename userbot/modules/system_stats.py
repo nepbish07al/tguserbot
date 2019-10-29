@@ -1,11 +1,3 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
-#
-# Licensed under the Raphielscape Public License, Version 1.c (the "License");
-# you may not use this file except in compliance with the License.
-#
-# .alive renamed to .status, rtt added to it
-""" Userbot module for getting information about the server. """
-
 from asyncio import create_subprocess_shell as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 from platform import python_version, uname
@@ -14,7 +6,6 @@ from os import remove, system
 from telethon import version
 from subprocess import check_output
 from telethon.tl.types import User, Chat, Channel
-
 from userbot import CMD_HELP, ALIVE_NAME
 from userbot.events import register, errors_handler
 
