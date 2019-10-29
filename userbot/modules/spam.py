@@ -17,7 +17,6 @@ async def tmeme(e):
                 BOTLOG_CHATID, "#TSPAM \n\n"
                 "TSpam was executed successfully")
 
-
 @register(outgoing=True, pattern="^.spam (.*)")
 @errors_handler
 async def spammer(e):
@@ -30,7 +29,6 @@ async def spammer(e):
             await e.client.send_message(
                 BOTLOG_CHATID, "#SPAM \n\n"
                 "Spam was executed successfully")
-
 
 @register(outgoing=True, pattern="^.picspam")
 @errors_handler
@@ -48,7 +46,6 @@ async def tiny_pic_spam(e):
                 BOTLOG_CHATID, "#PICSPAM \n\n"
                 "PicSpam was executed successfully")
 
-
 @register(outgoing=True, pattern="^.delayspam (.*)")
 @errors_handler
 async def spammer(e):
@@ -64,7 +61,6 @@ async def spammer(e):
             await e.client.send_message(
                 BOTLOG_CHATID, "#DelaySPAM \n\n"
                 "DelaySpam was executed successfully")
-
 
 CMD_HELP.update({
     "spam":
