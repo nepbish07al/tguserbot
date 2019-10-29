@@ -11,13 +11,11 @@ async def speedtst(spd):
     if not spd.text[0].isalpha() and spd.text[0] in ("."):
         await spd.edit("`Running speed test . . .`")
         test = speedtest.Speedtest()
-
         test.get_best_server()
         test.download()
         test.upload()
         test.results.share()
         result = test.results.dict()
-
         await spd.edit("`"
                        "Started at "
                        f"{result['timestamp']} \n\n"
@@ -32,9 +30,6 @@ async def speedtst(spd):
                        "`")
 
 def speed_convert(size):
-    """
-    Hi human, you can't read bytes?
-    """
     power = 2**10
     zero = 0
     units = {0: '', 1: 'Kb/s', 2: 'Mb/s', 3: 'Gb/s', 4: 'Tb/s'}
