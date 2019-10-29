@@ -5,8 +5,7 @@ from userbot.events import register, errors_handler
 
 @register(outgoing=True, pattern="^.userid$")
 @errors_handler
-async def useridgetter(target):
-    """ For .userid command, returns the ID of the target user. """
+async def useridgetter(target): #gets user id
     if not target.text[0].isalpha() and target.text[0] in ("."):
         message = await target.get_reply_message()
         if message:
@@ -16,7 +15,6 @@ async def useridgetter(target):
                     name = "@" + message.sender.username
                 else:
                     name = "**" + message.sender.first_name + "**"
-
             else:
                 user_id = message.forward.sender.id
                 if message.forward.sender.username:
@@ -28,15 +26,13 @@ async def useridgetter(target):
 
 @register(outgoing=True, pattern="^.chatid$")
 @errors_handler
-async def chatidgetter(chat):
-    """ For .chatid, returns the ID of the chat you are in at that moment. """
+async def chatidgetter(chat): #gets chat id
     if not chat.text[0].isalpha() and chat.text[0] in ("."):
         await chat.edit("Chat ID: `" + str(chat.chat_id) + "`")
 
 @register(outgoing=True, pattern=r"^.log(?: |$)([\s\S]*)")
 @errors_handler
-async def log(log_text):
-    """ For .log command, forwards a message or the command argument to the bot logs group """
+async def log(log_text): #forwards stuff to log channel/group
     if not log_text.text[0].isalpha() and log_text.text[0] in ("."):
         if BOTLOG:
             if log_text.reply_to_msg_id:
@@ -56,41 +52,6 @@ async def log(log_text):
         sleep(2)
         await log_text.delete()
 
-@register(outgoing=True, pattern="^.unmutechat$")
-@errors_handler
-async def unmute_chat(unm_e):
-    """ For .unmutechat command, unmute a muted chat. """
-    if not unm_e.text[0].isalpha() and unm_e.text[0] in ("."):
-        try:
-            from userbot.modules.sql_helper.keep_read_sql import unkread
-        except AttributeError:
-            await unm_e.edit('`Running on Non-SQL Mode!`')
-            return
-        unkread(str(unm_e.chat_id))
-        await unm_e.edit("```Unmuted this chat Successfully```")
-        sleep(2)
-        await unm_e.delete()
-
-@register(outgoing=True, pattern="^.mutechat$")
-@errors_handler
-async def mute_chat(mute_e):
-    """ For .mutechat command, mute any chat. """
-    if not mute_e.text[0].isalpha() and mute_e.text[0] in ("."):
-        try:
-            from userbot.modules.sql_helper.keep_read_sql import kread
-        except AttributeError:
-            await mute_e.edit("`Running on Non-SQL mode!`")
-            return
-        await mute_e.edit(str(mute_e.chat_id))
-        kread(str(mute_e.chat_id))
-        await mute_e.edit("`Shush! This chat will be silenced!`")
-        sleep(2)
-        await mute_e.delete()
-        if BOTLOG:
-            await mute_e.client.send_message(
-                BOTLOG_CHATID,
-                str(mute_e.chat_id) + " was silenced.")
-
 CMD_HELP.update({
     "chat":
     ".chatid\
@@ -98,9 +59,4 @@ CMD_HELP.update({
 \n\n.userid\
 \nUsage: Fetches the ID of the user in reply, if its a forwarded message, finds the ID for the source.\
 \n\n.log\
-\nUsage: Forwards the message you've replied to in your bot logs group.\
-\n\n.unmutechat\
-\nUsage: Unmutes a muted chat.\
-\n\n.mutechat\
-\nUsage: Allows you to mute any chat."
-})
+\nUsage: Forwards the message you've replied to in your bot logs group."})
