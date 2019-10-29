@@ -31,7 +31,6 @@ async def speedtst(spd):
                        f"{result['client']['isp']}"
                        "`")
 
-
 def speed_convert(size):
     """
     Hi human, you can't read bytes?
@@ -43,7 +42,6 @@ def speed_convert(size):
         size /= power
         zero += 1
     return f"{round(size, 2)} {units[zero]}"
-
 
 @register(outgoing=True, pattern="^.dc$")
 @errors_handler
@@ -61,7 +59,6 @@ async def pingme(pong):
     if not pong.text[0].isalpha() and pong.text[0] in ("."):
         duration = check_output("ping -c 1 1.0.0.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
         await pong.edit("`Ping speed is: %s`" % (duration))
-
 
 @register(outgoing=True, pattern="^.cping(?: |$)?")
 @errors_handler
