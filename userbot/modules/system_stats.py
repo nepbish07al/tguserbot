@@ -9,10 +9,7 @@ from telethon.tl.types import User, Chat, Channel
 from userbot import CMD_HELP, ALIVE_NAME
 from userbot.events import register, errors_handler
 
-# ================= CONSTANT =================
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
-# ============================================
-
 
 @register(outgoing=True, pattern="^.sysd$")
 @errors_handler
@@ -34,7 +31,6 @@ async def sysdetails(sysd):
             await sysd.edit("`" + result + "`")
         except FileNotFoundError:
             await sysd.edit("`Install neofetch first !!`")
-
 
 @register(outgoing=True, pattern="^.botver$")
 @errors_handler
@@ -73,7 +69,6 @@ async def bot_ver(event):
                 "Shame that you don't have git, You're running 4.0 - 'Essentials' anyway"
             )
 
-
 @register(outgoing=True, pattern="^.status$")
 @errors_handler
 async def amireallyalive(alive):
@@ -88,7 +83,6 @@ async def amireallyalive(alive):
                          f"User: {DEFAULTUSER}\n"
                          f"RTT: {rtt}"
                          "`")
-
 
 CMD_HELP.update(
     {"sysd": ".sysd\
