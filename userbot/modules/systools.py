@@ -13,51 +13,30 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 
 @register(outgoing=True, pattern="^.sysd$")
 @errors_handler
-async def sysdetails(sysd):
-    """ For .sysd command, get system info using neofetch. """
+async def sysdetails(sysd): #sysd command, requires neofetch
     if not sysd.text[0].isalpha() and sysd.text[0] in ("."):
         try:
             neo = "neofetch --stdout"
-            fetch = await asyncrunapp(
-                neo,
-                stdout=asyncPIPE,
-                stderr=asyncPIPE,
-            )
-
+            fetch = await asyncrunapp(neo, stdout=asyncPIPE, stderr=asyncPIPE)
             stdout, stderr = await fetch.communicate()
-            result = str(stdout.decode().strip()) \
-                + str(stderr.decode().strip())
-
+            result = str(stdout.decode().strip()) + str(stderr.decode().strip())
             await sysd.edit("`" + result + "`")
         except FileNotFoundError:
             await sysd.edit("`Install neofetch first !!`")
 
 @register(outgoing=True, pattern="^.botver$")
 @errors_handler
-async def bot_ver(event):
-    """ For .botver command, get the bot version. """
+async def bot_ver(event): #bot version command
     if not event.text[0].isalpha() and event.text[0] in ("."):
         if which("git") is not None:
             invokever = "git describe --all --long"
-            ver = await asyncrunapp(
-                invokever,
-                stdout=asyncPIPE,
-                stderr=asyncPIPE,
-            )
+            ver = await asyncrunapp(invokever, stdout=asyncPIPE, stderr=asyncPIPE)
             stdout, stderr = await ver.communicate()
-            verout = str(stdout.decode().strip()) \
-                + str(stderr.decode().strip())
-
+            verout = str(stdout.decode().strip()) + str(stderr.decode().strip())
             invokerev = "git rev-list --all --count"
-            rev = await asyncrunapp(
-                invokerev,
-                stdout=asyncPIPE,
-                stderr=asyncPIPE,
-            )
+            rev = await asyncrunapp(invokerev, stdout=asyncPIPE, stderr=asyncPIPE)
             stdout, stderr = await rev.communicate()
-            revout = str(stdout.decode().strip()) \
-                + str(stderr.decode().strip())
-
+            revout = str(stdout.decode().strip()) + str(stderr.decode().strip())
             await event.edit("`Userbot Version: "
                              f"{verout}"
                              "` \n"
@@ -65,14 +44,11 @@ async def bot_ver(event):
                              f"{revout}"
                              "`")
         else:
-            await event.edit(
-                "Shame that you don't have git, You're running 4.0 - 'Essentials' anyway"
-            )
+            await event.edit("Shame that you don't have git, You're running tguserbot 1.0 anyway")
 
 @register(outgoing=True, pattern="^.status$")
 @errors_handler
-async def amireallyalive(alive):
-    """ For .alive command, check if the bot is running.  """
+async def amireallyalive(alive): #.status, .alive, you name it
     if not alive.text[0].isalpha() and alive.text[0] in ("."):
         rtt = check_output("ping -c 1 1.1.1.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
         await alive.edit("`"
@@ -92,5 +68,4 @@ CMD_HELP.update({"botver": ".botver\
 CMD_HELP.update({
     "status":
     ".status\
-    \nUsage: Type .status to see wether your bot is working or not."
-})
+    \nUsage: Type .status to see wether your bot is working or not."})
