@@ -115,15 +115,12 @@ def deEmojify(inputString): #removes emojis for safe string handling
 CMD_HELP.update({
     'currency':
     '.currency <amount> <from> <to>\
-        \nUsage: Converts various currencies for you.'
-})
+        \nUsage: Converts various currencies for you.'})
 CMD_HELP.update({
     'tts':
     '.tts <text> [or reply]\
-        \nUsage: Translates text to speech for the default language which is set.\nUse .lang <text> to set language for your TTS.'
-})
+        \nUsage: Translates text to speech for the default language which is set.\nUse .lang <text> to set language for your TTS.'})
 CMD_HELP.update({
     'trt':
     '.trt <text> [or reply]\
-        \nUsage: Translates text to the default language which is set.\nUse .lang <text> to set language for your TTS.'
-})
+        \nUsage: Translates text to the default language which is set.\nUse .lang <text> to set language for your TTS.'})
