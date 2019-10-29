@@ -5,7 +5,6 @@ from pytz import timezone as tz
 from userbot import CMD_HELP, COUNTRY, TZ_NUMBER
 from userbot.events import register, errors_handler
 
-
 async def get_tz(con):
     """ Get time zone of the given country. """
     if "(Uk)" in con:
@@ -29,7 +28,6 @@ async def get_tz(con):
             return c_tz[con]
     except KeyError:
         return
-
 
 @register(outgoing=True, pattern="^.time(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?")
 @errors_handler
@@ -95,7 +93,6 @@ async def time_func(tdata):
         await tdata.edit(
             f"`It's`  **{dtnow}**  `in {c_name}({time_zone} timezone).`")
 
-
 @register(outgoing=True, pattern="^.date(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?")
 @errors_handler
 async def date_func(dat):
@@ -159,7 +156,6 @@ async def date_func(dat):
         await dat.edit(
             f"`It's`  **{dtnow}**  `in {c_name}({time_zone} timezone).`")
 
-
 @register(outgoing=True, pattern="^.settime (.*)(?<![0-9])(?: |$)([0-9]+)?")
 @errors_handler
 async def set_time_country(loc):
@@ -205,7 +201,6 @@ async def set_time_country(loc):
 
         await loc.edit("`Default country for date and time set to "
                        f"{COUNTRY}({tz_name} timezone).`")
-
 
 CMD_HELP.update({
     "time":
