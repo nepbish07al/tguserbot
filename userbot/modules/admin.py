@@ -1,27 +1,10 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
-#
-# Licensed under the Raphielscape Public License, Version 1.c (the "License");
-# you may not use this file except in compliance with the License.
-"""
-Userbot module to help you manage a group
-"""
-
 from asyncio import sleep
 from os import remove
-
-from telethon.errors import (BadRequestError, ChatAdminRequiredError,
-                             ImageProcessFailedError, PhotoCropSizeSmallError,
-                             UserAdminInvalidError)
-from telethon.errors.rpcerrorlist import (UserIdInvalidError,
-                                          MessageTooLongError)
-from telethon.tl.functions.channels import (EditAdminRequest,
-                                            EditBannedRequest,
-                                            EditPhotoRequest)
+from telethon.errors import BadRequestError, ChatAdminRequiredError, ImageProcessFailedError, PhotoCropSizeSmallError, UserAdminInvalidError
+from telethon.errors.rpcerrorlist import UserIdInvalidError, MessageTooLongError
+from telethon.tl.functions.channels import EditAdminRequest, EditBannedRequest, EditPhotoRequest
 from telethon.tl.functions.messages import UpdatePinnedMessageRequest
-from telethon.tl.types import (ChannelParticipantsAdmins, ChatAdminRights,
-                               ChatBannedRights, MessageEntityMentionName,
-                               MessageMediaPhoto)
-
+from telethon.tl.types import ChannelParticipantsAdmins, ChatAdminRights, ChatBannedRights, MessageEntityMentionName, MessageMediaPhoto
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot
 from userbot.events import register, errors_handler
 
