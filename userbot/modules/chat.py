@@ -96,21 +96,6 @@ async def mute_chat(mute_e):
                 str(mute_e.chat_id) + " was silenced.")
 
 
-@register(incoming=True)
-@errors_handler
-async def keep_read(message):
-    """ The mute logic. """
-    try:
-        from userbot.modules.sql_helper.keep_read_sql import is_kread
-    except AttributeError:
-        return
-    kread = is_kread()
-    if kread:
-        for i in kread:
-            if i.groupid == str(message.chat_id):
-                await message.client.send_read_acknowledge(message.chat_id)
-
-
 CMD_HELP.update({
     "chat":
     ".chatid\
