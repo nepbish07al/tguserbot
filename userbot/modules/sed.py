@@ -6,7 +6,6 @@ from userbot.events import register, errors_handler
 
 DELIMITERS = ("/", ":", "|", "_")
 
-
 async def separate_sed(sed_string):
     """ Separate sed arguments. """
 
@@ -51,7 +50,6 @@ async def separate_sed(sed_string):
             flags = sed_string[counter:]
         return replace, replace_with, flags.lower()
     return None
-
 
 @register(outgoing=True, pattern="^.s")
 @errors_handler
@@ -100,7 +98,6 @@ async def sed(command):
                 await command.edit(f"Did you mean? \n\n{text}")
                 await sleep(3)
                 await command.edit(text)
-
 
 CMD_HELP.update({
     "sed":
