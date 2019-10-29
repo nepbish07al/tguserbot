@@ -1,17 +1,8 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
-#
-# Licensed under the Raphielscape Public License, Version 1.c (the "License");
-# you may not use this file except in compliance with the License.
-#
-""" Userbot initialization. """
-
 import os
-
+import pylast
 from sys import version_info
 from logging import basicConfig, getLogger, INFO, DEBUG
 from distutils.util import strtobool as sb
-
-import pylast
 from dotenv import load_dotenv
 from requests import get
 from telethon import TelegramClient
