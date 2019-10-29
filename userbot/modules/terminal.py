@@ -1,17 +1,7 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
-#
-# Licensed under the Raphielscape Public License, Version 1.c (the "License");
-# you may not use this file except in compliance with the License.
-#
-#
-# Eval command has been removed, module renamed terminal
-""" Userbot module for executing code and terminal commands from Telegram. """
-
 import asyncio
 from getpass import getuser
 from os import remove
 from sys import executable
-
 from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID
 from userbot.events import register, errors_handler
 
