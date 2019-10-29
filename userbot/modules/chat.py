@@ -26,14 +26,12 @@ async def useridgetter(target):
             await target.edit("**Name:** {} \n**User ID:** `{}`".format(
                 name, user_id))
 
-
 @register(outgoing=True, pattern="^.chatid$")
 @errors_handler
 async def chatidgetter(chat):
     """ For .chatid, returns the ID of the chat you are in at that moment. """
     if not chat.text[0].isalpha() and chat.text[0] in ("."):
         await chat.edit("Chat ID: `" + str(chat.chat_id) + "`")
-
 
 @register(outgoing=True, pattern=r"^.log(?: |$)([\s\S]*)")
 @errors_handler
@@ -58,7 +56,6 @@ async def log(log_text):
         sleep(2)
         await log_text.delete()
 
-
 @register(outgoing=True, pattern="^.unmutechat$")
 @errors_handler
 async def unmute_chat(unm_e):
@@ -73,7 +70,6 @@ async def unmute_chat(unm_e):
         await unm_e.edit("```Unmuted this chat Successfully```")
         sleep(2)
         await unm_e.delete()
-
 
 @register(outgoing=True, pattern="^.mutechat$")
 @errors_handler
@@ -94,7 +90,6 @@ async def mute_chat(mute_e):
             await mute_e.client.send_message(
                 BOTLOG_CHATID,
                 str(mute_e.chat_id) + " was silenced.")
-
 
 CMD_HELP.update({
     "chat":
