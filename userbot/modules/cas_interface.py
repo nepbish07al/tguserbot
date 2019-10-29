@@ -9,7 +9,6 @@ from telethon.tl.types import ChannelParticipantsAdmins, Message, User
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, bot
 from userbot.events import errors_handler, register
 
-
 @register(outgoing=True, pattern="^.cascheck ?(.*)")
 @errors_handler
 async def cascheck(cas):
@@ -79,7 +78,6 @@ async def cascheck(cas):
             data.close()
         await cas.edit(text)
 
-
 @register(outgoing=True, pattern="^.casupdate$")
 @errors_handler
 async def casupdate(down):
@@ -101,7 +99,6 @@ async def casupdate(down):
             for error in downloader.get_errors():
                 print(str(error))
         return
-
 
 CMD_HELP.update({
     'anti_spambot':
