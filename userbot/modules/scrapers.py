@@ -5,30 +5,18 @@ import re
 from time import sleep
 from html import unescape
 from re import findall
-from selenium import webdriver
 from urllib.parse import quote_plus
 from urllib.error import HTTPError
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.chrome.options import Options
-from wikipedia import summary
-from wikipedia.exceptions import DisambiguationError, PageError
-from urbandict import define
 from requests import get
 from search_engine_parser import GoogleSearch
-from google_images_download import google_images_download
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
 from googletrans import LANGUAGES, Translator
 from gtts import gTTS
 from emoji import get_emoji_regexp
-from pytube import YouTube
-from pytube.helpers import safe_filename
 from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID
 from userbot.events import register, errors_handler
 
 CARBONLANG = "auto"
 LANG = "en"
-
 
 @register(outgoing=True, pattern="^.currency (.*)")
 @errors_handler
@@ -61,7 +49,6 @@ async def _(event):
         else:
             await event.edit("`Invalid syntax.`")
             return
-
 
 @register(outgoing=True, pattern=r"^.tts(?: |$)([\s\S]*)")
 @errors_handler
@@ -112,7 +99,6 @@ async def text_to_speech(query):
                     "tts of `" + message + "` executed successfully!")
             await query.delete()
 
-
 @register(outgoing=True, pattern=r"^.trt(?: |$)([\s\S]*)")
 @errors_handler
 async def translateme(trans):
@@ -150,7 +136,6 @@ async def translateme(trans):
 def deEmojify(inputString):
     """ Remove emojis and other non-safe characters from string """
     return get_emoji_regexp().sub(u'', inputString)
-
 
 CMD_HELP.update({
     'currency':
