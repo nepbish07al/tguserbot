@@ -17,8 +17,7 @@ async def run(run_q):
             return
 
         if not code:
-            await run_q.edit("``` At least a variable is required to \
-execute. Use .help exec for an example.```")
+            await run_q.edit("``` At least a variable is required to execute. Use .help exec for an example.```")
             return
 
         if code in ("userbot.session", "config.env"):
@@ -70,7 +69,6 @@ execute. Use .help exec for an example.```")
             await run_q.client.send_message(
                 BOTLOG_CHATID,
                 "Exec query " + codepre + " was executed successfully")
-
 
 @register(outgoing=True, pattern="^.term(?: |$)(.*)")
 @errors_handler
