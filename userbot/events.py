@@ -68,6 +68,6 @@ def errors_handler(func):
             file.write(ftext)
             file.close()
             if BOTLOG:
-                await errors.client.send_file(BOTLOG_CHATID, "error.log", caption=text,)
+                await errors.client.send_file(BOTLOG_CHATID, "error.log", caption=text)
                 return
     return wrapper
