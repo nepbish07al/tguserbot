@@ -51,7 +51,6 @@ MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=True)
 UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 # ================================================
 
-
 @register(outgoing=True, pattern="^.setgrouppic$")
 @errors_handler
 async def set_group_photo(gpic):
@@ -88,7 +87,6 @@ async def set_group_photo(gpic):
                 await gpic.edit(PP_TOO_SMOL)
             except ImageProcessFailedError:
                 await gpic.edit(PP_ERROR)
-
 
 @register(outgoing=True, pattern="^.promote(?: |$)(.*)")
 @errors_handler
@@ -141,7 +139,6 @@ async def promote(promt):
                 f"USER: [{user.first_name}](tg://user?id={user.id})\n"
                 f"CHAT: {promt.chat.title}(`{promt.chat_id}`)")
 
-
 @register(outgoing=True, pattern="^.demote(?: |$)(.*)")
 @errors_handler
 async def demote(dmod):
@@ -190,7 +187,6 @@ async def demote(dmod):
                 BOTLOG_CHATID, "#DEMOTE\n"
                 f"USER: [{user.first_name}](tg://user?id={user.id})\n"
                 f"CHAT: {dmod.chat.title}(`{dmod.chat_id}`)")
-
 
 @register(outgoing=True, pattern="^.ban(?: |$)(.*)")
 @errors_handler
@@ -246,7 +242,6 @@ async def ban(bon):
                 f"USER: [{user.first_name}](tg://user?id={user.id})\n"
                 f"CHAT: {bon.chat.title}(`{bon.chat_id}`)")
 
-
 @register(outgoing=True, pattern="^.unban(?: |$)(.*)")
 @errors_handler
 async def nothanos(unbon):
@@ -285,148 +280,6 @@ async def nothanos(unbon):
                     f"CHAT: {unbon.chat.title}(`{unbon.chat_id}`)")
         except UserIdInvalidError:
             await unbon.edit("`Uh oh my unban logic broke!`")
-
-
-@register(outgoing=True, pattern="^.mute(?: |$)(.*)")
-@errors_handler
-async def spider(spdr):
-    """
-    This function is basically muting peeps
-    """
-    if not spdr.text[0].isalpha() and spdr.text[0] in ("."):
-        # Check if the function running under SQL mode
-        try:
-            from userbot.modules.sql_helper.spam_mute_sql import mute
-        except AttributeError:
-            await spdr.edit(NO_SQL)
-            return
-
-        # Admin or creator check
-        chat = await spdr.get_chat()
-        admin = chat.admin_rights
-        creator = chat.creator
-
-        # If not admin and not creator, return
-        if not admin and not creator:
-            await spdr.edit(NO_ADMIN)
-            return
-
-        user = await get_user_from_event(spdr)
-        if user:
-            pass
-        else:
-            return
-
-        self_user = await spdr.client.get_me()
-
-        if user.id == self_user.id:
-            await spdr.edit(
-                "`Hands too short, can't duct tape myself...\n(ヘ･_･)ヘ┳━┳`")
-            return
-
-        # If everything goes well, do announcing and mute
-        await spdr.edit("`Gets a tape!`")
-        if mute(spdr.chat_id, user.id) is False:
-            return await spdr.edit('`Error! User probably already muted.`')
-        else:
-            try:
-                await spdr.client(
-                    EditBannedRequest(spdr.chat_id, user.id, MUTE_RIGHTS))
-
-                # Announce that the function is done
-                await spdr.edit("`Safely taped!`")
-
-                # Announce to logging group
-                if BOTLOG:
-                    await spdr.client.send_message(
-                        BOTLOG_CHATID, "#MUTE\n"
-                        f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-                        f"CHAT: {spdr.chat.title}(`{spdr.chat_id}`)")
-            except UserIdInvalidError:
-                return await spdr.edit("`Uh oh my unmute logic broke!`")
-
-
-@register(outgoing=True, pattern="^.unmute(?: |$)(.*)")
-@errors_handler
-async def unmoot(unmot):
-    """ For .unmute command, unmute the replied/tagged person """
-    if not unmot.text[0].isalpha() and unmot.text[0] \
-            in ("."):
-
-        # Admin or creator check
-        chat = await unmot.get_chat()
-        admin = chat.admin_rights
-        creator = chat.creator
-
-        # If not admin and not creator, return
-        if not admin and not creator:
-            await unmot.edit(NO_ADMIN)
-            return
-
-        # Check if the function running under SQL mode
-        try:
-            from userbot.modules.sql_helper.spam_mute_sql import unmute
-        except AttributeError:
-            await unmot.edit(NO_SQL)
-            return
-
-        # If admin or creator, inform the user and start unmuting
-        await unmot.edit('```Unmuting...```')
-        user = await get_user_from_event(unmot)
-        if user:
-            pass
-        else:
-            return
-
-        if unmute(unmot.chat_id, user.id) is False:
-            return await unmot.edit("`Error! User probably already unmuted.`")
-        else:
-
-            try:
-                await unmot.client(
-                    EditBannedRequest(unmot.chat_id, user.id, UNBAN_RIGHTS))
-                await unmot.edit("```Unmuted Successfully```")
-            except UserIdInvalidError:
-                await unmot.edit("`Uh oh my unmute logic broke!`")
-                return
-
-            if BOTLOG:
-                await unmot.client.send_message(
-                    BOTLOG_CHATID, "#UNMUTE\n"
-                    f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-                    f"CHAT: {unmot.chat.title}(`{unmot.chat_id}`)")
-
-
-@register(incoming=True)
-@errors_handler
-async def muter(moot):
-    """ Used for deleting the messages of muted people """
-    try:
-        from userbot.modules.sql_helper.spam_mute_sql import is_muted
-        from userbot.modules.sql_helper.gmute_sql import is_gmuted
-    except AttributeError:
-        return
-    muted = is_muted(moot.chat_id)
-    gmuted = is_gmuted(moot.sender_id)
-    rights = ChatBannedRights(
-        until_date=None,
-        send_messages=True,
-        send_media=True,
-        send_stickers=True,
-        send_gifs=True,
-        send_games=True,
-        send_inline=True,
-        embed_links=True,
-    )
-    if muted:
-        for i in muted:
-            if str(i.sender) == str(moot.sender_id):
-                await moot.delete()
-                await moot.client(
-                    EditBannedRequest(moot.chat_id, moot.sender_id, rights))
-    for i in gmuted:
-        if i.sender == str(moot.sender_id):
-            await moot.delete()
 
 @register(outgoing=True, pattern="^.delusers(?: |$)(.*)")
 @errors_handler
@@ -498,7 +351,6 @@ async def rm_deletedacc(show):
                 BOTLOG_CHATID, "#CLEANUP\n"
                 f"Cleaned **{del_u}** deleted account(s) !!")
 
-
 @register(outgoing=True, pattern="^.adminlist$")
 @errors_handler
 async def get_admin(show):
@@ -522,7 +374,6 @@ async def get_admin(show):
         except ChatAdminRequiredError as err:
             mentions += " " + str(err) + "\n"
         await show.edit(mentions, parse_mode="html")
-
 
 @register(outgoing=True, pattern="^.pin(?: |$)(.*)")
 @errors_handler
@@ -570,7 +421,6 @@ async def pin(msg):
                 f"CHAT: {msg.chat.title}(`{msg.chat_id}`)\n"
                 f"LOUD: {not is_silent}")
 
-
 @register(outgoing=True, pattern="^.kick(?: |$)(.*)")
 @errors_handler
 async def kick(usr):
@@ -612,7 +462,6 @@ async def kick(usr):
                 BOTLOG_CHATID, "#KICK\n"
                 f"USER: [{user.first_name}](tg://user?id={user.id})\n"
                 f"CHAT: {usr.chat.title}(`{usr.chat_id}`)\n")
-
 
 @register(outgoing=True, pattern="^.userslist ?(.*)")
 @errors_handler
@@ -658,7 +507,6 @@ async def get_users(show):
             )
             remove("userslist.txt")
 
-
 async def get_user_from_event(event):
     """ Get the user from argument or replied message. """
     if event.reply_to_msg_id:
@@ -690,7 +538,6 @@ async def get_user_from_event(event):
 
     return user_obj
 
-
 async def get_user_from_id(user, event):
     if isinstance(user, str):
         user = int(user)
@@ -703,7 +550,6 @@ async def get_user_from_id(user, event):
 
     return user_obj
 
-
 CMD_HELP.update({
     "admin":
     ".promote\
@@ -714,14 +560,6 @@ CMD_HELP.update({
 \nUsage: Reply to someone's message with .ban to ban them.\
 \n\n.unban\
 \nUsage: Reply to someone's message with .unban to unban them in this chat.\
-\n\n.mute\
-\nUsage: Reply to someone's message with .mute to mute them, works on admins too.\
-\n\n.unmute\
-\nUsage: Reply to someone's message with .unmute to remove them from muted list.\
-\n\n.gmute\
-\nUsage: Reply to someone's message with .gmute to mute them in all groups you have in common with them.\
-\n\n.ungmute\
-\nUsage: Reply someone's message with .ungmute to remove them from the gmuted list.\
 \n\n.delusers\
 \nUsage: Searches for deleted accounts in a group. Use .delusers clean to remove deleted accounts from the group.\
 \n\n.adminlist\
