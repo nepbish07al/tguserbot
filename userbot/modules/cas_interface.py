@@ -98,7 +98,7 @@ async def casupdate(down): #downloads csv from combot export
         return
 
 CMD_HELP.update({
-    'anti_spambot':
+    'cas_interface':
     ".cascheck [optional <reply/user id/username/chat id/invite link>]\
     \nAllows you to check an user, channel (with admin flag) or a whole group for CAS Banned users.\
     \n\n.casupdate\

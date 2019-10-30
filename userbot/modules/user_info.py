@@ -94,6 +94,6 @@ async def fetch_info(replied_user, event):
     return photo, caption
 
 CMD_HELP.update({
-    "info":
+    "user_info":
     ".info <username> or reply to someones text with .whois\
     \nUsage: Gets info of an user."})
