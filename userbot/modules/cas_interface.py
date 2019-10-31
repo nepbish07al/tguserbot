@@ -99,7 +99,6 @@ async def cascheck(cas): #checks if a user, or all users in a group are cas bann
         remove("caslist.txt")
         return
 
-
 def isCSVoutdated() -> bool: #checks if csv is a day or more old
     csv_file = TEMP_DOWNLOAD_DIRECTORY + "/export.csv"
     if not path.exists(csv_file):
@@ -111,13 +110,11 @@ def isCSVoutdated() -> bool: #checks if csv is a day or more old
     else:
         return False
 
-
 @register(outgoing=True, pattern="^.casupdate$")
 @errors_handler
 async def casupdate(event): #updates cas csv
     await casupdater(event, showinfo=True)
     return
-
 
 async def casupdater(down, showinfo: bool): #csv downloader
     url = "https://combot.org/api/cas/export.csv"
