@@ -114,7 +114,7 @@ def isCSVoutdated() -> bool: #checks if csv is a day or more old
 @register(outgoing=True, pattern="^.casupdate$")
 @errors_handler
 async def casupdate(event): #updates cas csv
-    if not target.text[0].isalpha() and target.text[0] in ("."):
+    if not event.text[0].isalpha() and event.text[0] in ("."):
         await casupdater(event, showinfo=True)
         return
 
