@@ -33,8 +33,6 @@ if ENV:
     BOTLOG = sb(os.environ.get("BOTLOG", "False")) # Logging channel/group configuration.
     CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False")) # Console verbose logging
     ALIVE_NAME = os.environ.get("ALIVE_NAME", None) # Default .alive name
-    COUNTRY = str(os.environ.get("COUNTRY", "")) # time and date country
-    TZ_NUMBER = int(os.environ.get("TZ_NUMBER", 1)) # time and date time zone
     CLEAN_WELCOME = sb(os.environ.get("CLEAN_WELCOME", "True"))
 
 else:
@@ -55,8 +53,6 @@ else:
     BOTLOG = Config.BOTLOG
     CONSOLE_LOGGER_VERBOSE = Config.CONSOLE_LOGGER_VERBOSE
     ALIVE_NAME = Config.ALIVE_NAME
-    COUNTRY = str(Config.COUNTRY)
-    TZ_NUMBER = int(Config.TZ_NUMBER)
     CLEAN_WELCOME = Config.CLEAN_WELCOME
 
 TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./downloads")
