@@ -25,8 +25,6 @@ class Config(object):
     BOTLOG = False # Logging channel/group configuration.
     CONSOLE_LOGGER_VERBOSE = False # Console verbose logging
     ALIVE_NAME = None # Default .status name
-    COUNTRY = "" # Time & Date - Country and Time Zone
-    TZ_NUMBER = 1 # Time & Date - Country and Time Zone
     CLEAN_WELCOME = True # Clean Welcome
     GREET_STICKER='CAADAgAD0QMAAjq5FQKizo2AiTQCBQI' # Comming soon
 

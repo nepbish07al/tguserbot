@@ -17,10 +17,6 @@ except PhoneNumberInvalidError:
 for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)
 
-#Terminal output stuff
-LOGS.info("You are running tguserbot - 1.0")
-LOGS.info("Userbot is running, test it by typing .status")
-
 if len(argv) not in (1, 3, 4):
     bot.disconnect()
 else:
