@@ -5,7 +5,7 @@ from subprocess import check_output
 from userbot import CMD_HELP
 from userbot.events import register, errors_handler
 
-@register(outgoing=True, pattern="^.speed$")
+@register(outgoing=True, pattern="^.speedtest$")
 @errors_handler
 async def speedtst(spd):
     if not spd.text[0].isalpha() and spd.text[0] in ("."):
