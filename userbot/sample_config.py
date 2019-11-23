@@ -27,6 +27,7 @@ class Config(object):
     ALIVE_NAME = None # Default .status name
     CLEAN_WELCOME = True # Clean Welcome
     GREET_STICKER='CAADAgAD0QMAAjq5FQKizo2AiTQCBQI' # Comming soon
+    HOMIES = []
 
 class Development(Config):
     LOGGER = True

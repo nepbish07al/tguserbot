@@ -3,7 +3,7 @@ from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
-from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
+from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, HOMIES
 from userbot.events import register, errors_handler
 
 @register(pattern=".info(?: |$)(.*)", outgoing=True)
@@ -81,6 +81,8 @@ async def fetch_info(replied_user, event):
     caption += f"First Name: {first_name}\n"
     caption += f"Last Name: {last_name}\n"
     caption += f"Username: {username}\n"
+    if user_id in HOMIES:
+        caption +=f"\nThis is one of my homies, respect him!\n"
     caption += f"Data Centre ID: {dc_id}\n"
     caption += f"Number of Profile Pics: {replied_user_profile_photos_count}\n"
     caption += f"Permanent Link To Profile: "

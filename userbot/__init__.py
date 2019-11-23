@@ -34,6 +34,7 @@ if ENV:
     CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False")) # Console verbose logging
     ALIVE_NAME = os.environ.get("ALIVE_NAME", None) # Default .alive name
     CLEAN_WELCOME = sb(os.environ.get("CLEAN_WELCOME", "True"))
+    HOMIES = []
 
 else:
 # importing separate config to be able to keep our shit hidden
@@ -54,6 +55,7 @@ else:
     CONSOLE_LOGGER_VERBOSE = Config.CONSOLE_LOGGER_VERBOSE
     ALIVE_NAME = Config.ALIVE_NAME
     CLEAN_WELCOME = Config.CLEAN_WELCOME
+    HOMIES = Config.HOMIES
 
 TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./downloads")
 
