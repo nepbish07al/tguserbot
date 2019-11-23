@@ -72,10 +72,9 @@ async def fetch_info(replied_user, event):
     is_bot = replied_user.user.bot
     restricted = replied_user.user.restricted
     verified = replied_user.user.verified
-    photo = await event.client.download_profile_photo(user_id, TEMP_DOWNLOAD_DIRECTORY + str(user_id) + ".jpg", download_big=True)
-    first_name = first_name.replace("\u2060", "") if first_name else ("This User has no First Name")
-    last_name = last_name.replace("\u2060", "") if last_name else ("This User has no Last Name")
-    username = "@{}".format(username) if username else ("This User has no Username")
+    first_name = first_name.replace("\u2060", "") if first_name else ("(N/A)")
+    last_name = last_name.replace("\u2060", "") if last_name else ("(N/A)")
+    username = "@{}".format(username) if username else ("(N/A)")
     user_bio = "This User has no About" if not user_bio else user_bio
     caption = "<b>USER INFO:</b>\n\n"
     caption += f"First Name: {first_name}\n"
@@ -93,7 +92,7 @@ async def fetch_info(replied_user, event):
     caption += f"ID: <code>{user_id}</code>\n\n"
     caption += f"Bio: \n<code>{user_bio}</code>\n\n"
     caption += f"Common Chats with this user: {common_chat}\n"
-    return photo, caption
+    return caption
 
 CMD_HELP.update({
     "user_info":
