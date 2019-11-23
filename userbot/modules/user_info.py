@@ -82,7 +82,7 @@ async def fetch_info(replied_user, event):
     caption += f"Last Name: {last_name}\n"
     caption += f"Username: {username}\n"
     if user_id in HOMIES:
-        caption +=f"\nThis is one of my homies, respect him!\n"
+        caption +=f"\nThis is one of my homies, respect him!\n\n"
     caption += f"Data Centre ID: {dc_id}\n"
     caption += f"Number of Profile Pics: {replied_user_profile_photos_count}\n"
     caption += f"Permanent Link To Profile: "
