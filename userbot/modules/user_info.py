@@ -16,7 +16,7 @@ async def who(event): #.info command
         if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
             os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
         replied_user = await get_user(event)
-        photo, caption = await fetch_info(replied_user, event)
+        caption = await fetch_info(replied_user, event)
         message_id_to_reply = event.message.reply_to_msg_id
         if not message_id_to_reply:
             message_id_to_reply = None
