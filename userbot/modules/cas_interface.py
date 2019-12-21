@@ -27,16 +27,6 @@ async def cascheck(cas): #checks if a user, or all users in a group are cas bann
                     chat = int(chat)
                 except ValueError:
                     pass
-        if not chat:
-            chat = cas.chat_id
-        try:
-            info = await cas.client.get_entity(chat)
-        except (TypeError, ValueError) as err:
-            await cas.edit(str(err))
-            return
-        else:
-            await cas.edit("`CAS data not found. Please use .casupdate command to get the latest CAS data`")
-            return
         try:
             if type(info) is User:  # check an user only
                 if cas_api.banchecker(info.id):
