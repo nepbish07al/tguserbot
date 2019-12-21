@@ -11,7 +11,7 @@ from urllib.error import HTTPError, URLError
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, bot
 from userbot.events import errors_handler, register
 
-import userbot.include.cas_api as cas_api
+import userbot.modules.include.cas_api as cas_api
 
 @register(outgoing=True, pattern="^.cascheck ?(.*)")
 @errors_handler
