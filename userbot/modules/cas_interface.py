@@ -11,8 +11,6 @@ from urllib.error import HTTPError, URLError
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, bot
 from userbot.events import errors_handler, register
 
-import userbot.modules.include.cas_api as cas_api
-
 @register(outgoing=True, pattern="^.cascheck ?(.*)")
 @errors_handler
 async def cascheck(cas): #checks if a user, or all users in a group are cas banned
@@ -27,14 +25,30 @@ async def cascheck(cas): #checks if a user, or all users in a group are cas bann
                     chat = int(chat)
                 except ValueError:
                     pass
+        if not chat:
+            chat = cas.chat_id
         try:
             info = await cas.client.get_entity(chat)
         except (TypeError, ValueError) as err:
             await cas.edit(str(err))
             return
+        exportcsv = TEMP_DOWNLOAD_DIRECTORY + "/export.csv"
+        user_ids = []
+        if path.exists(exportcsv):
+            if isCSVoutdated():
+                await cas.edit("`Auto updating CAS data...`")
+                print("CASCHECK: Auto update CAS data started")
+                await casupdater(cas, showinfo=False)
+            await cas.edit("`Processing...`")
+            with open(exportcsv) as data:
+                for cas_id in data:
+                    user_ids.append(int(cas_id))
+        else:
+            await cas.edit("`CAS data not found. Please use .casupdate command to get the latest CAS data`")
+            return
         try:
             if type(info) is User:  # check an user only
-                if cas_api.banchecker(info.id):
+                if info.id in user_ids:
                     if not info.deleted:
                         text = f"Warning! [{info.first_name}](tg://user?id={info.id}) [ID: `{info.id}`] is CAS Banned!"
                     else:
@@ -46,7 +60,7 @@ async def cascheck(cas): #checks if a user, or all users in a group are cas bann
                 cas_count, members_count = (0,)*2
                 text_users = ""
                 async for user in cas.client.iter_participants(info.id):
-                    if cas_api.banchecker(user.id):
+                    if user.id in user_ids:
                         cas_count += 1
                         if not user.deleted:
                             text_users += f"\n{cas_count}. [{user.first_name}](tg://user?id={user.id}) `{user.id}`"
@@ -86,10 +100,68 @@ async def cascheck(cas): #checks if a user, or all users in a group are cas bann
             remove("caslist.txt")
             return
 
+def isCSVoutdated() -> bool: #checks if csv is a day or more old
+    csv_file = TEMP_DOWNLOAD_DIRECTORY + "/export.csv"
+    if not path.exists(csv_file):
+        return False
+    file_date = datetime.fromtimestamp(path.getmtime(csv_file))
+    duration = datetime.today() - file_date
+    if duration.days >= 1:
+        return True
+    else:
+        return False
+
+@register(outgoing=True, pattern="^.casupdate$")
+@errors_handler
+async def casupdate(event): #updates cas csv
+    if not event.text[0].isalpha() and event.text[0] in ("."):
+        await casupdater(event, showinfo=True)
+        return
+
+async def casupdater(down, showinfo: bool): #csv downloader
+    url = "https://combot.org/api/cas/export.csv"
+    filename = TEMP_DOWNLOAD_DIRECTORY + "/export.csv"
+    if showinfo:
+        await down.edit("`Connecting...`")
+    try:
+        downloader = SmartDL(url, filename, progress_bar=False)
+        downloader.start(blocking=False)
+        if showinfo:
+            await down.edit("`Downloading...`")
+    except HTTPError as http:
+        await down.edit("`Connection failed: internal server error occured`")
+        print("HTTPError:", http)
+        return
+    except URLError as urle:
+        await down.edit("`Connection failed: server not reachable`")
+        print("URLError:", urle)
+        return
+    except IOError as io:
+        await down.edit(f"`I/O Error: {io}`")
+        print("IOError:", io)
+        return
+    except Exception as e:
+        await down.edit(f"`Update failed: {be}`")
+        print("Exception:", e)
+        return
+    if downloader.isSuccessful():
+        if showinfo:
+            await down.edit("`Successfully updated latest CAS CSV data`")
+        print("CASUPATE download speed: %s" % downloader.get_speed(human=True))
+        print("CASUPATE status: %s" % downloader.get_status())
+        print("CASUPATE download time: %s seconds" % round(downloader.get_dl_time(), 2))
+    else:
+        await down.edit("`Update failed`")
+        for error in downloader.get_errors():
+            print(str(error))
+    return
+
 CMD_HELP.update({
     'anti_spambot':
     "If enabled in config.env or env var,\
         \nthis module will kick (or inform the admins of the group about) the\
         \nspammer(s) if they match the userbot's anti-spam algorithm.\
     \n\n.cascheck [optional <reply/user id/username/chat id/invite link>]\
-    \nAllows you to check an user, channel (with admin flag) or a whole group for CAS Banned users."})
+    \nAllows you to check an user, channel (with admin flag) or a whole group for CAS Banned users.\
+    \n\n.casupdate\
+    \nGet the latest CAS CSV list from combot.org. Required for .cascheck."})
