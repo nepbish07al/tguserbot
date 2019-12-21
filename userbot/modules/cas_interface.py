@@ -28,6 +28,11 @@ async def cascheck(cas): #checks if a user, or all users in a group are cas bann
                 except ValueError:
                     pass
         try:
+            info = await cas.client.get_entity(chat)
+        except (TypeError, ValueError) as err:
+            await cas.edit(str(err))
+            return
+        try:
             if type(info) is User:  # check an user only
                 if cas_api.banchecker(info.id):
                     if not info.deleted:
