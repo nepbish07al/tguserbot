@@ -12,10 +12,8 @@ from search_engine_parser import GoogleSearch
 from googletrans import LANGUAGES, Translator
 from gtts import gTTS
 from emoji import get_emoji_regexp
-from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID
+from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, LANG
 from userbot.events import register, errors_handler
-
-LANG = "en"
 
 @register(outgoing=True, pattern="^.currency (.*)")
 @errors_handler
@@ -123,4 +121,4 @@ CMD_HELP.update({
 CMD_HELP.update({
     'trt':
     '.trt <text> [or reply]\
-        \nUsage: Translates text to the default language which is set.\nUse .lang <text> to set language for your TTS.'})
+        \nUsage: Translates text to the default language which is set.'})
