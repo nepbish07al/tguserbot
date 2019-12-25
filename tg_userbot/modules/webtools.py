@@ -72,7 +72,7 @@ async def cping(args):
             await args.edit("`DNS: " + dns +"\n"+"Ping speed: "+duration+"`")
 
 CMD_HELP.update(
-    {"speed": ".speed\
+    {"speedtest": ".speedtest\
     \nUsage: Does a speedtest and shows the results."})
 CMD_HELP.update(
     {"dc": ".dc\
