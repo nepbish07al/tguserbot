@@ -5,23 +5,19 @@ from telethon.errors.rpcerrorlist import UserIdInvalidError, MessageTooLongError
 from telethon.tl.functions.channels import EditAdminRequest, EditBannedRequest, EditPhotoRequest
 from telethon.tl.functions.messages import UpdatePinnedMessageRequest
 from telethon.tl.types import ChannelParticipantsAdmins, ChatAdminRights, ChatBannedRights, MessageEntityMentionName, MessageMediaPhoto
-from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot
-from userbot.events import register, errors_handler
+from tg_userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot
+from tg_userbot.events import register, errors_handler
 
 PP_TOO_SMOL = "`The image is too small`"
 PP_ERROR = "`Failure while processing the image`"
 NO_ADMIN = "`I am not an admin!`"
 NO_PERM = "`I don't have sufficient permissions!`"
-NO_SQL = "`Running on Non-SQL mode!`"
 CHAT_PP_CHANGED = "`Chat Picture Changed`"
-CHAT_PP_ERROR = "`Some issue with updating the pic, maybe coz I'm not an admin, or don't have enough rights.`"
 INVALID_MEDIA = "`Invalid Extension`"
 
 BANNED_RIGHTS = ChatBannedRights(until_date=None, view_messages=True, send_messages=True, send_media=True, send_stickers=True, send_gifs=True, send_games=True, send_inline=True, embed_links=True)
 UNBAN_RIGHTS = ChatBannedRights(until_date=None, send_messages=None, send_media=None, send_stickers=None, send_gifs=None, send_games=None, send_inline=None, embed_links=None)
 KICK_RIGHTS = ChatBannedRights(until_date=None, view_messages=True)
-MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=True)
-UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 
 @register(outgoing=True, pattern="^.setgrouppic$")
 @errors_handler
@@ -396,4 +392,6 @@ CMD_HELP.update({
 \n\n.adminlist\
 \nUsage: Retrieves all admins in a chat.\
 \n\n.userslist or .userslist <name>\
-\nUsage: Retrieves all users in a chat."})
+\nUsage: Retrieves all users in a chat.\
+\n\n.kick\
+\nUsage: Reply to someone's message with .kick to kick them."})
