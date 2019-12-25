@@ -28,7 +28,7 @@ class Config(object):
     CLEAN_WELCOME = True # Clean Welcome
     GREET_STICKER='CAADAgAD0QMAAjq5FQKizo2AiTQCBQI' # Comming soon
     LANG = 'en' #translator language
-    HOMIES = []
+    HOMIES = [] #Human Of Maximum Intelligence and Empathy, H.O.M.I.E.
 
 class Development(Config):
     LOGGER = True
