@@ -74,5 +74,4 @@ COUNT_PM = {}
 LASTMSG = {}
 ENABLE_KILLME = True
 CMD_HELP = {}
-ISAFK = False
-AFKREASON = None
+VERSION = "1.0.0"
