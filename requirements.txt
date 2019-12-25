@@ -15,7 +15,6 @@ oauth2client
 Pillow>=5.3.0
 psycopg2
 psycopg2-binary
-pybase64>=0.4.0
 pySmartDL
 python-barcode
 python-dotenv
@@ -25,5 +24,4 @@ requests>=2.18.4
 search-engine-parser
 speedtest-cli>=2.0.2
 telethon>=1.9
-telethon-session-sqlalchemy>=0.2.6
 urbandict>=0.5
