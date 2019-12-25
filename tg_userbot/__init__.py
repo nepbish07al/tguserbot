@@ -39,7 +39,7 @@ if ENV:
 
 else:
 # importing separate config to be able to keep our shit hidden
-    from userbot.config import Development as Config
+    from tg_userbot.config import Development as Config
     API_KEY = Config.API_KEY
     API_HASH = Config.API_HASH
     if not API_KEY:
