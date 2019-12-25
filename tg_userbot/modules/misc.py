@@ -9,14 +9,6 @@ import json
 from tg_userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from tg_userbot.events import register, errors_handler
 
-@register(outgoing=True, pattern="^.random")
-@errors_handler
-async def randomise(items): #random item from list of items
-    if not items.text[0].isalpha() and items.text[0] in ("."):
-        itemo = (items.text[8:]).split()
-        index = randint(1, len(itemo) - 1)
-        await items.edit("**Query: **\n`" + items.text[8:] + "`\n**Output: **\n`" + itemo[index] + "`")
-
 @register(outgoing=True, pattern="^.shutdown$")
 @errors_handler
 async def killdabot(event): #bot shutdown
@@ -43,11 +35,6 @@ async def json(event): #decodes message
             out_file.name = "message.json"
             await event.client.send_file(event.chat_id, out_file, force_document=True, allow_cache=False, reply_to=reply_to_id, caption="`Here's the decoded message data !!`")
             await event.delete()
-
-CMD_HELP.update({
-    'random':
-    '.random <item1> <item2> ... <itemN>\
-\nUsage: Get a random item from the list of items.'})
 
 CMD_HELP.update({
     "shutdown":
