@@ -12,8 +12,8 @@ from search_engine_parser import GoogleSearch
 from googletrans import LANGUAGES, Translator
 from gtts import gTTS
 from emoji import get_emoji_regexp
-from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, LANG
-from userbot.events import register, errors_handler
+from tg_userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, LANG
+from tg_userbot.events import register, errors_handler
 
 @register(outgoing=True, pattern="^.currency (.*)")
 @errors_handler

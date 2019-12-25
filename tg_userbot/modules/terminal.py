@@ -2,8 +2,8 @@ import asyncio
 from getpass import getuser
 from os import remove
 from sys import executable
-from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID
-from userbot.events import register, errors_handler
+from tg_userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID
+from tg_userbot.events import register, errors_handler
 
 @register(outgoing=True, pattern=r"^.exec(?: |$)([\s\S]*)")
 @errors_handler

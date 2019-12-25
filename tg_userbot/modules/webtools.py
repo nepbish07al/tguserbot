@@ -2,8 +2,8 @@ from datetime import datetime
 import speedtest
 from telethon import functions
 from subprocess import check_output
-from userbot import CMD_HELP
-from userbot.events import register, errors_handler
+from tg_userbot import CMD_HELP
+from tg_userbot.events import register, errors_handler
 
 @register(outgoing=True, pattern="^.speedtest$")
 @errors_handler
