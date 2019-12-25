@@ -6,8 +6,8 @@ from random import choice
 import requests
 from bs4 import BeautifulSoup
 from humanize import naturalsize
-from userbot import CMD_HELP
-from userbot.events import register, errors_handler
+from tg_userbot import CMD_HELP
+from tg_userbot.events import register, errors_handler
 
 @register(outgoing=True, pattern=r"^.downlink(?: |$)([\s\S]*)")
 @errors_handler
