@@ -1,7 +1,7 @@
 import asyncio
 from asyncio import wait, sleep
-from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
-from userbot.events import register, errors_handler
+from tg_userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
+from tg_userbot.events import register, errors_handler
 
 @register(outgoing=True, pattern="^.tspam (.*)")
 @errors_handler
