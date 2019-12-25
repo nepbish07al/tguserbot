@@ -4,8 +4,8 @@ import qrcode
 import barcode
 from barcode.writer import ImageWriter
 from bs4 import BeautifulSoup
-from userbot import CMD_HELP
-from userbot.events import register, errors_handler
+from tg_userbot import CMD_HELP
+from tg_userbot.events import register, errors_handler
 
 @register(pattern=r"^.decode$", outgoing=True)
 @errors_handler
