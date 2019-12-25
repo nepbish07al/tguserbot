@@ -17,21 +17,6 @@ async def randomise(items): #random item from list of items
         index = randint(1, len(itemo) - 1)
         await items.edit("**Query: **\n`" + items.text[8:] + "`\n**Output: **\n`" + itemo[index] + "`")
 
-@register(outgoing=True, pattern="^.sleep( [0-9]+)?$")
-@errors_handler
-async def sleepybot(time): #bot stands by for some time
-    message = time.text
-    if not message[0].isalpha() and message[0] in ("."):
-        if " " not in time.pattern_match.group(1):
-            await time.reply("Syntax: `.sleep [seconds]`")
-        else:
-            counter = int(time.pattern_match.group(1))
-            await time.edit("Sleeping...")
-            sleep(2)
-            if BOTLOG:
-                await time.client.send_message(BOTLOG_CHATID, "You put the bot to sleep for " + str(counter) +" seconds")
-            sleep(counter)
-
 @register(outgoing=True, pattern="^.shutdown$")
 @errors_handler
 async def killdabot(event): #bot shutdown
@@ -63,11 +48,6 @@ CMD_HELP.update({
     'random':
     '.random <item1> <item2> ... <itemN>\
 \nUsage: Get a random item from the list of items.'})
-
-CMD_HELP.update({
-    'sleep':
-    '.sleep <seconds>\
-\nUsage: Simply .sleep to sleep for the designated time in seconds'})
 
 CMD_HELP.update({
     "shutdown":
