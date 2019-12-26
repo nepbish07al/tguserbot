@@ -9,15 +9,6 @@ import json
 from tg_userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from tg_userbot.events import register, errors_handler
 
-@register(outgoing=True, pattern="^.shutdown$")
-@errors_handler
-async def killdabot(event): #bot shutdown
-    if not event.text[0].isalpha() and event.text[0] in ("."):
-        await event.edit("`Powering off...`")
-        if BOTLOG:
-            await event.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n""Bot shut down")
-        await event.client.disconnect()
-
 @register(outgoing=True, pattern="^.json$")
 @errors_handler
 async def json(event): #decodes message
@@ -40,8 +31,3 @@ CMD_HELP.update({
     "shutdown":
     ".shutdown\
 \nUsage: Simply .shutdown, equivalent to CTRL-C in terminal"})
-
-CMD_HELP.update({
-    "json":
-    ".json\
-\nUsage: Get detailed JSON formatted data about replied message"})

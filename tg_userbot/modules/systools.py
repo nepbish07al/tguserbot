@@ -24,28 +24,6 @@ async def sysdetails(sysd): #sysd command, requires neofetch
         except FileNotFoundError:
             await sysd.edit("`Install neofetch first !!`")
 
-@register(outgoing=True, pattern="^.botver$")
-@errors_handler
-async def bot_ver(event): #bot version command
-    if not event.text[0].isalpha() and event.text[0] in ("."):
-        if which("git") is not None:
-            invokever = "git describe --all --long"
-            ver = await asyncrunapp(invokever, stdout=asyncPIPE, stderr=asyncPIPE)
-            stdout, stderr = await ver.communicate()
-            verout = str(stdout.decode().strip()) + str(stderr.decode().strip())
-            invokerev = "git rev-list --all --count"
-            rev = await asyncrunapp(invokerev, stdout=asyncPIPE, stderr=asyncPIPE)
-            stdout, stderr = await rev.communicate()
-            revout = str(stdout.decode().strip()) + str(stderr.decode().strip())
-            await event.edit("`Userbot Version: "
-                             f"{verout}"
-                             "` \n"
-                             "`Revision: "
-                             f"{revout}"
-                             "`")
-        else:
-            await event.edit("Shame that you don't have git, You're running tguserbot 1.0 anyway")
-
 @register(outgoing=True, pattern="^.status$")
 @errors_handler
 async def amireallyalive(alive): #.status, .alive, you name it
@@ -60,12 +38,19 @@ async def amireallyalive(alive): #.status, .alive, you name it
                          f"RTT: {rtt}"
                          "`")
 
+@register(outgoing=True, pattern="^.shutdown$")
+@errors_handler
+async def killdabot(event): #bot shutdown
+    if not event.text[0].isalpha() and event.text[0] in ("."):
+        await event.edit("`Powering off...`")
+        if BOTLOG:
+            await event.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n""Bot shut down")
+        await event.client.disconnect()
+
 CMD_HELP.update(
-    {"sysd": ".sysd\
-    \nUsage: Shows system information using neofetch."})
-CMD_HELP.update({"botver": ".botver\
-    \nUsage: Shows the userbot version."})
-CMD_HELP.update({
-    "status":
-    ".status\
-    \nUsage: Type .status to see wether your bot is working or not."})
+    {"systools": ".sysd\
+    \nUsage: Shows system information using neofetch.\
+    \n.status\
+    \nUsage: Type .status to see wether your bot is working or not.\
+    \n.shutdown\
+    \nUsage: Type .shutdown to shutdown the bot."})
