@@ -11,5 +11,6 @@ def __list_all_modules():
     return all_modules
 
 ALL_MODULES = sorted(__list_all_modules())
-LOGS.info("Loading Modules: %s", str(ALL_MODULES))
 __all__ = ALL_MODULES + ["ALL_MODULES"]
+sleep(1)
+LOGS.info("Modules loaded: %s", str(ALL_MODULES))
