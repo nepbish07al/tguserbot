@@ -4,7 +4,7 @@ from telethon.errors import BadRequestError, ChatAdminRequiredError, ImageProces
 from telethon.errors.rpcerrorlist import UserIdInvalidError, MessageTooLongError
 from telethon.tl.functions.channels import EditAdminRequest, EditBannedRequest, EditPhotoRequest
 from telethon.tl.functions.messages import UpdatePinnedMessageRequest
-from telethon.tl.types import ChannelParticipantsAdmins, ChatAdminRights, ChatBannedRights, MessageEntityMentionName, MessageMediaPhoto
+from telethon.tl.types import ChannelParticipantsAdmins, ChatAdminRights, ChatBannedRights, MessageEntityMentionName, MessageMediaPhoto, User
 from tg_userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot
 from tg_userbot.events import register, errors_handler
 
