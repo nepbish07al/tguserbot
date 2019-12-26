@@ -111,14 +111,10 @@ def deEmojify(inputString): #removes emojis for safe string handling
     return get_emoji_regexp().sub(u'', inputString)
 
 CMD_HELP.update({
-    'currency':
+    'scrappers':
     '.currency <amount> <from> <to>\
-        \nUsage: Converts various currencies for you.'})
-CMD_HELP.update({
-    'tts':
-    '.tts <text> [or reply]\
-        \nUsage: Translates text to speech for the default language which is set.\nUse .lang <text> to set language for your TTS.'})
-CMD_HELP.update({
-    'trt':
-    '.trt <text> [or reply]\
-        \nUsage: Translates text to the default language which is set.'})
+     \nUsage: Converts various currencies for you.\
+     \n.tts <text> [or reply]\
+     \nUsage: Translates text to speech for the default language which is set.\nUse .lang <text> to set language for your TTS.\
+     \n.trt <text> [or reply]\
+     \nUsage: Translates text to the default language which is set.'})
