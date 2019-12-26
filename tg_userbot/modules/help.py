@@ -14,6 +14,6 @@ async def help(event): #generates help message
         else:
             string = "Please specify which module do you want help for !!\nSyntax: .help <module name>\n\nModules available:\n\n"
             for i in CMD_HELP:
-                string += "ℹ️ `" + str(i)
+                string += "-> `" + str(i)
                 string += "`\n"
             await event.edit(string)
