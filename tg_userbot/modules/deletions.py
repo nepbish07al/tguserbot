@@ -45,35 +45,10 @@ async def purgeme(delme): #same as fast purge, but only your messages
         i = 1
         await smsg.delete()
 
-@register(outgoing=True, pattern="^.sd")
-@errors_handler
-async def selfdestruct(destroy): #sends self destructing message
-    if not destroy.text[0].isalpha() and destroy.text[0] in ("."):
-        message = destroy.text
-        counter = int(message[4:6])
-        text = str(destroy.text[6:])
-        await destroy.delete()
-        smsg = await destroy.client.send_message(destroy.chat_id, text)
-        await sleep(counter)
-        await smsg.delete()
-        if BOTLOG:
-            await destroy.client.send_message(BOTLOG_CHATID, "sd query done successfully")
-
 CMD_HELP.update({
-    'purge':
+    'deletions':
     '.purge\
-        \nUsage: Purges all messages starting from the reply.'
-})
-
-CMD_HELP.update({
-    'purgeme':
-    '.purgeme <x>\
-        \nUsage: Deletes x amount of your latest messages.'
-})
-
-CMD_HELP.update({
-    'sd':
-    '.sd <x> <message>\
-\nUsage: Creates a message that selfdestructs in x seconds.\
-\nKeep the seconds under 100 since it puts your bot to sleep.'
+     \nUsage: Purges all messages starting from the reply.\
+     .purgeme <x>\
+     \nUsage: Deletes x amount of your latest messages.'
 })
