@@ -473,21 +473,6 @@ async def hoi(hello): #hi
     if not hello.text[0].isalpha() and hello.text[0] in ("."):
         await hello.edit(random.choice(HELLOSTR))
 
-@register(outgoing=True, pattern="^.clock$")
-@errors_handler
-async def _(event): #clock
-    if not event.text[0].isalpha() and event.text[0] in ("."):
-        if event.fwd_from:
-            return
-        deq = deque(list("🕙🕘🕗🕖🕕🕔🕓🕒🕑🕐🕛"))
-        try:
-            for _ in range(32):
-                await asyncio.sleep(0.1)
-                await event.edit("".join(deq))
-                deq.rotate(1)
-        except BaseException:
-            return
-
 @register(outgoing=True, pattern="^.mock(?: |$)(.*)")
 @errors_handler
 async def spongemocktext(mock):
@@ -619,8 +604,6 @@ CMD_HELP.update({
 \nUsage: Stretch it.\
 \n\n.zal\
 \nUsage: Invoke the feeling of chaos.\
-\n\n.clock\
-\nUsage: kensar clock animation.\
 \n\n.hi\
 \nUsage: Greet everyone!\
 \n\n.coinflip <heads/tails>\
