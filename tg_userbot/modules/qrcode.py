@@ -64,12 +64,8 @@ async def make_qr(makeqr): #makes qr
         await makeqr.delete()
 
 CMD_HELP.update({
-    'decode':
+    'qrcode':
     ".decode <reply to barcode/qrcode>\
-\nUsage: Get the content from the replied QR Code/Bar Code."})
-
-CMD_HELP.update({
-    'makeqr':
-    ".makeqr <content>\
-\nUsage: Make a QR Code from the given content.\
-\nExample: .makeqr www.google.com"})
+\nUsage: Get the content from the replied QR Code/Bar Code.\
+\n.makeqr <content>\
+\nUsage: Make a QR Code from the given content."})
