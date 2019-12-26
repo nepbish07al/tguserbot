@@ -49,33 +49,82 @@ async def set_group_photo(gpic): #sets new group "profile" picture
 
 @register(outgoing=True, pattern="^.promote(?: |$)(.*)")
 @errors_handler
-async def promote(promt): #promotes tagged person
-    if not promt.text[0].isalpha() and promt.text[0] in ("."):
-        chat = await promt.get_chat() #get chat
-        admin = chat.admin_rights
-        creator = chat.creator
-        if not admin and not creator: # Cant promote if you aint admin
-            await promt.edit(NO_ADMIN)
-            return
-        new_rights = ChatAdminRights(add_admins=False, invite_users=True, change_info=False, ban_users=True, delete_messages=True, pin_messages=True)
-        await promt.edit("`Promoting...`")
-        user = await get_user_from_event(promt)
-        if user:
-            pass
-        else:
-            return
-        try: # Try to promote if current user is admin or creator
+async def promote(promt):
+    if promt.text[0].isalpha() or promt.text[0] not in ("."):
+        return
+    chat = await promt.get_chat()
+    if isinstance(chat, User):
+        await promt.edit("`Yooo, this is not a channel or a group!`")
+        return
+    admin = chat.admin_rights  
+    creator = chat.creator
+    if not admin and not creator:
+        await promt.edit(NO_ADMIN)
+        return
+    new_rights = ChatAdminRights(add_admins=False,
+                                 invite_users=True,
+                                 change_info=False,
+                                 ban_users=True,
+                                 delete_messages=True,
+                                 pin_messages=True)
+    get_user = await get_user_from_event(promt)
+    if isinstance(get_user, tuple):
+        user, rank = get_user
+    else:
+        user = get_user
+        rank = ""
+    if not rank:
+        rank = ""
+    if user:
+        pass
+    else:
+        return
+    if not isinstance(user, User):
+        await promt.edit("`I can't promote a channel or a group!`")
+        return
+    try:
+        async for member in promt.client.iter_participants(promt.chat_id, filter=ChannelParticipantsAdmins):
+            if user.id == member.id:
+                if user.is_self:
+                    await promt.edit("`I am immortal already`")
+                else:
+                    await promt.edit("`This user is immortal already`")
+                return
+    except ChatAdminRequiredError as cadre:
+        await promt.edit("`Admin privileges are required`")
+        print("ChatAdminRequiredError:". cadre)
+        return
+    await promt.edit("`Promoting...`")
+    try:
+        if creator:
             await promt.client(
-                EditAdminRequest(promt.chat_id, user.id, new_rights))
-            await promt.edit("`Promoted Successfully!`")
-        except BadRequestError:
-            await promt.edit(NO_PERM) # If Telethon spit BadRequestError, assume no have Promote perm
-            return
-        if BOTLOG: #logs shit, if set to log
-            await promt.client.send_message(
-                BOTLOG_CHATID, "#PROMOTE\n"
-                f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-                f"CHAT: {promt.chat.title}(`{promt.chat_id}`)")
+                EditAdminRequest(promt.chat_id, user.id, new_rights, rank))
+        else:
+            admin.add_admins = False
+            if all(getattr(admin, right) is False for right in vars(admin)):
+                return await promt.edit("`I don't have enough admin rights to promote this user`")
+            await promt.client(
+                EditAdminRequest(promt.chat_id, user.id, admin, rank))
+        if user.id in HOMIE_LIST:
+            await promt.edit("`Promoted my homie with immortal power!`")
+        else:
+            await promt.edit("`Promoted with immortal power!`")
+    except AdminsTooMuchError as atme:
+        await promt.edit("`There are too many admins in this chat already`")
+        print("AdminsTooMuchError:", atme)
+        return
+    except BadRequestError as bre:
+        await promt.edit(NO_PERM)
+        print("BadRequestError:", bre)
+        return
+    except (TypeError, ValueError) as e:
+        await promt.edit(str(e))
+        return
+    if BOTLOG:
+        await promt.client.send_message(
+            BOTLOG_CHATID, "#PROMOTE\n"
+            f"USER: [{user.first_name}](tg://user?id={user.id})\n"
+            f"CHAT: {promt.chat.title}(`{promt.chat_id}`)")
 
 @register(outgoing=True, pattern="^.demote(?: |$)(.*)")
 @errors_handler
