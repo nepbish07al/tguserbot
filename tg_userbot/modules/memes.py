@@ -513,13 +513,6 @@ async def claptext(memereview): #clap
         reply_text += " 👏"
         await memereview.edit(reply_text)
 
-@register(outgoing=True, pattern="^.bt$")
-@errors_handler
-async def bluetext(bt_e): #bluetext insult
-    if not bt_e.text[0].isalpha() and bt_e.text[0] in ("."):
-        if await bt_e.get_reply_message():
-            await bt_e.edit("/BLUETEXT /MUST /CLICK.\n/ARE /YOU /A /STUPID /ANIMAL /WHICH /IS /ATTRACTED /TO /COLOURS ?")
-
 @register(outgoing=True, pattern="^.lfy (.*)")
 @errors_handler
 async def let_me_google_that_for_you(lmgtfy_q): #img.gtfy
@@ -614,8 +607,6 @@ CMD_HELP.update({
 \nUsage: Do it and find the real fun.\
 \n\n.clap\
 \nUsage: Praise people!\
-\n\n.bt\
-\nUsage: Believe me, you will find this useful.\
 \n\n.type\
 \nUsage: Just a small command to make your keyboard become a typewriter!\
 \n\n.lfy <query>\
