@@ -5,7 +5,7 @@ from telethon.errors.rpcerrorlist import UserIdInvalidError, MessageTooLongError
 from telethon.tl.functions.channels import EditAdminRequest, EditBannedRequest, EditPhotoRequest
 from telethon.tl.functions.messages import UpdatePinnedMessageRequest
 from telethon.tl.types import ChannelParticipantsAdmins, ChatAdminRights, ChatBannedRights, MessageEntityMentionName, MessageMediaPhoto, User
-from tg_userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot
+from tg_userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot, HOMIES
 from tg_userbot.events import register, errors_handler
 
 PP_TOO_SMOL = "`The image is too small`"
@@ -105,7 +105,7 @@ async def promote(promt):
                 return await promt.edit("`I don't have enough admin rights to promote this user`")
             await promt.client(
                 EditAdminRequest(promt.chat_id, user.id, admin, rank))
-        if user.id in HOMIE_LIST:
+        if user.id in HOMIES:
             await promt.edit("`Promoted my homie with immortal power!`")
         else:
             await promt.edit("`Promoted with immortal power!`")
