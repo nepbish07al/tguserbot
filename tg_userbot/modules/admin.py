@@ -129,7 +129,7 @@ async def promote(promt):
 @register(outgoing=True, pattern="^.demote(?: |$)(.*)")
 @errors_handler
 async def demote(dmod):
-    if promt.text[0].isalpha() or promt.text[0] not in ("."):
+    if dmod.text[0].isalpha() or dmod.text[0] not in ("."):
         return    
     chat = await dmod.get_chat()
     if isinstance(chat, User):
