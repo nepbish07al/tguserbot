@@ -128,33 +128,70 @@ async def promote(promt):
 
 @register(outgoing=True, pattern="^.demote(?: |$)(.*)")
 @errors_handler
-async def demote(dmod): #demotes tagged person
-    if not dmod.text[0].isalpha() and dmod.text[0] in ("."):
-        chat = await dmod.get_chat()
-        admin = chat.admin_rights
-        creator = chat.creator
-        if not admin and not creator:
-            await dmod.edit(NO_ADMIN)
+async def demote(dmod):
+    if promt.text[0].isalpha() or promt.text[0] not in ("."):
+        return    
+    chat = await dmod.get_chat()
+    if isinstance(chat, User):
+        await dmod.edit("`Yooo, this is not a channel or a group!`")
+        return
+    admin = chat.admin_rights
+    creator = chat.creator
+    if not admin and not creator:
+        await dmod.edit(NO_ADMIN)
+        return
+    get_user = await get_user_from_event(dmod)
+    if isinstance(get_user, tuple):
+        user, rank = get_user
+    else:
+        user = get_user
+        rank = ""
+    if not rank:
+        rank = ""
+    if user:
+        pass
+    else:
+        return
+    if not isinstance(user, User):
+        await dmod.edit("`I can't demote a channel or a group!`")
+        return
+    try:
+        admins_list = []
+        async for member in dmod.client.iter_participants(dmod.chat_id, filter=ChannelParticipantsAdmins):
+            admins_list.append(member.id)
+        if user.id not in admins_list:
+            await dmod.edit("`This user is mortal already`")
             return
-        await dmod.edit("`Demoting...`")
-        user = await get_user_from_event(dmod)
-        if user:
-            pass
-        else:
-            return
-        # New rights
-        newrights = ChatAdminRights(add_admins=None, invite_users=None, change_info=None, ban_users=None, delete_messages=None, pin_messages=None)
-        try:
-            await dmod.client(EditAdminRequest(dmod.chat_id, user.id, newrights)) # try Edit Admin Permission
-        except BadRequestError:
-            await dmod.edit(NO_PERM) # If Telethon spit BadRequestError, assume no have Promote perm
-            return
-        await dmod.edit("`Demoted Successfully!`")
-        if BOTLOG: #log action
-            await dmod.client.send_message(
-                BOTLOG_CHATID, "#DEMOTE\n"
-                f"USER: [{user.first_name}](tg://user?id={user.id})\n"
-                f"CHAT: {dmod.chat.title}(`{dmod.chat_id}`)")
+    except ChatAdminRequiredError as cadre:
+        await dmod.edit("`Admin privileges are required`")
+        print("ChatAdminRequiredError:". cadre)
+        return
+    if user.is_self:
+        await dmod.edit("`I can't demote myself!`")
+        return
+    await dmod.edit("`Demoting...`")
+    newrights = ChatAdminRights(add_admins=None,
+                                invite_users=None,
+                                change_info=None,
+                                ban_users=None,
+                                delete_messages=None,
+                                pin_messages=None)
+    try:
+        await dmod.client(
+            EditAdminRequest(dmod.chat_id, user.id, newrights, rank))
+        await dmod.edit("`Demoted to a mortal user lmao`")
+    except BadRequestError as bre:
+        await dmod.edit(NO_PERM)
+        print("BadRequestError:", bre)
+        return
+    except (TypeError, ValueError) as e:
+        await dmod.edit(str(e))
+        return
+    if BOTLOG:
+        await dmod.client.send_message(
+            BOTLOG_CHATID, "#DEMOTE\n"
+            f"USER: [{user.first_name}](tg://user?id={user.id})\n"
+            f"CHAT: {dmod.chat.title}(`{dmod.chat_id}`)")
 
 @register(outgoing=True, pattern="^.ban(?: |$)(.*)")
 @errors_handler
