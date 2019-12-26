@@ -17,5 +17,3 @@ Special thanks to my friend [corsicanu](https://github.com/corsicanu) for his he
 This project, as with most of my projects, is licensed under GPL-3.0, which means you are free to use it, even for commercial purposes, as long as it stays open source. It is also distributed with no warranty.
 
 The configuration file, however, is distributed under Apache License, version 2.0.
-
-# [CHECK IF CAN DISTRIBUTE WORK WITH 2 LICENSES]
