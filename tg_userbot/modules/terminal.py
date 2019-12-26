@@ -87,6 +87,5 @@ async def terminal_runner(term): #bash interpreter
             await term.client.send_message(BOTLOG_CHATID, "Terminal Command " + command + " was executed sucessfully")
 
 CMD_HELP.update(
-    {"exec": ".exec print('hello')\nUsage: Execute small python scripts."})
-CMD_HELP.update(
-    {"term": ".term ls\nUsage: Run bash commands and scripts on your server."})
+    {"terminal": ".exec print('hello')\nUsage: Execute small python scripts.\
+        \n.term <bash_command>\nUsage: Run bash commands and scripts on your server."})
