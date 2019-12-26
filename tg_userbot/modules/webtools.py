@@ -72,11 +72,9 @@ async def cping(args):
             await args.edit("`DNS: " + dns +"\n"+"Ping speed: "+duration+"`")
 
 CMD_HELP.update(
-    {"speedtest": ".speedtest\
-    \nUsage: Does a speedtest and shows the results."})
-CMD_HELP.update(
-    {"dc": ".dc\
-    \nUsage: Finds the nearest datacenter from your server."})
-CMD_HELP.update(
-    {"ping": ".ping\
+    {"webtools": ".speedtest\
+    \nUsage: Does a speedtest and shows the results.\
+    \n.dc\
+    \nUsage: Finds the nearest datacenter from your server.\
+    \n.ping\
     \nUsage: Shows your real time ping"})
