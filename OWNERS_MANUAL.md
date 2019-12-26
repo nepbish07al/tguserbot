@@ -34,11 +34,11 @@ This document contains instructions in how to use every command in every module 
 
 .purge: purges all message starting from the replied point
 
-.purgeme <x>: deletes the latest x messages by you
+.purgeme "x": deletes the latest x messages by you
 
 # Direct Links
 
-.downlink <url>: replying to a link or with a URL as argument, generate a shorter link.
+.downlink "url": replying to a link or with a URL as argument, generate a shorter link.
 
 # Help
 
@@ -54,7 +54,7 @@ This document contains instructions in how to use every command in every module 
 
 .hi: greets everyone from a list of greetings
 
-.coinflip <heads/tails>: flips a coin
+.coinflip "heads/tails": flips a coin
 
 .slap: slaps a user
 
@@ -78,7 +78,7 @@ This document contains instructions in how to use every command in every module 
 
 # Scrappers
 
-.currency <amount> <from> <to>: converts multiple currencies for you
+.currency "amount" "from" "to": converts multiple currencies for you
 
 .tts: text to speech encoder
 
@@ -86,9 +86,9 @@ This document contains instructions in how to use every command in every module 
 
 # Spam
 
-.tspam <text>: spam letter by letter
+.tspam "text": spam letter by letter
 
-.spam <count> <text>: floods the chat with your message
+.spam "count" "text": floods the chat with your message
 
 # Systools
 
@@ -102,11 +102,11 @@ This document contains instructions in how to use every command in every module 
 
 .exec: Execute small python scripts
 
-.term <bash_command>: run Bash terminal commands directly in a supported host
+.term "bash_command": run Bash terminal commands directly in a supported host
 
 # User info
 
-.info <username> or as a reply: gets info about the specific user
+.info "username" or as a reply: gets info about the specific user
 
 # Webtools
 
@@ -116,4 +116,4 @@ This document contains instructions in how to use every command in every module 
 
 .ping: shows your round trip time ping
 
-.cping <dns/ip>: pings a specific IP
+.cping "dns/ip": pings a specific IP
