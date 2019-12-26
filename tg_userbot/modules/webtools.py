@@ -77,4 +77,6 @@ CMD_HELP.update(
     \n.dc\
     \nUsage: Finds the nearest datacenter from your server.\
     \n.ping\
-    \nUsage: Shows your real time ping"})
+    \nUsage: Shows your real time ping\
+    \n.cping <dns/ip>\
+    \nUsage: Pings a specific IP."})
