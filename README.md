@@ -40,7 +40,7 @@ In advance, thank you for your help.
 
 ## Special Thanks
 
-Special thanks to my friend [corsicanu](https://github.com/corsicanu) for his help with the configuration file, motivation and hard kick at the start of this project, to my friend [prototype74](https://github.com/prototype74) for his help with some modules and implementation of some functions (such as RTT in webtools, or fixing the promote and demote functions with Telethon's update) and to my friend [EBY](https://t.me/a52016benutzer) for his motivation and slap ideas.
+Special thanks to my friend [corsicanu](https://github.com/corsicanu) for his help with the configuration file, motivation and hard kick at the start of this project, to my friend [prototype74](https://github.com/prototype74) for his help with some modules and implementation of some functions (such as RTT in webtools, and fixing the promote and demote functions with Telethon's update) and to my friend [EBY](https://t.me/a52016benutzer) for his motivation and slap ideas.
 
 ## Licensing
 
