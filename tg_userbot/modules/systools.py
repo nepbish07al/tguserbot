@@ -29,7 +29,7 @@ async def sysdetails(sysd): #sysd command, requires neofetch
 async def statuschecker(msg): #.status, .alive, you name it
     if not msg.text[0].isalpha() and msg.text[0] in ("."):
         rtt = check_output("ping -c 1 1.1.1.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
-        await alive.edit("`"
+        await msg.edit("`"
                          "System Status: "
                          f"Online \n \n"
                          f"Telethon version: {version.__version__} \n"
