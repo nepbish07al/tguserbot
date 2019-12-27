@@ -6,7 +6,7 @@ from os import remove, system
 from telethon import version
 from subprocess import check_output
 from telethon.tl.types import User, Chat, Channel
-from tg_userbot import CMD_HELP, ALIVE_NAME, BOTLOG, BOTLOG_CHATID
+from tg_userbot import CMD_HELP, ALIVE_NAME, BOTLOG, BOTLOG_CHATID, VERSION
 from tg_userbot.events import register, errors_handler
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
