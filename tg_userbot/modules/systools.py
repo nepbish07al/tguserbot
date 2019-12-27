@@ -35,7 +35,7 @@ async def statuschecker(msg): #.status, .alive, you name it
                          f"Telethon version: {version.__version__} \n"
                          f"Python: {python_version()} \n"
                          f"User: {DEFAULTUSER}\n"
-                         f"RTT: {rtt}\n"
+                         f"RTT: {rtt}"
                          f"Version: {VERSION}"
                          "`")
 
