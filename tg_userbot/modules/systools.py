@@ -26,8 +26,8 @@ async def sysdetails(sysd): #sysd command, requires neofetch
 
 @register(outgoing=True, pattern="^.status$")
 @errors_handler
-async def amireallyalive(alive): #.status, .alive, you name it
-    if not alive.text[0].isalpha() and alive.text[0] in ("."):
+async def statuschecker(msg): #.status, .alive, you name it
+    if not msg.text[0].isalpha() and msg.text[0] in ("."):
         rtt = check_output("ping -c 1 1.1.1.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
         await alive.edit("`"
                          "System Status: "
@@ -35,12 +35,13 @@ async def amireallyalive(alive): #.status, .alive, you name it
                          f"Telethon version: {version.__version__} \n"
                          f"Python: {python_version()} \n"
                          f"User: {DEFAULTUSER}\n"
-                         f"RTT: {rtt}"
+                         f"RTT: {rtt}\n"
+                         f"Version: {VERSION}"
                          "`")
 
 @register(outgoing=True, pattern="^.shutdown$")
 @errors_handler
-async def killdabot(event): #bot shutdown
+async def shutdown(event): #bot shutdown
     if not event.text[0].isalpha() and event.text[0] in ("."):
         await event.edit("`Powering off...`")
         if BOTLOG:
