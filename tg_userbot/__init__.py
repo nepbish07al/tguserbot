@@ -74,4 +74,4 @@ COUNT_PM = {}
 LASTMSG = {}
 ENABLE_KILLME = True
 CMD_HELP = {}
-VERSION = "0.9.1 - Pre-Release"
+VERSION = "1.0.0"
