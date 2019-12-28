@@ -6,6 +6,8 @@ Out of the box, most PaperPlane (and PaperPlane Extended) modules *should* work,
 
 Updates will be issued incrementally, this is how it will work: example version X.Y.Z. If X increases, major rebase happened, dependencies changed, and possibly entire behaviour, likely it will make past not compatible with this release. If Y increases, features have been added, or big issues have been fixed. If Z increases, common issues have been fixed, simpler update.
 
+## I HIGHLY RECOMMEND USING BRANCH MASTER, DEV IS SUPER BUGGY
+
 ## Starting up
 
 Once you have everything ready to start, you can simply run
