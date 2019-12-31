@@ -29,6 +29,7 @@ class Config(object):
     GREET_STICKER='CAADAgAD0QMAAjq5FQKizo2AiTQCBQI' # Comming soon
     LANG = 'en' #translator language
     HOMIES = [] #Human Of Maximum Intelligence and Empathy, H.O.M.I.E.
+    GIRLFRIEND = None
 
 class Development(Config):
     LOGGER = True
