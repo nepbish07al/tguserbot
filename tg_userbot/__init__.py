@@ -35,6 +35,7 @@ if ENV:
     ALIVE_NAME = os.environ.get("ALIVE_NAME", None) # Default .alive name
     CLEAN_WELCOME = sb(os.environ.get("CLEAN_WELCOME", "True"))
     HOMIES = []
+    GIRLFRIEND = None
     LANG = os.environ.get("LANG", 'en')
 
 else:
@@ -58,6 +59,7 @@ else:
     CLEAN_WELCOME = Config.CLEAN_WELCOME
     HOMIES = Config.HOMIES
     LANG = Config.LANG
+    GIRLFRIEND = Config.GIRLFRIEND
 
 TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./downloads")
 
