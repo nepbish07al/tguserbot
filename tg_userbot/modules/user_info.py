@@ -76,8 +76,6 @@ async def fetch_info(replied_user, event):
     verified = replied_user.user.verified
     first_name = first_name.replace("\u2060", "") if first_name else ("(N/A)")
     last_name = last_name.replace("\u2060", "") if last_name else ("(N/A)")
-    member_obj = participant_info.participant if participant_info else None
-    join_date = member_obj.date if member_obj is not None and hasattr(member_obj, "date") else None
     username = "@{}".format(username) if username else ("(N/A)")
     user_bio = "This User has no About" if not user_bio else user_bio
     caption = "<b>USER INFO:</b>\n\n"
@@ -94,7 +92,6 @@ async def fetch_info(replied_user, event):
     caption += f"<a href=\"tg://user?id={user_id}\">{first_name}</a>\n"
     caption += f"Is Bot: {is_bot}\n"
     caption += f"Is Restricted: {restricted}\n"
-    caption += f"Join date: {join_date}\n"
     caption += f"Is Verified by Telegram: {verified}\n"
     caption += f"ID: <code>{user_id}</code>\n\n"
     caption += f"Bio: \n<code>{user_bio}</code>\n\n"
