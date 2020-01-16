@@ -19,7 +19,7 @@ if not __name__.endswith("sample_config"):
 # Create a new config.py file in same dir and import, then extend this class.
 class Config(object):
 	OWNER_ID = None # required OWNER ID
-    API_KEY =  None # required tg Key
+    API_KEY = None # required tg Key
     API_HASH = None # required tg hash
     STRING_SESSION = None # Userbot Session String
     BOTLOG_CHATID = 0 # Logging channel/group configuration.
