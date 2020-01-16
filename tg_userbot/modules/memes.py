@@ -7,7 +7,7 @@ import requests
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from cowpy import cow
-from tg_userbot import CMD_HELP
+from tg_userbot import CMD_HELP, OWNER_ID, HOMIES, GIRLFRIEND
 from tg_userbot.events import register, errors_handler
 
 ZALG_LIST = [[
@@ -317,6 +317,14 @@ async def coin(event): #coinflip
 @errors_handler
 async def who(event): #slap
     if not event.text[0].isalpha() and event.text[0] in ("."):
+        person = await get_user_from_event(event)
+        if person is not None:
+            user_id = person.id
+            first_name = person.first_name
+            username = person.username
+            if user_id == GIRLFRIEND:
+                await event.edit("`I am unable to slap my girlfriend`")
+                return
         if event.fwd_from:
             return
         replied_user = await get_user(event)
@@ -395,7 +403,25 @@ async def decide(event): #yes/no
 @errors_handler
 async def insult(e): #insult from insult structure
     if not e.text[0].isalpha() and e.text[0] in ("."):
-        await e.edit(random.choice(INSULT_STRINGS))
+        person = await get_user_from_event(e)
+        if person:
+            person = person[0]
+        else:
+            await e.edit("`Well, time to get my schizophrenia pills, because I am insulting ghosts again`")
+            return
+        user_id = person.id
+        first_name = person.first_name
+        username = person.username
+        if username:
+            special = "@{}".format(username)
+        else:
+            special = f"[{first_name}](tg://user?id={user_id})"
+        if user_id in HOMIE_LIST:
+            await e.edit("I won't insult my homie " + special)
+        elif user_id == GIRLFRIEND:
+            await e.edit("Only love words to my baby " + special)
+        else:
+            await e.edit(random.choice(INSULT_STRINGS))
 
 @register(outgoing=True, pattern="^.vapor(?: |$)(.*)")
 @errors_handler
