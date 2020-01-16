@@ -9,6 +9,7 @@ from telethon.tl.types import MessageEntityMentionName
 from cowpy import cow
 from tg_userbot import CMD_HELP, OWNER_ID, HOMIES, GIRLFRIEND
 from tg_userbot.events import register, errors_handler
+from tg_userbot.modules.admin import get_user_from_event
 
 ZALG_LIST = [[
     "̖",
