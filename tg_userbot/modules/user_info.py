@@ -93,6 +93,7 @@ async def fetch_info(replied_user, event):
     caption += f"<a href=\"tg://user?id={user_id}\">{first_name}</a>\n"
     caption += f"Is Bot: {is_bot}\n"
     caption += f"Is Restricted: {restricted}\n"
+    caption += f"Join date: {join_date}\n"
     caption += f"Is Verified by Telegram: {verified}\n"
     caption += f"ID: <code>{user_id}</code>\n\n"
     caption += f"Bio: \n<code>{user_bio}</code>\n\n"
