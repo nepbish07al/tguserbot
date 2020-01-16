@@ -61,6 +61,7 @@ else:
     HOMIES = Config.HOMIES
     LANG = Config.LANG
     GIRLFRIEND = Config.GIRLFRIEND
+    OWNER_ID = Config.OWNER_ID
 
 TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./downloads")
 
