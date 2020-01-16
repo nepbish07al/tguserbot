@@ -76,6 +76,7 @@ async def fetch_info(replied_user, event):
     verified = replied_user.user.verified
     first_name = first_name.replace("\u2060", "") if first_name else ("(N/A)")
     last_name = last_name.replace("\u2060", "") if last_name else ("(N/A)")
+    member_obj = participant_info.participant if participant_info else None
     join_date = member_obj.date if member_obj is not None and hasattr(member_obj, "date") else None
     username = "@{}".format(username) if username else ("(N/A)")
     user_bio = "This User has no About" if not user_bio else user_bio
