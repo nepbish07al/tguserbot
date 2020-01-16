@@ -95,7 +95,7 @@ async def fetch_info(replied_user, event):
     caption += f"Is Verified by Telegram: {verified}\n"
     caption += f"ID: <code>{user_id}</code>\n\n"
     caption += f"Bio: \n<code>{user_bio}</code>\n\n"
-    caption += f"Common Chats with this user: {common_chat}\n"
+    caption += f"Common chats: {common_chat}\n"
     return caption
 
 CMD_HELP.update({
