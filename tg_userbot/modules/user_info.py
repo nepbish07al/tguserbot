@@ -3,7 +3,7 @@ from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
-from tg_userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, HOMIES, GIRLFRIEND
+from tg_userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, HOMIES, GIRLFRIEND, OWNER_ID
 from tg_userbot.events import register, errors_handler
 
 @register(pattern=".info(?: |$)(.*)", outgoing=True)
@@ -64,9 +64,11 @@ async def fetch_info(replied_user, event):
     try:
         dc_id, location = get_input_location(replied_user.profile_photo)
     except Exception as e:
-        dc_id = "Couldn't fetch DC ID!"
+        dc_id = "Unknown"
         location = str(e)
-    common_chat = replied_user.common_chats_count
+    common_chat = str(replied_user.common_chats_count)
+    if user_id == OWNER_ID:
+        common_chat = "really, mate?"
     username = replied_user.user.username
     user_bio = replied_user.about
     is_bot = replied_user.user.bot
@@ -74,6 +76,7 @@ async def fetch_info(replied_user, event):
     verified = replied_user.user.verified
     first_name = first_name.replace("\u2060", "") if first_name else ("(N/A)")
     last_name = last_name.replace("\u2060", "") if last_name else ("(N/A)")
+    join_date = member_obj.date if member_obj is not None and hasattr(member_obj, "date") else None
     username = "@{}".format(username) if username else ("(N/A)")
     user_bio = "This User has no About" if not user_bio else user_bio
     caption = "<b>USER INFO:</b>\n\n"
