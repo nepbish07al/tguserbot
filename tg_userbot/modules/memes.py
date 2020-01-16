@@ -290,8 +290,6 @@ EMOJI = (
 @errors_handler
 async def coin(event): #coinflip
     if not event.text[0].isalpha() and event.text[0] in ("."):
-        if event.fwd_from:
-            return
         r = random.randint(1, 10000)
         await event.edit("`Throwing the coin...`")
         time.sleep(3)
