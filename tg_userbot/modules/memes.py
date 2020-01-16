@@ -292,26 +292,15 @@ async def coin(event): #coinflip
     if not event.text[0].isalpha() and event.text[0] in ("."):
         if event.fwd_from:
             return
-        r = random.randint(1, 100)
-        input_str = event.pattern_match.group(1)
-        if input_str:
-            input_str = input_str.lower()
+        r = random.randint(1, 10000)
+        await event.edit("`Throwing the coin...`")
+        time.sleep(3)
         if r % 2 == 1:
-            if input_str == "heads":
-                await event.edit("The coin landed on: **Heads**.\nYou were correct.")
-            elif input_str == "tails":
-                await event.edit("The coin landed on: **Heads**.\nYou weren't correct, try again ...")
-            else:
-                await event.edit("The coin landed on: **Heads**.")
+            await event.edit("`The coin landed on: Heads`")
         elif r % 2 == 0:
-            if input_str == "tails":
-                await event.edit("The coin landed on: **Tails**.\nYou were correct.")
-            elif input_str == "heads":
-                await event.edit("The coin landed on: **Tails**.\nYou weren't correct, try again ...")
-            else:
-                await event.edit("The coin landed on: **Tails**.")
+            await event.edit("`The coin landed on: Tails`")
         else:
-            await event.edit("Gimme another coin, this one fake AF !!")
+            await event.edit("`Mate, this is a beer bottle cap, give me a coin!`")
 
 @register(pattern="^.slap(?: |$)(.*)", outgoing=True)
 @errors_handler
