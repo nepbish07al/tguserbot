@@ -286,7 +286,7 @@ EMOJI = (
     "\U0001F9D0",
     "\U0001F632")
 
-@register(outgoing=True, pattern=r"^.coinflip (.*)")
+@register(outgoing=True, pattern=r"^.coinflip$")
 @errors_handler
 async def coin(event): #coinflip
     if not event.text[0].isalpha() and event.text[0] in ("."):
