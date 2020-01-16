@@ -33,6 +33,7 @@ if ENV:
     BOTLOG = sb(os.environ.get("BOTLOG", "False")) # Logging channel/group configuration.
     CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False")) # Console verbose logging
     ALIVE_NAME = os.environ.get("ALIVE_NAME", None) # Default .alive name
+    OWNER_ID = int(os.environ.get("OWNER_ID", 0))
     CLEAN_WELCOME = sb(os.environ.get("CLEAN_WELCOME", "True"))
     HOMIES = []
     GIRLFRIEND = None
