@@ -78,4 +78,4 @@ COUNT_PM = {}
 LASTMSG = {}
 ENABLE_KILLME = True
 CMD_HELP = {}
-VERSION = "1.1.1"
+VERSION = "1.2.0"
