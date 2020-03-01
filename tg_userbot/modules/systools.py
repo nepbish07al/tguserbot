@@ -6,8 +6,14 @@ from os import remove, system
 from telethon import version
 from subprocess import check_output
 from telethon.tl.types import User, Chat, Channel
-from tg_userbot import CMD_HELP, ALIVE_NAME, BOTLOG, BOTLOG_CHATID, VERSION
+
+from tg_userbot import CMD_HELP, ALIVE_NAME, BOTLOG, BOTLOG_CHATID, VERSION, AUTOMATION_ENABLED
 from tg_userbot.events import register, errors_handler
+
+
+import tg_userbot.modules.libs.git_api as git
+import tg_userbot.modules.libs.cas_api as cas
+
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 
@@ -28,15 +34,24 @@ async def sysdetails(sysd): #sysd command, requires neofetch
 @errors_handler
 async def statuschecker(msg): #.status, .alive, you name it
     if not msg.text[0].isalpha() and msg.text[0] in ("."):
+        gitver = git.vercheck()
+        casver = cas.vercheck()
         rtt = check_output("ping -c 1 1.1.1.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
+        automationData = "Disabled"
+        if AUTOMATION_ENABLED:
+            automationData = "Enabled"
         await msg.edit("`"
                          "System Status: "
                          f"Online \n \n"
-                         f"Telethon version: {version.__version__} \n"
-                         f"Python: {python_version()} \n"
+                         f"Version: {VERSION}\n"
                          f"User: {DEFAULTUSER}\n"
-                         f"RTT: {rtt}"
-                         f"Version: {VERSION}"
+                         f"RTT: {rtt}\n"
+                         f"Automation: {automationData}\n"
+                         f"\n"
+                         f"Telethon: {version.__version__} \n"
+                         f"Python: {python_version()} \n"
+                         f"GitHub API: {gitver} \n"
+                         f"CAS API: {casver}"
                          "`")
 
 @register(outgoing=True, pattern="^.shutdown$")

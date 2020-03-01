@@ -38,6 +38,10 @@ if ENV:
     HOMIES = []
     GIRLFRIEND = None
     LANG = os.environ.get("LANG", 'en')
+    AUTOMATION_ENABLED = False
+    AUTOMATION_SENDERS = []
+    AUTOMATION_COMMANDS = []
+    AUTOMATION_TRIGGERS = []
 
 else:
 # importing separate config to be able to keep our shit hidden
@@ -62,6 +66,10 @@ else:
     LANG = Config.LANG
     GIRLFRIEND = Config.GIRLFRIEND
     OWNER_ID = Config.OWNER_ID
+    AUTOMATION_ENABLED = Config.AUTOMATION_ENABLED
+    AUTOMATION_SENDERS = Config.AUTOMATION_SENDERS
+    AUTOMATION_COMMANDS = Config.AUTOMATION_COMMANDS
+    AUTOMATION_TRIGGERS = Config.AUTOMATION_TRIGGERS
 
 TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./downloads")
 
@@ -78,4 +86,4 @@ COUNT_PM = {}
 LASTMSG = {}
 ENABLE_KILLME = True
 CMD_HELP = {}
-VERSION = "1.2.0"
+VERSION = "2.0.0-pa"
