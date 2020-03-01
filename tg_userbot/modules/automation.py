@@ -10,11 +10,9 @@ AUTOMATOR_REPLIES = [
     "Yes",
     "Say yes",
     "Good bye",
-    "Yasin is the ninja, but I am the Robot",
     "Who wins, Ninja or Robot",
     "Who is the ninja now",
-    "Watch me, I can even do it asleep",
-    "No, Nuno ain't on meth again"
+    "Watch me, I can even do it asleep"
 ]
 
 @register(incoming=True)
