@@ -21,3 +21,4 @@ qrcode
 requests>=2.18.4
 speedtest-cli>=2.0.2
 telethon>=1.10.9
+pylast
