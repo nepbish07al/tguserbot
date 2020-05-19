@@ -49,6 +49,6 @@ CMD_HELP.update({
     'deletions':
     '.purge\
      \nUsage: Purges all messages starting from the reply.\
-     .purgeme <x>\
+     \n\n.purgeme <x>\
      \nUsage: Deletes x amount of your latest messages.'
 })
