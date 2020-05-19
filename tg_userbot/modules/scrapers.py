@@ -114,7 +114,7 @@ CMD_HELP.update({
     'scrappers':
     '.currency <amount> <from> <to>\
      \nUsage: Converts various currencies for you.\
-     \n.tts <text> [or reply]\
+     \n\n.tts <text> [or reply]\
      \nUsage: Translates text to speech for the default language which is set.\nUse .lang <text> to set language for your TTS.\
-     \n.trt <text> [or reply]\
+     \n\n.trt <text> [or reply]\
      \nUsage: Translates text to the default language which is set.'})
