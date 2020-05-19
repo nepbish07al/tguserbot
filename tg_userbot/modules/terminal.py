@@ -88,4 +88,4 @@ async def terminal_runner(term): #bash interpreter
 
 CMD_HELP.update(
     {"terminal": ".exec print('hello')\nUsage: Execute small python scripts.\
-        \n.term <bash_command>\nUsage: Run bash commands and scripts on your server."})
+        \n\n.term <bash_command>\nUsage: Run bash commands and scripts on your server."})
