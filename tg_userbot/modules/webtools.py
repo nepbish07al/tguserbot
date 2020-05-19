@@ -74,9 +74,9 @@ async def cping(args):
 CMD_HELP.update(
     {"webtools": ".speedtest\
     \nUsage: Does a speedtest and shows the results.\
-    \n.dc\
+    \n\n.dc\
     \nUsage: Finds the nearest datacenter from your server.\
-    \n.ping\
+    \n\n.ping\
     \nUsage: Shows your real time ping\
-    \n.cping <dns/ip>\
+    \n\n.cping <dns/ip>\
     \nUsage: Pings a specific IP."})
