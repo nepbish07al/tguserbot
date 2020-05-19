@@ -6,14 +6,7 @@ from telethon.events import StopPropagation
 from tg_userbot import BOTLOG, BOTLOG_CHATID, AUTOMATION_ENABLED, AUTOMATION_SENDERS, AUTOMATION_COMMANDS, AUTOMATION_TRIGGERS, CMD_HELP
 from tg_userbot.events import register, errors_handler
 
-AUTOMATOR_REPLIES = [
-    "Yes",
-    "Say yes",
-    "Good bye",
-    "Who wins, Ninja or Robot",
-    "Who is the ninja now",
-    "Watch me, I can even do it asleep"
-]
+AUTOMATOR_REPLIES = "Testing Automation again"
 
 @register(incoming=True)
 @errors_handler
@@ -26,7 +19,7 @@ async def automator(sender):
                 command = AUTOMATION_COMMANDS[commandId]
                 x = sender.raw_text.split(trigger)
                 data = x[1]
-                replyStr = command + " " + data + " " + choice(AUTOMATOR_REPLIES)
+                replyStr = command + " " + data + " " + AUTOMATOR_REPLIES
                 await sender.reply(replyStr)
                 if BOTLOG:
                     await sender.client.send_message(BOTLOG_CHATID, "#AUTOMATION \n\n The command '" + replyStr + "' has been executed in " + str(sender.sender_id))

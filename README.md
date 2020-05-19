@@ -1,6 +1,8 @@
-# tguserbot 2.0.0 PREALPHA RELEASE
+# tguserbot
 
-Small userbot for telegram. This project aims to be a simple to use, modular userbot for Telegram users. This is an unstable prealpha release of the upcoming 2.0.0, for the stable version 1, please select the tguserbot-v1 branch.
+Small userbot for telegram. This project aims to be a simple to use, modular userbot for Telegram users. It is based of [PaperPlane Extended](https://github.com/AvinashReddy3108/PaperplaneExtended), yet completely stripped down and worked on for months. It does not use SQL or any Database entirely. It contains some changes of my own, some commands have been added, a lot removed and some have changed the names to more user friendly names.
+
+Out of the box, most PaperPlane (and PaperPlane Extended) modules *should* work, with a small change in the imports, and maybe the installation of some dependencies.
 
 Updates will be issued incrementally, this is how it will work: example version X.Y.Z. If X increases, major rebase happened, dependencies changed, and possibly entire behaviour, likely it will make past not compatible with this release. If Y increases, features have been added, or big issues have been fixed. If Z increases, common issues have been fixed, simpler update.
 
