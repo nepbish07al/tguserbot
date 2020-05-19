@@ -66,7 +66,7 @@ async def shutdown(event): #bot shutdown
 CMD_HELP.update(
     {"systools": ".sysd\
     \nUsage: Shows system information using neofetch.\
-    \n.status\
+    \n\n.status\
     \nUsage: Type .status to see wether your bot is working or not.\
-    \n.shutdown\
+    \n\n.shutdown\
     \nUsage: Type .shutdown to shutdown the bot."})
