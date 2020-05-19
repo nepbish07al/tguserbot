@@ -67,5 +67,5 @@ CMD_HELP.update({
     'qrcode':
     ".decode <reply to barcode/qrcode>\
 \nUsage: Get the content from the replied QR Code/Bar Code.\
-\n.makeqr <content>\
+\n\n.makeqr <content>\
 \nUsage: Make a QR Code from the given content."})
