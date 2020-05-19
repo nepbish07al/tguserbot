@@ -1,0 +1,13 @@
+tg_userbot/config.py
+*.pyc
+.idea/
+.project
+.pydevproject
+.directory
+.vscode
+tg_usebot/__pychache__/
+tg_usebot/modules/__pychache__/
+tg_usebot/modules/libs/__pychache__/
+*.log
+*.session
+*.session-journal
