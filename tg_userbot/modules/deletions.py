@@ -45,10 +45,27 @@ async def purgeme(delme): #same as fast purge, but only your messages
         i = 1
         await smsg.delete()
 
+@register(outgoing=True, pattern="^.del$")
+@errors_handler
+async def delete_it(delme):
+    if not delme.text[0].isalpha() and delme.text[0] in ("."):
+        msg_src = await delme.get_reply_message()
+        if delme.reply_to_msg_id:
+            try:
+                await msg_src.delete()
+                await delme.delete()
+                if BOTLOG:
+                    await delme.client.send_message(BOTLOG_CHATID, "Deletion of message was successful")
+            except rpcbaseerrors.BadRequestError:
+                if BOTLOG:
+                    await delme.client.send_message(BOTLOG_CHATID, "Well, I can't delete a message")
+
 CMD_HELP.update({
     'deletions':
     '.purge\
      \nUsage: Purges all messages starting from the reply.\
      \n\n.purgeme <x>\
-     \nUsage: Deletes x amount of your latest messages.'
+     \nUsage: Deletes x amount of your latest messages.\
+     \n\n.del\
+     \nUsage: Deletes the message replied to'
 })
