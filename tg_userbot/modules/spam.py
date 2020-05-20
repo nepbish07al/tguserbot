@@ -15,6 +15,19 @@ async def tmeme(e):
         if BOTLOG:
             await e.client.send_message(BOTLOG_CHATID, "#TSPAM \n\nTSpam was executed successfully")
 
+@register(outgoing=True, pattern="^.wspam (.*)")
+@errors_handler
+async def tmeme(e):
+    wspam = str(e.pattern_match.group(1))
+    message = wspam.split()
+    await e.delete()
+    for word in message:
+        await e.respond(word)
+    if BOTLOG:
+        if BOTLOG:
+            await e.client.send_message(BOTLOG_CHATID, "#WSPAM \n\nWSpam was executed successfully")
+
+
 @register(outgoing=True, pattern="^.spam (.*)")
 @errors_handler
 async def spammer(e):
@@ -44,6 +57,8 @@ CMD_HELP.update({
     "spam":
     ".tspam <text>\
 \nUsage: Spam the text letter by letter.\
+\n\n.wspam <text>\
+\nUsage: Spam the text word by word.\
 \n\n.spam <count> <text>\
 \nUsage: Floods text in the chat !!\
 \n\n.delayspam <delay> <count> <text>\
