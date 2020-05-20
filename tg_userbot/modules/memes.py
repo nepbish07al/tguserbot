@@ -460,6 +460,14 @@ async def hoi(hello): #hi
     if not hello.text[0].isalpha() and hello.text[0] in ("."):
         await hello.edit(random.choice(HELLOSTR))
 
+@register(outgoing=True, pattern="^.oof$")
+@errors_handler
+async def Oof(e):
+    t = "Oof"
+    for j in range(15):
+        t = t[:-1] + "of"
+        await e.edit(t)
+
 @register(outgoing=True, pattern="^.mock(?: |$)(.*)")
 @errors_handler
 async def spongemocktext(mock):
@@ -499,6 +507,28 @@ async def claptext(memereview): #clap
         reply_text += message.replace(" ", " 👏 ")
         reply_text += " 👏"
         await memereview.edit(reply_text)
+
+@register(outgoing=True, pattern="^.bt$")
+@errors_handler
+async def bluetext(bt_e):
+    """ Believe me, you will find this useful. """
+    if await bt_e.get_reply_message() and bt_e.is_group:
+        await bt_e.edit(
+            "/BLUETEXT /MUST /CLICK.\n"
+            "/ARE /YOU /A /STUPID /ANIMAL /WHICH /IS /ATTRACTED /TO /COLOURS ?"
+        )
+
+
+@register(outgoing=True, pattern=r"^.f (.*)")
+@errors_handler
+async def payf(event):
+    paytext = event.pattern_match.group(1)
+    pay = "{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}".format(
+        paytext * 8, paytext * 8, paytext * 2, paytext * 2, paytext * 2,
+        paytext * 6, paytext * 6, paytext * 2, paytext * 2, paytext * 2,
+        paytext * 2, paytext * 2)
+    await event.edit(pay)
+
 
 @register(outgoing=True, pattern="^.lfy (.*)")
 @errors_handler
@@ -552,29 +582,30 @@ async def scam(event):
 
 @register(pattern=r".type(?: |$)(.*)", outgoing=True)
 @errors_handler
-async def typewriter(typew): #typewritter
-    if not typew.text[0].isalpha() and typew.text[0] in ("."):
-        textx = await typew.get_reply_message()
-        message = typew.pattern_match.group(1)
-        if message:
-            pass
-        elif textx:
-            message = textx.text
-        else:
-            await typew.edit("`Give a text to type!`")
-            return
-        sleep_time = 0.03
-        typing_symbol = "█"
-        old_text = ""
-        await typew.edit(typing_symbol)
+async def typewriter(typew):
+    """ Just a small command to make your keyboard become a typewriter! """
+    textx = await typew.get_reply_message()
+    message = typew.pattern_match.group(1)
+    if message:
+        pass
+    elif textx:
+        message = textx.text
+    else:
+        await typew.edit("`Give a text to type!`")
+        return
+    sleep_time = 0.03
+    typing_symbol = "|"
+    old_text = ""
+    await typew.edit(typing_symbol)
+    await asyncio.sleep(sleep_time)
+    for character in message:
+        old_text = old_text + "" + character
+        typing_text = old_text + "" + typing_symbol
+        await typew.edit(typing_text)
         await asyncio.sleep(sleep_time)
-        for character in message:
-            old_text = old_text + "" + character
-            typing_text = old_text + "" + typing_symbol
-            await typew.edit(typing_text)
-            await asyncio.sleep(sleep_time)
-            await typew.edit(old_text)
-            await asyncio.sleep(sleep_time)
+        await typew.edit(old_text)
+        await asyncio.sleep(sleep_time)
+
 
 CMD_HELP.update({
     "memes":
@@ -584,6 +615,8 @@ CMD_HELP.update({
 \nUsage: Stretch it.\
 \n\n.zal\
 \nUsage: Invoke the feeling of chaos.\
+\n\nOof\
+\nUsage: Ooooof\
 \n\n.hi\
 \nUsage: Greet everyone!\
 \n\n.coinflip <heads/tails>\
@@ -594,6 +627,10 @@ CMD_HELP.update({
 \nUsage: Do it and find the real fun.\
 \n\n.clap\
 \nUsage: Praise people!\
+\n\n.f <emoji/character>\
+\nUsage: Pay Respects.\
+\n\n.bt\
+\nUsage: Believe me, you will find this useful.\
 \n\n.type\
 \nUsage: Just a small command to make your keyboard become a typewriter!\
 \n\n.lfy <query>\
