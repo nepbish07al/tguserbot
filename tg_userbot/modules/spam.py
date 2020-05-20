@@ -17,15 +17,16 @@ async def tmeme(e):
 
 @register(outgoing=True, pattern="^.wspam (.*)")
 @errors_handler
-async def tmeme(e):
-    wspam = str(e.pattern_match.group(1))
-    message = wspam.split()
-    await e.delete()
-    for word in message:
-        await e.respond(word)
-    if BOTLOG:
+async def wspam(e):
+    if not e.text[0].isalpha() and e.text[0] in ("."):
+        wspam = str(e.pattern_match.group(1))
+        message = wspam.split()
+        await e.delete()
+        for word in message:
+            await e.respond(word)
         if BOTLOG:
-            await e.client.send_message(BOTLOG_CHATID, "#WSPAM \n\nWSpam was executed successfully")
+            if BOTLOG:
+                await e.client.send_message(BOTLOG_CHATID, "#WSPAM \n\nWSpam was executed successfully")
 
 
 @register(outgoing=True, pattern="^.spam (.*)")

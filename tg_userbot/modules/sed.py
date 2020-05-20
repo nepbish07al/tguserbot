@@ -36,16 +36,13 @@ async def separate_sed(sed_string):
             if (sed_string[counter] == "\\" and counter + 1 < len(sed_string)
                     and sed_string[counter + 1] == delim):
                 sed_string = sed_string[:counter] + sed_string[counter + 1:]
-
             elif sed_string[counter] == delim:
                 replace_with = sed_string[start:counter]
                 counter += 1
                 break
-
             counter += 1
         else:
             return replace, sed_string[start:], ""
-
         flags = ""
         if counter < len(sed_string):
             flags = sed_string[counter:]
@@ -56,45 +53,40 @@ async def separate_sed(sed_string):
 @register(outgoing=True, pattern="^.s")
 @errors_handler
 async def sed(command):
-    """ For sed command, use sed on Telegram. """
-    sed_result = await separate_sed(command.text)
-    textx = await command.get_reply_message()
-    if sed_result:
-        if textx:
-            to_fix = textx.text
-        else:
-            await command.edit(
-                "`Master, I don't have brains. Well you too don't I guess.`")
-            return
-
-        repl, repl_with, flags = sed_result
-
-        if not repl:
-            await command.edit(
-                "`Master, I don't have brains. Well you too don't I guess.`")
-            return
-
-        try:
-            check = re.match(repl, to_fix, flags=re.IGNORECASE)
-            if check and check.group(0).lower() == to_fix.lower():
-                await command.edit("`Boi!, that's a reply. Don't use sed`")
-                return
-
-            if "i" in flags and "g" in flags:
-                text = re.sub(repl, repl_with, to_fix, flags=re.I).strip()
-            elif "i" in flags:
-                text = re.sub(repl, repl_with, to_fix, count=1,
-                              flags=re.I).strip()
-            elif "g" in flags:
-                text = re.sub(repl, repl_with, to_fix).strip()
+    if not command.text[0].isalpha() and command.text[0] in ("."):
+        sed_result = await separate_sed(command.text)
+        textx = await command.get_reply_message()
+        if sed_result:
+            if textx:
+                to_fix = textx.text
             else:
-                text = re.sub(repl, repl_with, to_fix, count=1).strip()
-        except sre_err:
-            await command.edit("B O I! [Learn Regex](https://regexone.com)")
-            return
-        if text:
-            await command.edit(f"Did you mean? \n\n{text}")
+                await command.edit("`Master, I don't have brains. Well you too don't I guess.`")
+                return
+            repl, repl_with, flags = sed_result
 
+            if not repl:
+                await command.edit("`Master, I don't have brains. Well you too don't I guess.`")
+                return
+            try:
+                check = re.match(repl, to_fix, flags=re.IGNORECASE)
+                if check and check.group(0).lower() == to_fix.lower():
+                    await command.edit("`Boi!, that's a reply. Don't use sed`")
+                    return
+
+                if "i" in flags and "g" in flags:
+                    text = re.sub(repl, repl_with, to_fix, flags=re.I).strip()
+                elif "i" in flags:
+                    text = re.sub(repl, repl_with, to_fix, count=1,
+                              flags=re.I).strip()
+                elif "g" in flags:
+                    text = re.sub(repl, repl_with, to_fix).strip()
+                else:
+                    text = re.sub(repl, repl_with, to_fix, count=1).strip()
+            except sre_err:
+                await command.edit("B O I! [Learn Regex](https://regexone.com)")
+                return
+            if text:
+                await command.edit(f"Did you mean? \n\n{text}")
 
 CMD_HELP.update({
     "sed":

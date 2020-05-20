@@ -463,10 +463,11 @@ async def hoi(hello): #hi
 @register(outgoing=True, pattern="^.oof$")
 @errors_handler
 async def Oof(e):
-    t = "Oof"
-    for j in range(15):
-        t = t[:-1] + "of"
-        await e.edit(t)
+    if not e.text[0].isalpha() and e.text[0] in ("."):
+        t = "Oof"
+        for j in range(15):
+            t = t[:-1] + "of"
+            await e.edit(t)
 
 @register(outgoing=True, pattern="^.mock(?: |$)(.*)")
 @errors_handler
