@@ -593,7 +593,7 @@ async def typewriter(typew):
     else:
         await typew.edit("`Give a text to type!`")
         return
-    sleep_time = 0.03
+    sleep_time = 0.1
     typing_symbol = "|"
     old_text = ""
     await typew.edit(typing_symbol)
