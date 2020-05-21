@@ -512,23 +512,24 @@ async def claptext(memereview): #clap
 @register(outgoing=True, pattern="^.bt$")
 @errors_handler
 async def bluetext(bt_e):
-    """ Believe me, you will find this useful. """
-    if await bt_e.get_reply_message() and bt_e.is_group:
-        await bt_e.edit(
-            "/BLUETEXT /MUST /CLICK.\n"
-            "/ARE /YOU /A /STUPID /ANIMAL /WHICH /IS /ATTRACTED /TO /COLOURS ?"
-        )
+    if not bt_e.text[0].isalpha() and bt_e.text[0] in ("."):
+        if await bt_e.get_reply_message() and bt_e.is_group:
+            await bt_e.edit(
+                "/BLUETEXT /MUST /CLICK.\n"
+                "/ARE /YOU /A /STUPID /ANIMAL /WHICH /IS /ATTRACTED /TO /COLOURS ?"
+            )
 
 
 @register(outgoing=True, pattern=r"^.f (.*)")
 @errors_handler
 async def payf(event):
-    paytext = event.pattern_match.group(1)
-    pay = "{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}".format(
-        paytext * 8, paytext * 8, paytext * 2, paytext * 2, paytext * 2,
-        paytext * 6, paytext * 6, paytext * 2, paytext * 2, paytext * 2,
-        paytext * 2, paytext * 2)
-    await event.edit(pay)
+    if not event.text[0].isalpha() and event.text[0] in ("."):
+        paytext = event.pattern_match.group(1)
+        pay = "{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}".format(
+            paytext * 8, paytext * 8, paytext * 2, paytext * 2, paytext * 2,
+            paytext * 6, paytext * 6, paytext * 2, paytext * 2, paytext * 2,
+            paytext * 2, paytext * 2)
+        await event.edit(pay)
 
 
 @register(outgoing=True, pattern="^.lfy (.*)")
