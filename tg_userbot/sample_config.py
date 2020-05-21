@@ -35,8 +35,9 @@ class Config(object):
     AUTOMATION_SENDERS = [] #IDs
     AUTOMATION_COMMANDS = [] #strings
     AUTOMATION_TRIGGERS = [] #strings
+    Q_API_TOKEN = None # Quotly API key http://antiddos.systems
     OPEN_WEATHER_MAP_APPID = None
-    
+
 class Development(Config):
     LOGGER = True
   

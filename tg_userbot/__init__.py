@@ -42,6 +42,7 @@ if ENV:
     AUTOMATION_SENDERS = []
     AUTOMATION_COMMANDS = []
     AUTOMATION_TRIGGERS = []
+    Q_API_TOKEN = os.environ.get("Q_API_TOKEN", None) # Quotly API key http://antiddos.systems
     OPEN_WEATHER_MAP_APPID = os.environ.get("OPEN_WEATHER_MAP_APPID", None) # weather key
 
 else:
@@ -71,6 +72,7 @@ else:
     AUTOMATION_SENDERS = Config.AUTOMATION_SENDERS
     AUTOMATION_COMMANDS = Config.AUTOMATION_COMMANDS
     AUTOMATION_TRIGGERS = Config.AUTOMATION_TRIGGERS
+    Q_API_TOKEN = Config.Q_API_TOKEN # Quotly API key http://antiddos.systems
     OPEN_WEATHER_MAP_APPID = Config.OPEN_WEATHER_MAP_APPID
 
 TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./downloads")
