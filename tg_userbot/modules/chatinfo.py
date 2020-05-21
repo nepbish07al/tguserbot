@@ -97,6 +97,12 @@ async def fetch_info(chat, event):
     messages_viewable = msg_info.count if msg_info else None
     messages_sent = chat.full_chat.read_inbox_max_id if hasattr(chat.full_chat, "read_inbox_max_id") else None
     messages_sent_alt = chat.full_chat.read_outbox_max_id if hasattr(chat.full_chat, "read_outbox_max_id") else None
+    if messages_sent and messages_viewable:
+        deleted_messages = (messages_sent - messages_viewable) if messages_sent >= messages_viewable else 0
+    elif messages_sent_alt and messages_viewable:
+        deleted_messages = (messages_sent_alt - messages_viewable) if messages_sent_alt >= messages_viewable else 0
+    else:
+        deleted_messages = 0
     exp_count = chat.full_chat.pts if hasattr(chat.full_chat, "pts") else None
     username = chat_obj_info.username if hasattr(chat_obj_info, "username") else None
     bots_list = chat.full_chat.bot_info  # this is a list
@@ -147,6 +153,8 @@ async def fetch_info(chat, event):
         caption += f"{chat_type} level: <code>{chat_level}</code>\n"
     if messages_viewable is not None:
         caption += f"Viewable messages: <code>{messages_viewable}</code>\n"
+    if deleted_messages:
+        caption += f"Deleted messages: <code>{deleted_messages}</code>\n"
     if messages_sent:
         caption += f"Messages sent: <code>{messages_sent}</code>\n"
     elif messages_sent_alt:
