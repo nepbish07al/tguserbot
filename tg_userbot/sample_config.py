@@ -35,6 +35,7 @@ class Config(object):
     AUTOMATION_SENDERS = [] #IDs
     AUTOMATION_COMMANDS = [] #strings
     AUTOMATION_TRIGGERS = [] #strings
+    OPEN_WEATHER_MAP_APPID = None
     
 class Development(Config):
     LOGGER = True

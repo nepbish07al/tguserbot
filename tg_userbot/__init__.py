@@ -42,6 +42,7 @@ if ENV:
     AUTOMATION_SENDERS = []
     AUTOMATION_COMMANDS = []
     AUTOMATION_TRIGGERS = []
+    OPEN_WEATHER_MAP_APPID = os.environ.get("OPEN_WEATHER_MAP_APPID", None) # weather key
 
 else:
 # importing separate config to be able to keep our shit hidden
@@ -70,6 +71,7 @@ else:
     AUTOMATION_SENDERS = Config.AUTOMATION_SENDERS
     AUTOMATION_COMMANDS = Config.AUTOMATION_COMMANDS
     AUTOMATION_TRIGGERS = Config.AUTOMATION_TRIGGERS
+    OPEN_WEATHER_MAP_APPID = Config.OPEN_WEATHER_MAP_APPID
 
 TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./downloads")
 
