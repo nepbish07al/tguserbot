@@ -1,15 +1,10 @@
 import json
 from requests import get
 from datetime import datetime
-from pytz import country_timezones as c_tz
-from pytz import timezone as tz
-from pytz import country_names as c_n
+from pytz import country_timezones as c_tz, timezone as tz, country_names as c_n
 
-from tg_userbot import CMD_HELP
-from tg_userbot import OPEN_WEATHER_MAP_APPID as OWM_API
-from tg_userbot.events import register
-
-DEFCITY = None
+from tg_userbot import OPEN_WEATHER_MAP_APPID as OWM_API, OPEN_WEATHER_MAP_DEFCITY as DEFCITY, CMD_HELP
+from tg_userbot.events import register, errors_handler
 
 async def get_tz(con):
     for c_code in c_n:
@@ -22,6 +17,7 @@ async def get_tz(con):
         return
 
 @register(outgoing=True, pattern="^\.weather(?: |$)(.*)")
+@errors_handler
 async def get_weather(weather):
     if not weather.text[0].isalpha() and weather.text[0] in ("."):
         if not OWM_API:
@@ -32,7 +28,7 @@ async def get_weather(weather):
         if not weather.pattern_match.group(1):
             CITY = DEFCITY
             if not CITY:
-                await weather.edit("`Please specify a city or set one as default using the WEATHER_DEFCITY config variable.`")
+                await weather.edit("`Please specify a city or set one as default.`")
                 return
         else:
             CITY = weather.pattern_match.group(1)
@@ -58,25 +54,46 @@ async def get_weather(weather):
         if request.status_code != 200:
             await weather.edit(f"`Invalid country.`")
             return
+
         cityname = result['name']
         curtemp = result['main']['temp']
         humidity = result['main']['humidity']
         min_temp = result['main']['temp_min']
         max_temp = result['main']['temp_max']
-        desc = result['weather'][0]
-        desc = desc['main']
         country = result['sys']['country']
         sunrise = result['sys']['sunrise']
         sunset = result['sys']['sunset']
         wind = result['wind']['speed']
-        winddir = result['wind']['deg']
+        weath = result['weather'][0]
+        desc = weath['main']
+        icon = weath['id']
+        condmain = weath['main']
+        conddet = weath['description']
+
+        if icon <= 232: # Rain storm
+            icon = "⛈"
+        elif icon <= 321: # Drizzle
+            icon = "🌧"
+        elif icon <= 504: # Light rain
+            icon = "🌦"
+        elif icon <= 531: # Cloudy rain
+            icon = "⛈"
+        elif icon <= 622: # Snow
+            icon = "❄️"
+        elif icon <= 781: # Atmosphere
+            icon = "🌪"
+        elif icon <= 800: # Bright
+            icon = "☀️"
+        elif icon <= 801: # A little cloudy
+            icon = "⛅️"
+        elif icon <= 804: # Cloudy
+            icon = "☁️"
+
         ctimezone = tz(c_tz[country][0])
-        time = datetime.now(ctimezone).strftime("%A, %I:%M %p")
+        time = datetime.now(ctimezone).strftime("%A %d %b, %H:%M").lstrip("0").replace(" 0", " ")
         fullc_n = c_n[f"{country}"]
         dirs = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
-        div = (360 / len(dirs))
-        funmath = int((winddir + (div / 2)) / div)
-        findir = dirs[funmath % len(dirs)]
+
         kmph = str(wind * 3.6).split(".")
         mph = str(wind * 2.237).split(".")
         def fahrenheit(f):
@@ -86,19 +103,24 @@ async def get_weather(weather):
             temp = str((c - 273.15)).split(".")
             return temp[0]
         def sun(unix):
-            xx = datetime.fromtimestamp(unix, tz=ctimezone).strftime("%I:%M %p")
+            xx = datetime.fromtimestamp(unix, tz=ctimezone).strftime("%H:%M").lstrip("0").replace(" 0", " ")
             return xx
         await weather.edit(
-            f"**Temperature:** `{celsius(curtemp)}°C | {fahrenheit(curtemp)}°F`\n"
+            f"**{cityname}, {fullc_n}**\n"
             +
-            f"**Min. Temp.:** `{celsius(min_temp)}°C | {fahrenheit(min_temp)}°F`\n"
+            f"`{time}`\n\n"
             +
-            f"**Max. Temp.:** `{celsius(max_temp)}°C | {fahrenheit(max_temp)}°F`\n"
-            + f"**Humidity:** `{humidity}%`\n" +
-            f"**Wind:** `{kmph[0]} kmh | {mph[0]} mph, {findir}`\n" +
-            f"**Sunrise:** `{sun(sunrise)}`\n" +
-            f"**Sunset:** `{sun(sunset)}`\n\n\n" + f"**{desc}**\n" +
-            f"`{cityname}, {fullc_n}`\n" + f"`{time}`")
+            f"**Temperature:** `{celsius(curtemp)}°C\n`"
+            +
+            f"**Condition:** `{condmain}, {conddet}` " + f"{icon}\n"
+            +
+            f"**Humidity:** `{humidity}%`\n"
+            +
+            f"**Wind:** `{kmph[0]} km/h`\n"
+            +
+            f"**Sunrise**: `{sun(sunrise)}`\n"
+            +
+            f"**Sunset**: `{sun(sunset)}`")
 
 CMD_HELP.update({
     "weather":

@@ -36,7 +36,8 @@ class Config(object):
     AUTOMATION_COMMANDS = [] #strings
     AUTOMATION_TRIGGERS = [] #strings
     Q_API_TOKEN = None # Quotly API key http://antiddos.systems
-    OPEN_WEATHER_MAP_APPID = None
+    OPEN_WEATHER_MAP_APPID = None # OWM API key https://openweathermap.org/
+    OPEN_WEATHER_MAP_DEFCITY = None # default city to be used for weather
 
 class Development(Config):
     LOGGER = True

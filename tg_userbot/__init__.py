@@ -43,7 +43,8 @@ if ENV:
     AUTOMATION_COMMANDS = []
     AUTOMATION_TRIGGERS = []
     Q_API_TOKEN = os.environ.get("Q_API_TOKEN", None) # Quotly API key http://antiddos.systems
-    OPEN_WEATHER_MAP_APPID = os.environ.get("OPEN_WEATHER_MAP_APPID", None) # weather key
+    OPEN_WEATHER_MAP_APPID = os.environ.get("OPEN_WEATHER_MAP_APPID", None)
+    OPEN_WEATHER_MAP_DEFCITY = os.environ.get("OPEN_WEATHER_MAP_DEFCITY", None)
 
 else:
 # importing separate config to be able to keep our shit hidden
@@ -74,6 +75,7 @@ else:
     AUTOMATION_TRIGGERS = Config.AUTOMATION_TRIGGERS
     Q_API_TOKEN = Config.Q_API_TOKEN # Quotly API key http://antiddos.systems
     OPEN_WEATHER_MAP_APPID = Config.OPEN_WEATHER_MAP_APPID
+    OPEN_WEATHER_MAP_DEFCITY = Config.OPEN_WEATHER_MAP_DEFCITY
 
 TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./downloads")
 
