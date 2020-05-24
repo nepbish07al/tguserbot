@@ -515,8 +515,8 @@ async def bluetext(bt_e):
     if not bt_e.text[0].isalpha() and bt_e.text[0] in ("."):
         if await bt_e.get_reply_message() and bt_e.is_group:
             await bt_e.edit(
-                "/BLUETEXT /MUST /CLICK.\n"
-                "/ARE /YOU /A /STUPID /ANIMAL /WHICH /IS /ATTRACTED /TO /COLOURS ?"
+                "/BLUE /TEXT /MUST /CLICK\n"
+                "/ARE /YOU /A /STUPID /COW /WHICH /IS /ATTRACTED /TO /COLORS ?"
             )
 
 
