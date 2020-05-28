@@ -608,6 +608,41 @@ async def typewriter(typew):
             await typew.edit(old_text)
             await asyncio.sleep(sleep_time)
 
+@register(outgoing=True, pattern=r"^.caps(?: |$)([\s\S]*)")
+@errors_handler
+async def to_upper(request):
+    if not request.text[0].isalpha() and request.text[0] in ("."):
+        textx = await request.get_reply_message()
+        message = request.pattern_match.group(1)
+        if message:
+            pass
+        elif textx:
+            message = textx.text
+        else:
+            await request.edit("`Usage: .caps <text>`")
+            return
+        reply = ''
+        reply += message.upper()
+        await request.edit(reply)
+
+@register(outgoing=True, pattern=r"^.small(?: |$)([\s\S]*)")
+@errors_handler
+async def to_lower(request):
+    if not request.text[0].isalpha() and request.text[0] in ("."):
+        textx = await request.get_reply_message()
+        message = request.pattern_match.group(1)
+        if message:
+            pass
+        elif textx:
+            message = textx.text
+        else:
+            await request.edit("`Usage: .small <text>`")
+            return
+        reply = ''
+        reply += message.lower()
+        await request.edit(reply)
+
+
 CMD_HELP.update({
     "memes":
     ".vapor\
@@ -616,8 +651,12 @@ CMD_HELP.update({
 \nUsage: Stretch it.\
 \n\n.zal\
 \nUsage: Invoke the feeling of chaos.\
-\n\nOof\
+\n\n.oof\
 \nUsage: Ooooof\
+\n\n.caps <text>\
+\nUsage: Converts text to uppercase.\
+\n\n.small <text>\
+\nUsage: Converts text to uppercase.\
 \n\n.hi\
 \nUsage: Greet everyone!\
 \n\n.coinflip <heads/tails>\
