@@ -608,6 +608,21 @@ async def typewriter(typew):
             await typew.edit(old_text)
             await asyncio.sleep(sleep_time)
 
+@register(outgoing=True, pattern="^.gei$")
+@errors_handler
+async def isgei(gei):
+    if not gei.text[0].isalpha() and gei.text[0] in ("."):
+        if await gei.get_reply_message() and gei.is_group or gei.to_id:
+            await gei.edit("`┈┈┈╭━━━━━╮┈┈┈┈┈\n"
+"┈┈┈┃┊┊┊┊┊┃┈┈┈┈┈\n"
+"┈┈┈┃┊┊╭━╮┻╮┈┈┈┈\n"
+"┈┈┈╱╲┊┃▋┃▋┃┈┈┈┈\n"
+"┈┈╭┻┊┊╰━┻━╮┈┈┈┈\n"
+"┈┈╰┳┊╭━━━┳╯┈┈┈┈\n"
+"┈┈┈┃┊┃╰━━┫┈NIGGA U GEY\n"
+"┈┈┈┈┈┈┏━┓┈┈┈┈┈┈`")
+
+
 @register(outgoing=True, pattern=r"^.caps(?: |$)([\s\S]*)")
 @errors_handler
 async def to_upper(request):
@@ -641,6 +656,23 @@ async def to_lower(request):
         reply = ''
         reply += message.lower()
         await request.edit(reply)
+        
+@register(outgoing=True, pattern=r"^.noformat(?: |$)([\s\S]*)")
+@errors_handler
+async def noformat(request):
+    if not request.text[0].isalpha() and request.text[0] in ("."):
+        textx = await request.get_reply_message()
+        message = request.pattern_match.group(1)
+        if message:
+            pass
+        elif textx:
+            message = textx.text
+        else:
+            await request.edit("`Usage: .noformat <text>/<reply>`")
+            return
+        reply = ''
+        reply += '```'+message+'```'
+        await request.edit(reply)
 
 
 CMD_HELP.update({
@@ -671,6 +703,10 @@ CMD_HELP.update({
 \nUsage: Pay Respects.\
 \n\n.bt\
 \nUsage: Believe me, you will find this useful.\
+\n\n.noformat\
+\nUsage: Returns text without formatting.\
+\n\n.gei\
+\nUsage: Use this as a reply if your friend does something gei.\
 \n\n.type\
 \nUsage: Just a small command to make your keyboard become a typewriter!\
 \n\n.lfy <query>\
