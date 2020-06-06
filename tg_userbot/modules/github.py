@@ -1,5 +1,7 @@
 import tg_userbot.modules.libs.git_api as api
+
 from tg_userbot.events import register, errors_handler
+from tg_userbot import CMD_HELP
 
 #do not async
 def getData(url, index):
@@ -39,3 +41,8 @@ async def get_release(event):
         url = commandArgs[1]
         text = getData(url, index)
         await event.edit(text, parse_mode="html")
+
+CMD_HELP.update({
+"github":
+".git <user>/<repo>\
+\nGets the updated release of the specified user/repo combo"})
