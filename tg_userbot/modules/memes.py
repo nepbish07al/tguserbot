@@ -623,6 +623,21 @@ async def isgei(gei):
 "┈┈┈┈┈┈┏━┓┈┈┈┈┈┈`")
 
 
+@register(outgoing=True, pattern="^.nou$")
+@errors_handler
+async def isgei(gei):
+    if not gei.text[0].isalpha() and gei.text[0] in ("."):
+        if await gei.get_reply_message() and gei.is_group or gei.to_id:
+            await gei.edit("`┈╭╮╭╮\n"
+"┈┃┃┃┃\n"
+"╭┻┗┻┗╮\n"
+"┃┈▋┈▋┃\n"
+"┃┈╭▋━╮━╮\n"
+"┃┈┈╭╰╯╰╯╮\n"
+"┫┈┈  NoU\n"
+"┃┈╰╰━━━━╯\n"
+"┗━━┻━┛`")
+
 @register(outgoing=True, pattern=r"^.caps(?: |$)([\s\S]*)")
 @errors_handler
 async def to_upper(request):
