@@ -38,9 +38,13 @@ If the volume of issues or general traffic to the repo justifies it, a Telegram 
 
 In advance, thank you for your help.
 
-## Special Thanks
+## Special Thanks to my contributors and friends:
 
-Special thanks to my friend [corsicanu](https://github.com/corsicanu) for his help with the configuration file, motivation and hard kick at the start of this project, to my friend [prototype74](https://github.com/prototype74) for his help with some modules and implementation of some functions (such as RTT in webtools, and fixing the promote and demote functions with Telethon's update) and to my friend [EBY](https://t.me/a52016benutzer) for his motivation and slap ideas.
+ - [corsicanu](https://github.com/corsicanu)
+ - [prototype74](https://github.com/prototype74)
+ - [EBY](https://t.me/a52016benutzer)
+ - [Soul Reaper](https://github.com/soulr344)
+ - [Hitalo](https://github.com/HitaloSama)
 
 ## Licensing
 
