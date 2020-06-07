@@ -1,7 +1,9 @@
 from asyncio import create_subprocess_shell as asyncrunapp
+from asyncio import create_subprocess_exec as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 from platform import python_version, uname
 from subprocess import check_output
+from shutil import which
 
 from telethon import version
 
@@ -24,6 +26,49 @@ async def sysdetails(sysd):  # sysd command, requires neofetch
             await sysd.edit("`" + result + "`")
         except FileNotFoundError:
             await sysd.edit("`Install neofetch first !!`")
+
+
+@register(outgoing=True, pattern="^\.botver$")
+async def bot_ver(event):
+    """ For .botver command, get the bot version. """
+    if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@",
+                                                             "!"):
+        if which("git") is not None:
+            ver = await asyncrunapp(
+                "git",
+                "describe",
+                "--all",
+                "--long",
+                stdout=asyncPIPE,
+                stderr=asyncPIPE,
+            )
+            stdout, stderr = await ver.communicate()
+            verout = str(stdout.decode().strip()) \
+                + str(stderr.decode().strip())
+ 
+            rev = await asyncrunapp(
+                "git",
+                "rev-list",
+                "--all",
+                "--count",
+                stdout=asyncPIPE,
+                stderr=asyncPIPE,
+            )
+            stdout, stderr = await rev.communicate()
+            revout = str(stdout.decode().strip()) \
+                + str(stderr.decode().strip())
+ 
+            await event.edit("`UserBot Version: "
+                             f"{verout}"
+                             "` \n"
+                             "`Revision: "
+                             f"{revout}"
+                             f"\nTagged Version: {VERSION}"
+                             "` \n")
+        else:
+            await event.edit(
+                "Shame that you don't have git, you're running - 'v1.beta.4' anyway!"
+            )
 
 
 @register(outgoing=True, pattern="^\.status$")
@@ -64,5 +109,7 @@ CMD_HELP.update(
     \nUsage: Shows system information using neofetch.\
     \n\n`.status`\
     \nUsage: Type .status to see wether your bot is working or not.\
+    \n\n`.botver`\
+    \nUsage: Shows the userbot version.\
     \n\n`.shutdown`\
     \nUsage: Type .shutdown to shutdown the bot."})
