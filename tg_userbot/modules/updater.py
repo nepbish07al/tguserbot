@@ -113,7 +113,7 @@ async def upstream(ups):
                        'Bot is restarting... Wait for a second!`')
         # Spin a new instance of bot
         args = [sys.executable, "-m", "tg_userbot"]
-        os.execle(sys.executable, *args, environ)
+        execle(sys.executable, *args, environ)
         return
 
 
