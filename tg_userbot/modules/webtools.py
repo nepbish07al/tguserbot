@@ -55,14 +55,37 @@ async def neardc(event):
 async def pingme(pong):
     if not pong.text[0].isalpha() and pong.text[0] in ("."):
         if os.name == "nt":
-            output = check_output("ping -n 1 1.0.0.1 | findstr time*", shell=True).decode()
+            output = check_output("ping -n 1 1.0.0.1 | findstr time=*", shell=True).decode()
             outS = output.splitlines()
             out = outS[0]
         else:
-            out = check_output("ping -c 1 1.0.0.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
-        duration = out
-        await pong.edit("`Ping speed is: %s`" % (duration))
-
+            #out = check_output("ping -c 1 1.0.0.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
+            out = check_output("ping -c 1 1.0.0.1 | grep time=", shell=True).decode()
+        #duration = out
+        splitOut = out.split(' ')
+        under = False
+        stringtocut = ""
+        for line in splitOut:
+            if (line.startswith('time=') or line.startswith('time<')):
+                stringtocut = line
+                break
+        newstra = stringtocut.split('=')
+        if len(newstra) == 1:
+            under = True
+            newstra = stringtocut.split('<')
+        newstr = ""
+        if os.name == 'nt':
+            newstr = newstra[1].split('ms')
+        else:
+            newstr = newstra[1].split(' ')  # redundant split, but to try and not break windows ping
+        ping_time = float(newstr[0])
+        if os.name == 'nt' and under:
+            await pong.edit("Ping speed is <" + ping_time + " ms")
+            #update.effective_message.reply_text(" Round-trip time is <{}ms".format(ping_time))
+        else:
+            await pong.edit("Ping speed is: " + ping_time + " ms")
+            #update.effective_message.reply_text(" Round-trip time: {}ms".format(ping_time))
+        #await pong.edit("`Ping speed is: %s`" % (duration))
 
 @register(outgoing=True, pattern="^\.cping(?: |$)?")
 async def cping(args):
