@@ -1,21 +1,23 @@
-import os
 import asyncio
+import os
+
 import qrcode
-import barcode
-from barcode.writer import ImageWriter
 from bs4 import BeautifulSoup
+
 from tg_userbot import CMD_HELP
 from tg_userbot.events import register, errors_handler
 
-@register(pattern=r"^.decode$", outgoing=True)
+
+@register(pattern=r"^\.decode$", outgoing=True)
 @errors_handler
-async def parseqr(qr_e): #decods qr or barcode
+async def parseqr(qr_e):  # decods qr or barcode
     if not qr_e.text[0].isalpha() and qr_e.text[0] in ("."):
         downloaded_file_name = await qr_e.client.download_media(
             await qr_e.get_reply_message())
         # parse the Official ZXing webpage to decode the QRCode
         command_to_exec = ["curl", "-X", "POST", "-F", "f=@" + downloaded_file_name + "", "https://zxing.org/w/decode"]
-        process = await asyncio.create_subprocess_exec(*command_to_exec, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,) #who knew syscalls in python, huh?
+        process = await asyncio.create_subprocess_exec(*command_to_exec, stdout=asyncio.subprocess.PIPE,
+                                                       stderr=asyncio.subprocess.PIPE, )  # who knew syscalls in python, huh?
         stdout, stderr = await process.communicate()
         e_response = stderr.decode().strip()
         t_response = stdout.decode().strip()
@@ -29,9 +31,10 @@ async def parseqr(qr_e): #decods qr or barcode
         qr_contents = soup.find_all("pre")[0].text
         await qr_e.edit("Decoded message: " + qr_contents)
 
-@register(pattern=r".makeqr(?: |$)([\s\S]*)", outgoing=True)
+
+@register(pattern=r"\.makeqr(?: |$)([\s\S]*)", outgoing=True)
 @errors_handler
-async def make_qr(makeqr): #makes qr
+async def make_qr(makeqr):  # makes qr
     if not makeqr.text[0].isalpha() and makeqr.text[0] in ("."):
         if makeqr.fwd_from:
             return
@@ -63,9 +66,10 @@ async def make_qr(makeqr): #makes qr
         os.remove("img_file.webp")
         await makeqr.delete()
 
+
 CMD_HELP.update({
     'qrcode':
-    ".decode <reply to barcode/qrcode>\
-\nUsage: Get the content from the replied QR Code/Bar Code.\
-\n\n.makeqr <content>\
-\nUsage: Make a QR Code from the given content."})
+        "`.decode <reply to barcode/qrcode>`\
+    \nUsage: Get the content from the replied QR Code/Bar Code.\
+    \n\n`.makeqr <content>`\
+    \nUsage: Make a QR Code from the given content."})

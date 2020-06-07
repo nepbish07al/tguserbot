@@ -1,11 +1,12 @@
 from time import sleep
-from telethon.tl.functions.channels import LeaveChannelRequest
+
 from tg_userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, bot
 from tg_userbot.events import register, errors_handler
 
-@register(outgoing=True, pattern="^.userid$")
+
+@register(outgoing=True, pattern="^\.userid$")
 @errors_handler
-async def useridgetter(target): #gets user id
+async def useridgetter(target):  # gets user id
     if not target.text[0].isalpha() and target.text[0] in ("."):
         message = await target.get_reply_message()
         if message:
@@ -24,15 +25,17 @@ async def useridgetter(target): #gets user id
             await target.edit("**Name:** {} \n**User ID:** `{}`".format(
                 name, user_id))
 
-@register(outgoing=True, pattern="^.chatid$")
+
+@register(outgoing=True, pattern="^\.chatid$")
 @errors_handler
-async def chatidgetter(chat): #gets chat id
+async def chatidgetter(chat):  # gets chat id
     if not chat.text[0].isalpha() and chat.text[0] in ("."):
         await chat.edit("Chat ID: `" + str(chat.chat_id) + "`")
 
-@register(outgoing=True, pattern=r"^.log(?: |$)([\s\S]*)")
+
+@register(outgoing=True, pattern=r"^\.log(?: |$)([\s\S]*)")
 @errors_handler
-async def log(log_text): #forwards stuff to log channel/group
+async def log(log_text):  # forwards stuff to log channel/group
     if not log_text.text[0].isalpha() and log_text.text[0] in ("."):
         if BOTLOG:
             if log_text.reply_to_msg_id:
@@ -52,11 +55,12 @@ async def log(log_text): #forwards stuff to log channel/group
         sleep(2)
         await log_text.delete()
 
+
 CMD_HELP.update({
     "chat":
-    ".chatid\
-\nUsage: Fetches the current chat's ID\
-\n\n.userid\
-\nUsage: Fetches the ID of the user in reply, if its a forwarded message, finds the ID for the source.\
-\n\n.log\
-\nUsage: Forwards the message you've replied to in your bot logs group."})
+        "`.chatid`\
+    \nUsage: Fetches the current chat's ID\
+    \n\n`.userid`\
+    \nUsage: Fetches the ID of the user in reply, if its a forwarded message, finds the ID for the source.\
+    \n\n`.log`\
+    \nUsage: Forwards the message you've replied to in your bot logs group."})

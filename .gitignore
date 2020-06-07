@@ -5,6 +5,7 @@ tg_userbot/config.py
 .pydevproject
 .directory
 .vscode
+tg_usebot/downloads/
 tg_usebot/__pychache__/
 tg_usebot/modules/__pychache__/
 tg_usebot/modules/libs/__pychache__/

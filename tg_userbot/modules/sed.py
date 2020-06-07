@@ -1,7 +1,7 @@
 import re
 from sre_constants import error as sre_err
+
 from tg_userbot import CMD_HELP
-from asyncio import sleep
 from tg_userbot.events import register, errors_handler
 
 DELIMITERS = ("/", ":", "|", "_")
@@ -50,7 +50,7 @@ async def separate_sed(sed_string):
     return None
 
 
-@register(outgoing=True, pattern="^.s")
+@register(outgoing=True, pattern="^\.s")
 @errors_handler
 async def sed(command):
     if not command.text[0].isalpha() and command.text[0] in ("."):
@@ -77,7 +77,7 @@ async def sed(command):
                     text = re.sub(repl, repl_with, to_fix, flags=re.I).strip()
                 elif "i" in flags:
                     text = re.sub(repl, repl_with, to_fix, count=1,
-                              flags=re.I).strip()
+                                  flags=re.I).strip()
                 elif "g" in flags:
                     text = re.sub(repl, repl_with, to_fix).strip()
                 else:
@@ -88,9 +88,10 @@ async def sed(command):
             if text:
                 await command.edit(f"Did you mean? \n\n{text}")
 
+
 CMD_HELP.update({
     "sed":
-    ".s<delimiter><old word(s)><delimiter><new word(s)>\
-    \nUsage: Replaces a word or words using sed.\
-    \nDelimiters: `/, :, |, _`"
+        ".s<delimiter><old word(s)><delimiter><new word(s)>\
+        \nUsage: Replaces a word or words using sed.\
+        \nDelimiters: `/, :, |, _`"
 })

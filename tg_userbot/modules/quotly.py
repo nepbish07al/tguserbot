@@ -15,37 +15,20 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #    Credits to ftg plugins, cmd is .q
 
-import logging
-import requests
 import base64
 import json
-import os 
-import telethon
-from telethon import events
+import logging
 from io import BytesIO
-from PIL import Image
-import asyncio
-import datetime
-from collections import defaultdict
-import math
-import os
+
 import requests
-import zipfile
-from telethon.errors.rpcerrorlist import StickersetInvalidError
-from telethon.errors import MessageNotModifiedError
+import telethon
+from PIL import Image
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
-from telethon.tl.functions.channels import GetParticipantRequest
-from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.types import (
-    DocumentAttributeFilename,
-    DocumentAttributeSticker,
-    InputMediaUploadedDocument,
-    InputPeerNotifySettings,
-    InputStickerSetID,
-    InputStickerSetShortName,
-    MessageMediaPhoto
+    DocumentAttributeFilename
 )
-from tg_userbot import Q_API_TOKEN, BOTLOG, BOTLOG_CHATID, CMD_HELP, bot
+
+from tg_userbot import Q_API_TOKEN, CMD_HELP, bot
 from tg_userbot.events import register
 
 logger = logging.getLogger(__name__)
@@ -73,15 +56,16 @@ if 1 == 1:
         "channel": "Channel"
     }
 
-    config = dict({"api_token": Q_API_TOKEN, 
-                                          "api_url": "http://api.antiddos.systems",
-                                          "username_colors": ["#fb6169", "#faa357", "#b48bf2", "#85de85",
-                                                              "#62d4e3", "#65bdf3", "#ff5694"],
-                                          "default_username_color": "#b48bf2"})
-   
+    config = dict({"api_token": Q_API_TOKEN,
+                   "api_url": "http://api.antiddos.systems",
+                   "username_colors": ["#fb6169", "#faa357", "#b48bf2", "#85de85",
+                                       "#62d4e3", "#65bdf3", "#ff5694"],
+                   "default_username_color": "#b48bf2"})
+
     client = bot
-    
-    @register(outgoing=True, pattern="^.q$")
+
+
+    @register(outgoing=True, pattern="^\.q$")
     async def quotecmd(message):  # noqa: C901
         """Quote a message.
         Usage: .quote [template]
@@ -106,7 +90,7 @@ if 1 == 1:
             if isinstance(message.to_id, telethon.tl.types.PeerChannel):
                 try:
                     user = await client(telethon.tl.functions.channels.GetParticipantRequest(message.chat_id,
-                                                                                                  reply.from_id))
+                                                                                             reply.from_id))
                     if isinstance(user.participant, telethon.tl.types.ChannelParticipantCreator):
                         admintitle = user.participant.rank or strings["creator"]
                     elif isinstance(user.participant, telethon.tl.types.ChannelParticipantAdmin):
@@ -247,10 +231,11 @@ def get_markdown(reply):
         markdown.append(md_item)
     return markdown
 
+
 CMD_HELP.update({
-        "quotly": 
-        ".q reply_message. \
+    "quotly":
+        "`.q <reply_message>` \
           \nUsage: Enhance ur text to sticker. \
-          \nNote: please add Q_API_TOKEN in config. \
+          \n\nNote: please add Q_API_TOKEN in config. \
           \n you can get those from http://antiddos.systems . "
-    })
+})

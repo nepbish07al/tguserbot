@@ -1,10 +1,12 @@
 import json
-from requests import get
 from datetime import datetime
+
 from pytz import country_timezones as c_tz, timezone as tz, country_names as c_n
+from requests import get
 
 from tg_userbot import OPEN_WEATHER_MAP_APPID as OWM_API, OPEN_WEATHER_MAP_DEFCITY as DEFCITY, CMD_HELP
 from tg_userbot.events import register, errors_handler
+
 
 async def get_tz(con):
     for c_code in c_n:
@@ -15,6 +17,7 @@ async def get_tz(con):
             return tz(c_tz[con][0])
     except KeyError:
         return
+
 
 @register(outgoing=True, pattern="^\.weather(?: |$)(.*)")
 @errors_handler
@@ -70,23 +73,23 @@ async def get_weather(weather):
         condmain = weath['main']
         conddet = weath['description']
 
-        if icon <= 232: # Rain storm
+        if icon <= 232:  # Rain storm
             icon = "⛈"
-        elif icon <= 321: # Drizzle
+        elif icon <= 321:  # Drizzle
             icon = "🌧"
-        elif icon <= 504: # Light rain
+        elif icon <= 504:  # Light rain
             icon = "🌦"
-        elif icon <= 531: # Cloudy rain
+        elif icon <= 531:  # Cloudy rain
             icon = "⛈"
-        elif icon <= 622: # Snow
+        elif icon <= 622:  # Snow
             icon = "❄️"
-        elif icon <= 781: # Atmosphere
+        elif icon <= 781:  # Atmosphere
             icon = "🌪"
-        elif icon <= 800: # Bright
+        elif icon <= 800:  # Bright
             icon = "☀️"
-        elif icon <= 801: # A little cloudy
+        elif icon <= 801:  # A little cloudy
             icon = "⛅️"
-        elif icon <= 804: # Cloudy
+        elif icon <= 804:  # Cloudy
             icon = "☁️"
 
         ctimezone = tz(c_tz[country][0])
@@ -96,15 +99,19 @@ async def get_weather(weather):
 
         kmph = str(wind * 3.6).split(".")
         mph = str(wind * 2.237).split(".")
+
         def fahrenheit(f):
             temp = str(((f - 273.15) * 9 / 5 + 32)).split(".")
             return temp[0]
+
         def celsius(c):
             temp = str((c - 273.15)).split(".")
             return temp[0]
+
         def sun(unix):
             xx = datetime.fromtimestamp(unix, tz=ctimezone).strftime("%H:%M").lstrip("0").replace(" 0", " ")
             return xx
+
         await weather.edit(
             f"**{cityname}, {fullc_n}**\n"
             +
@@ -122,8 +129,9 @@ async def get_weather(weather):
             +
             f"**Sunset**: `{sun(sunset)}`")
 
+
 CMD_HELP.update({
     "weather":
-    ".weather <city> or .weather <city>, <country name/code>\
-    \nUsage: Gets the weather of a city."
+        "`.weather <city>` or `.weather <city>`, `<country name/code>`\
+        \nUsage: Gets the weather of a city."
 })

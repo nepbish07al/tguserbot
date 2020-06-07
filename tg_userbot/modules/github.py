@@ -1,9 +1,10 @@
 import tg_userbot.modules.libs.git_api as api
 
-from tg_userbot.events import register, errors_handler
 from tg_userbot import CMD_HELP
+from tg_userbot.events import register, errors_handler
 
-#do not async
+
+# do not async
 def getData(url, index):
     if not api.getData(url):
         return "Invalid user/repo combo"
@@ -15,19 +16,20 @@ def getData(url, index):
     assets = api.getAssets(recentRelease)
     releaseName = api.getReleaseName(recentRelease)
     message = "<b>Author:</b> <a href='{}'>{}</a>\n".format(authorUrl, author)
-    message += "<b>Release Name:</b> "+releaseName+"\n\n"
+    message += "<b>Release Name:</b> " + releaseName + "\n\n"
     for asset in assets:
         message += "<b>Asset:</b> \n"
         fileName = api.getReleaseFileName(asset)
         fileURL = api.getReleaseFileURL(asset)
         assetFile = "<a href='{}'>{}</a>".format(fileURL, fileName)
-        sizeB = ((api.getSize(asset))/1024)/1024
+        sizeB = ((api.getSize(asset)) / 1024) / 1024
         size = "{0:.2f}".format(sizeB)
         downloadCount = api.getDownloadCount(asset)
         message += assetFile + "\n"
         message += "Size: " + size + " MB"
         message += "\nDownload Count: " + str(downloadCount) + "\n\n"
     return message
+
 
 @register(pattern=".git(?: |$)(.*)", outgoing=True)
 @errors_handler
@@ -37,12 +39,13 @@ async def get_release(event):
         if len(commandArgs) != 2 or not "/" in commandArgs[1]:
             await event.edit("Invalid arguments! Make sure you are typing a valid combination of user/repo")
             return
-        index = 0 #for now...
+        index = 0  # for now...
         url = commandArgs[1]
         text = getData(url, index)
         await event.edit(text, parse_mode="html")
 
+
 CMD_HELP.update({
-"github":
-".git <user>/<repo>\
-\nGets the updated release of the specified user/repo combo"})
+    "github":
+        ".git <user>/<repo>\
+        \nGets the updated release of the specified user/repo combo"})

@@ -1,27 +1,30 @@
-from telethon import events
 import asyncio
-from tg_userbot import bot, BOTLOG, BOTLOG_CHATID
-from traceback import format_exc
-from time import gmtime, strftime
-import math
-import subprocess
+import datetime
 import sys
 import traceback
-import datetime
+from time import gmtime, strftime
 
-def register(**args): #registers bot events
+from telethon import events
+
+from tg_userbot import bot, BOTLOG, BOTLOG_CHATID
+
+
+def register(**args):  # registers bot events
     pattern = args.get('pattern', None)
     disable_edited = args.get('disable_edited', False)
     if pattern is not None and not pattern.startswith('(?i)'):
         args['pattern'] = '(?i)' + pattern
     if "disable_edited" in args:
         del args['disable_edited']
+
     def decorator(func):
         if not disable_edited:
             bot.add_event_handler(func, events.MessageEdited(**args))
         bot.add_event_handler(func, events.NewMessage(**args))
         return func
+
     return decorator
+
 
 def errors_handler(func):
     async def wrapper(errors):
@@ -53,7 +56,7 @@ def errors_handler(func):
                 stderr=asyncio.subprocess.PIPE)
             stdout, stderr = await process.communicate()
             result = str(stdout.decode().strip()) \
-                + str(stderr.decode().strip())
+                     + str(stderr.decode().strip())
             ftext += result
             file = open("error.log", "w+")
             file.write(ftext)
@@ -61,4 +64,5 @@ def errors_handler(func):
             if BOTLOG:
                 await errors.client.send_file(BOTLOG_CHATID, "error.log", caption=text)
                 return
+
     return wrapper

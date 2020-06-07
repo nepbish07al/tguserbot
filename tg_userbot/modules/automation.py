@@ -1,12 +1,9 @@
-from asyncio import sleep
-from random import choice
-
-from telethon.events import StopPropagation
-
-from tg_userbot import BOTLOG, BOTLOG_CHATID, AUTOMATION_ENABLED, AUTOMATION_SENDERS, AUTOMATION_COMMANDS, AUTOMATION_TRIGGERS, CMD_HELP
+from tg_userbot import BOTLOG, BOTLOG_CHATID, AUTOMATION_ENABLED, AUTOMATION_SENDERS, AUTOMATION_COMMANDS, \
+    AUTOMATION_TRIGGERS, CMD_HELP
 from tg_userbot.events import register, errors_handler
 
 AUTOMATOR_REPLIES = "Testing Automation again"
+
 
 @register(incoming=True)
 @errors_handler
@@ -22,9 +19,12 @@ async def automator(sender):
                 replyStr = command + " " + data + " " + AUTOMATOR_REPLIES
                 await sender.reply(replyStr)
                 if BOTLOG:
-                    await sender.client.send_message(BOTLOG_CHATID, "#AUTOMATION \n\n The command '" + replyStr + "' has been executed in " + str(sender.sender_id))
+                    await sender.client.send_message(BOTLOG_CHATID,
+                                                     "#AUTOMATION \n\n The command '" + replyStr + "' has been executed in " + str(
+                                                         sender.sender_id))
+
 
 CMD_HELP.update({
-"automation":
-"Automation is based of config settings for now. Please refer to your\
-configuration settings or to tguserbot's owner manual."})
+    "automation":
+        "Automation is based of config settings for now.\
+         \nPlease refer to your configuration settings or to tguserbot's owner manual."})

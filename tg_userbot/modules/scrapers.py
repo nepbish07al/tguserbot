@@ -1,23 +1,17 @@
 import os
-import shutil
-from bs4 import BeautifulSoup
-import re
-from time import sleep
-from html import unescape
-from re import findall
-from urllib.parse import quote_plus
-from urllib.error import HTTPError
-from requests import get
-from search_engine_parser import GoogleSearch
+
+from emoji import get_emoji_regexp
 from googletrans import LANGUAGES, Translator
 from gtts import gTTS
-from emoji import get_emoji_regexp
+from requests import get
+
 from tg_userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, LANG
 from tg_userbot.events import register, errors_handler
 
-@register(outgoing=True, pattern="^.currency (.*)")
+
+@register(outgoing=True, pattern="^\.currency (.*)")
 @errors_handler
-async def _(event): #calculates exchange rates, no clue why you would need it, but sure
+async def _(event):  # calculates exchange rates, no clue why you would need it, but sure
     if not event.text[0].isalpha() and event.text[0] in ("."):
         if event.fwd_from:
             return
@@ -42,9 +36,10 @@ async def _(event): #calculates exchange rates, no clue why you would need it, b
             await event.edit("`Invalid syntax.`")
             return
 
-@register(outgoing=True, pattern=r"^.tts(?: |$)([\s\S]*)")
+
+@register(outgoing=True, pattern=r"^\.tts(?: |$)([\s\S]*)")
 @errors_handler
-async def text_to_speech(query): #text to speech
+async def text_to_speech(query):  # text to speech
     if not query.text[0].isalpha() and query.text[0] in ("."):
         textx = await query.get_reply_message()
         message = query.pattern_match.group(1)
@@ -81,9 +76,10 @@ async def text_to_speech(query): #text to speech
                 await query.client.send_message(BOTLOG_CHATID, "tts of `" + message + "` executed successfully!")
             await query.delete()
 
-@register(outgoing=True, pattern=r"^.trt(?: |$)([\s\S]*)")
+
+@register(outgoing=True, pattern=r"^\.trt(?: |$)([\s\S]*)")
 @errors_handler
-async def translateme(trans): #translator
+async def translateme(trans):  # translator
     if not trans.text[0].isalpha() and trans.text[0] in ("."):
         translator = Translator()
         textx = await trans.get_reply_message()
@@ -105,16 +101,19 @@ async def translateme(trans): #translator
         reply_text = f"From **{source_lan.title()}**\nTo **{transl_lan.title()}:**\n\n{reply_text.text}"
         await trans.edit(reply_text)
         if BOTLOG:
-            await trans.client.send_message(BOTLOG_CHATID, f"Translated some {source_lan.title()} stuff to {transl_lan.title()} just now.")
+            await trans.client.send_message(BOTLOG_CHATID,
+                                            f"Translated some {source_lan.title()} stuff to {transl_lan.title()} just now.")
 
-def deEmojify(inputString): #removes emojis for safe string handling
+
+def deEmojify(inputString):  # removes emojis for safe string handling
     return get_emoji_regexp().sub(u'', inputString)
+
 
 CMD_HELP.update({
     'scrappers':
-    '.currency <amount> <from> <to>\
-     \nUsage: Converts various currencies for you.\
-     \n\n.tts <text> [or reply]\
-     \nUsage: Translates text to speech for the default language which is set.\nUse .lang <text> to set language for your TTS.\
-     \n\n.trt <text> [or reply]\
-     \nUsage: Translates text to the default language which is set.'})
+        '`.currency <amount> <from> <to>`\
+         \nUsage: Converts various currencies for you.\
+         \n\n`.tts <text> [or reply]`\
+         \nUsage: Translates text to speech for the default language which is set.\nUse .lang <text> to set language for your TTS.\
+         \n\n`.trt <text> [or reply]`\
+         \nUsage: Translates text to the default language which is set.'})
