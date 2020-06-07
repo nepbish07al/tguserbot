@@ -4,7 +4,7 @@ from telethon.tl.types import MessageEntityMentionName
 
 import tg_userbot.modules.libs.cas_api as cas_api
 from tg_userbot import CMD_HELP
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 
 async def get_user(event):  # kanged get user
@@ -34,7 +34,6 @@ async def get_user(event):  # kanged get user
 
 
 @register(pattern="^\.cascheck(?: |$)(.*)", outgoing=True)
-@errors_handler
 async def caschecker(event):
     if not event.text[0].isalpha() and event.text[0] in ("."):
         if event.fwd_from:
@@ -75,7 +74,6 @@ async def caschecker(event):
 
 
 @register(pattern="^\.groupcheck$", outgoing=True)
-@errors_handler
 async def groupchecker(cas):
     if not cas.text[0].isalpha() and cas.text[0] in ("."):
         text = ""

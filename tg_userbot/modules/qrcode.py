@@ -5,11 +5,10 @@ import qrcode
 from bs4 import BeautifulSoup
 
 from tg_userbot import CMD_HELP
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 
 @register(pattern=r"^\.decode$", outgoing=True)
-@errors_handler
 async def parseqr(qr_e):  # decods qr or barcode
     if not qr_e.text[0].isalpha() and qr_e.text[0] in ("."):
         downloaded_file_name = await qr_e.client.download_media(
@@ -33,7 +32,6 @@ async def parseqr(qr_e):  # decods qr or barcode
 
 
 @register(pattern=r"\.makeqr(?: |$)([\s\S]*)", outgoing=True)
-@errors_handler
 async def make_qr(makeqr):  # makes qr
     if not makeqr.text[0].isalpha() and makeqr.text[0] in ("."):
         if makeqr.fwd_from:

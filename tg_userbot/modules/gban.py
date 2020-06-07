@@ -1,11 +1,10 @@
 import io
 from tg_userbot import bot, CMD_HELP, GBAN_BOT, GBANS
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 from tg_userbot.modules.libs.get_id import get_id
 from telethon.tl.functions.users import GetFullUserRequest
 
 @register(outgoing=True, pattern=r"^.gban(?: |$)([\s\S]*)")
-@errors_handler
 async def gban(request):
     if not request.text[0].isalpha() and request.text[0] in ("."):
         if GBANS:
@@ -43,7 +42,6 @@ async def gban(request):
 
 
 @register(outgoing=True, pattern=r"^.ungban(?: |$)([\s\S]*)")
-@errors_handler
 async def ungban(request):
     if not request.text[0].isalpha() and request.text[0] in ("."):
         if GBANS:
@@ -75,7 +73,6 @@ async def ungban(request):
 
 
 @register(outgoing=True, pattern=r"^.gkick(?: |$)([\s\S]*)")
-@errors_handler
 async def gkick(request):
     if not request.text[0].isalpha() and request.text[0] in ("."):
         if GBANS:

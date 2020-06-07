@@ -4,11 +4,10 @@ import speedtest
 from telethon import functions
 
 from tg_userbot import CMD_HELP
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 
 @register(outgoing=True, pattern="^\.speedtest$")
-@errors_handler
 async def speedtst(spd):
     if not spd.text[0].isalpha() and spd.text[0] in ("."):
         await spd.edit("`Running speed test . . .`")
@@ -43,7 +42,6 @@ def speed_convert(size):
 
 
 @register(outgoing=True, pattern="^\.dc$")
-@errors_handler
 async def neardc(event):
     if not event.text[0].isalpha() and event.text[0] in ("."):
         result = await event.client(functions.help.GetNearestDcRequest())
@@ -54,7 +52,6 @@ async def neardc(event):
 
 # Kanged .rtt from @prototype74, thanks homie
 @register(outgoing=True, pattern="^.ping$")
-@errors_handler
 async def pingme(pong):
     if not pong.text[0].isalpha() and pong.text[0] in ("."):
         duration = check_output("ping -c 1 1.0.0.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
@@ -62,7 +59,6 @@ async def pingme(pong):
 
 
 @register(outgoing=True, pattern="^\.cping(?: |$)?")
-@errors_handler
 async def cping(args):
     if not args.text[0].isalpha() and args.text[0] in ("."):
         commandParser = str(args.message.message).split(' ')

@@ -8,13 +8,12 @@ from telethon import version
 import tg_userbot.modules.libs.cas_api as cas
 import tg_userbot.modules.libs.git_api as git
 from tg_userbot import CMD_HELP, ALIVE_NAME, BOTLOG, BOTLOG_CHATID, VERSION, AUTOMATION_ENABLED
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 
 
 @register(outgoing=True, pattern="^\.sysd$")
-@errors_handler
 async def sysdetails(sysd):  # sysd command, requires neofetch
     if not sysd.text[0].isalpha() and sysd.text[0] in ("."):
         try:
@@ -28,7 +27,6 @@ async def sysdetails(sysd):  # sysd command, requires neofetch
 
 
 @register(outgoing=True, pattern="^\.status$")
-@errors_handler
 async def statuschecker(msg):  # .status, .alive, you name it
     if not msg.text[0].isalpha() and msg.text[0] in ("."):
         gitver = git.vercheck()
@@ -53,7 +51,6 @@ async def statuschecker(msg):  # .status, .alive, you name it
 
 
 @register(outgoing=True, pattern="^\.shutdown$")
-@errors_handler
 async def shutdown(event):  # bot shutdown
     if not event.text[0].isalpha() and event.text[0] in ("."):
         await event.edit("`Powering off...`")

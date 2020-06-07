@@ -1,11 +1,10 @@
 from time import sleep
 
 from tg_userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, bot
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 
 @register(outgoing=True, pattern="^\.userid$")
-@errors_handler
 async def useridgetter(target):  # gets user id
     if not target.text[0].isalpha() and target.text[0] in ("."):
         message = await target.get_reply_message()
@@ -27,14 +26,12 @@ async def useridgetter(target):  # gets user id
 
 
 @register(outgoing=True, pattern="^\.chatid$")
-@errors_handler
 async def chatidgetter(chat):  # gets chat id
     if not chat.text[0].isalpha() and chat.text[0] in ("."):
         await chat.edit("Chat ID: `" + str(chat.chat_id) + "`")
 
 
 @register(outgoing=True, pattern=r"^\.log(?: |$)([\s\S]*)")
-@errors_handler
 async def log(log_text):  # forwards stuff to log channel/group
     if not log_text.text[0].isalpha() and log_text.text[0] in ("."):
         if BOTLOG:

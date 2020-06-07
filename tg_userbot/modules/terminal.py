@@ -4,11 +4,10 @@ from os import remove
 from sys import executable
 
 from tg_userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 
 @register(outgoing=True, pattern=r"^\.exec(?: |$)([\s\S]*)")
-@errors_handler
 async def run(run_q):  # executes python code dynamically
     if not run_q.text[0].isalpha() and run_q.text[0] in ("."):
         code = run_q.pattern_match.group(1)
@@ -55,7 +54,6 @@ async def run(run_q):  # executes python code dynamically
 
 
 @register(outgoing=True, pattern="^\.term(?: |$)(.*)")
-@errors_handler
 async def terminal_runner(term):  # bash interpreter
     if not term.text[0].isalpha() and term.text[0] in ("."):
         curruser = getuser()
@@ -86,7 +84,7 @@ async def terminal_runner(term):  # bash interpreter
                                         caption="`Output too large, sending as file`")
             remove("output.txt")
             return
-        if uid is 0:
+        if uid == 0:
             await term.edit("`" f"{curruser}:~# {command}" f"\n{result}" "`")
         else:
             await term.edit("`" f"{curruser}:~$ {command}" f"\n{result}" "`")

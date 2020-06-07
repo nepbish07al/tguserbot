@@ -8,7 +8,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
 from tg_userbot import CMD_HELP
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 ZALG_LIST = [[
     "̖",
@@ -288,7 +288,6 @@ EMOJI = (
 
 
 @register(outgoing=True, pattern=r"^.coinflip$")
-@errors_handler
 async def coin(event):  # coinflip
     if not event.text[0].isalpha() and event.text[0] in ("."):
         r = random.randint(1, 10000)
@@ -303,7 +302,6 @@ async def coin(event):  # coinflip
 
 
 @register(pattern="^.slap(?: |$)(.*)", outgoing=True)
-@errors_handler
 async def who(event):  # slap
     if not event.text[0].isalpha() and event.text[0] in ("."):
         if event.fwd_from:
@@ -363,7 +361,6 @@ async def slap(replied_user, event):  # builds the slap msg itself
 
 
 @register(outgoing=True, pattern="^.decide(?: |$)(.*)")
-@errors_handler
 async def decide(event):  # yes/no
     if not event.text[0].isalpha() and event.text[0] in ("."):
         if event.fwd_from:
@@ -385,14 +382,12 @@ async def decide(event):  # yes/no
 
 
 @register(outgoing=True, pattern="^.insult$")
-@errors_handler
 async def insult(e):  # insult from insult structure
     if not e.text[0].isalpha() and e.text[0] in ("."):
         await e.edit(random.choice(INSULT_STRINGS))
 
 
 @register(outgoing=True, pattern="^.vapor(?: |$)(.*)")
-@errors_handler
 async def vapor(vpr):  # vapor
     if not vpr.text[0].isalpha() and vpr.text[0] in ("."):
         reply_text = list()
@@ -416,7 +411,6 @@ async def vapor(vpr):  # vapor
 
 
 @register(outgoing=True, pattern="^.str(?: |$)(.*)")
-@errors_handler
 async def stretch(stret):  # stretch
     if not stret.text[0].isalpha() and stret.text[0] in ("."):
         textx = await stret.get_reply_message()
@@ -435,7 +429,6 @@ async def stretch(stret):  # stretch
 
 
 @register(outgoing=True, pattern="^.zal(?: |$)(.*)")
-@errors_handler
 async def zal(zgfy):  # chaotic
     if not zgfy.text[0].isalpha() and zgfy.text[0] in ("."):
         reply_text = list()
@@ -465,14 +458,12 @@ async def zal(zgfy):  # chaotic
 
 
 @register(outgoing=True, pattern="^.hi$")
-@errors_handler
 async def hoi(hello):  # hi
     if not hello.text[0].isalpha() and hello.text[0] in ("."):
         await hello.edit(random.choice(HELLOSTR))
 
 
 @register(outgoing=True, pattern="^.oof$")
-@errors_handler
 async def Oof(e):
     if not e.text[0].isalpha() and e.text[0] in ("."):
         t = "Oof"
@@ -482,7 +473,6 @@ async def Oof(e):
 
 
 @register(outgoing=True, pattern="^.mock(?: |$)(.*)")
-@errors_handler
 async def spongemocktext(mock):
     if not mock.text[0].isalpha() and mock.text[0] in ("."):
         reply_text = list()
@@ -505,7 +495,6 @@ async def spongemocktext(mock):
 
 
 @register(outgoing=True, pattern="^.clap(?: |$)(.*)")
-@errors_handler
 async def claptext(memereview):  # clap
     if not memereview.text[0].isalpha() and memereview.text[0] in ("."):
         textx = await memereview.get_reply_message()
@@ -524,7 +513,6 @@ async def claptext(memereview):  # clap
 
 
 @register(outgoing=True, pattern="^.bt$")
-@errors_handler
 async def bluetext(bt_e):
     if not bt_e.text[0].isalpha() and bt_e.text[0] in ("."):
         if await bt_e.get_reply_message() and bt_e.is_group:
@@ -535,7 +523,6 @@ async def bluetext(bt_e):
 
 
 @register(outgoing=True, pattern=r"^.f (.*)")
-@errors_handler
 async def payf(event):
     if not event.text[0].isalpha() and event.text[0] in ("."):
         paytext = event.pattern_match.group(1)
@@ -547,7 +534,6 @@ async def payf(event):
 
 
 @register(outgoing=True, pattern="^.lfy (.*)")
-@errors_handler
 async def let_me_google_that_for_you(lmgtfy_q):  # img.gtfy
     if not lmgtfy_q.text[0].isalpha() and lmgtfy_q.text[0] in ("."):
         textx = await lmgtfy_q.get_reply_message()
@@ -565,7 +551,6 @@ async def let_me_google_that_for_you(lmgtfy_q):  # img.gtfy
 
 
 @register(pattern=r".scam(?: |$)(.*)", outgoing=True)
-@errors_handler
 async def scam(event):
     if not event.text[0].isalpha() and event.text[0] in ("."):
         options = [
@@ -599,7 +584,6 @@ async def scam(event):
 
 
 @register(pattern=r".type(?: |$)(.*)", outgoing=True)
-@errors_handler
 async def typewriter(typew):
     if not typew.text[0].isalpha() and typew.text[0] in ("."):
         textx = await typew.get_reply_message()
@@ -626,7 +610,6 @@ async def typewriter(typew):
 
 
 @register(outgoing=True, pattern="^.gei$")
-@errors_handler
 async def isgei(gei):
     if not gei.text[0].isalpha() and gei.text[0] in ("."):
         if await gei.get_reply_message() and gei.is_group or gei.to_id:
@@ -641,7 +624,6 @@ async def isgei(gei):
 
 
 @register(outgoing=True, pattern="^.nou$")
-@errors_handler
 async def isgei(gei):
     if not gei.text[0].isalpha() and gei.text[0] in ("."):
         if await gei.get_reply_message() and gei.is_group or gei.to_id:
@@ -657,7 +639,6 @@ async def isgei(gei):
 
 
 @register(outgoing=True, pattern=r"^.caps(?: |$)([\s\S]*)")
-@errors_handler
 async def to_upper(request):
     if not request.text[0].isalpha() and request.text[0] in ("."):
         textx = await request.get_reply_message()
@@ -675,7 +656,6 @@ async def to_upper(request):
 
 
 @register(outgoing=True, pattern=r"^.small(?: |$)([\s\S]*)")
-@errors_handler
 async def to_lower(request):
     if not request.text[0].isalpha() and request.text[0] in ("."):
         textx = await request.get_reply_message()
@@ -693,7 +673,6 @@ async def to_lower(request):
 
 
 @register(outgoing=True, pattern=r"^.noformat(?: |$)([\s\S]*)")
-@errors_handler
 async def noformat(request):
     if not request.text[0].isalpha() and request.text[0] in ("."):
         textx = await request.get_reply_message()

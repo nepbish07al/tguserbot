@@ -1,12 +1,11 @@
 from tg_userbot import BOTLOG, BOTLOG_CHATID, AUTOMATION_ENABLED, AUTOMATION_SENDERS, AUTOMATION_COMMANDS, \
     AUTOMATION_TRIGGERS, CMD_HELP
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 AUTOMATOR_REPLIES = "Testing Automation again"
 
 
 @register(incoming=True)
-@errors_handler
 async def automator(sender):
     if AUTOMATION_ENABLED and sender.is_private and (sender.sender_id in AUTOMATION_SENDERS):
         value = 0

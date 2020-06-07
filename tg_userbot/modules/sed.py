@@ -2,7 +2,7 @@ import re
 from sre_constants import error as sre_err
 
 from tg_userbot import CMD_HELP
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 DELIMITERS = ("/", ":", "|", "_")
 
@@ -51,7 +51,6 @@ async def separate_sed(sed_string):
 
 
 @register(outgoing=True, pattern="^\.s")
-@errors_handler
 async def sed(command):
     if not command.text[0].isalpha() and command.text[0] in ("."):
         sed_result = await separate_sed(command.text)
