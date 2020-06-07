@@ -99,7 +99,7 @@ async def statuschecker(msg):  # .status, .alive, you name it
                        "System Status: "
                        f"Online \n \n"
                        f"Version: {VERSION}\n"
-                       f"Commit: {commit}"
+                       f"Commit: {commit}\n"
                        f"User: {DEFAULTUSER}\n"
                        f"RTT: {rtt}\n"
                        f"Automation: {automationData}\n"
