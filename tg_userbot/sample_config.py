@@ -45,8 +45,6 @@ class Config(object):
     OPEN_WEATHER_MAP_APPID = None  # OWM API key https://openweathermap.org/
     OPEN_WEATHER_MAP_DEFCITY = None  # default city to be used for weather
     UPSTREAM_REPO_URL = "https://github.com/nunopenim/tguserbot.git"  # Custom (forked) repo URL for updater.
-    GBANS = ""
-    GBAN_BOT = ""
 
 
 class Development(Config):
