@@ -78,12 +78,28 @@ async def statuschecker(msg):  # .status, .alive, you name it
         casver = cas.vercheck()
         rtt = check_output("ping -c 1 1.1.1.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
         automationData = "Disabled"
+        commit = "N/A"
+        if which("git") is not None:
+            ver = await asyncrunapp(
+                "git",
+                "describe",
+                "--all",
+                "--long",
+                stdout=asyncPIPE,
+                stderr=asyncPIPE,
+            )
+            stdout, stderr = await ver.communicate()
+            verout = str(stdout.decode().strip()) \
+                + str(stderr.decode().strip())
+            verdiv = verout.split("-")
+            commit = verdiv[2]
         if AUTOMATION_ENABLED:
             automationData = "Enabled"
         await msg.edit("`"
                        "System Status: "
                        f"Online \n \n"
                        f"Version: {VERSION}\n"
+                       f"Commit: {commit}"
                        f"User: {DEFAULTUSER}\n"
                        f"RTT: {rtt}\n"
                        f"Automation: {automationData}\n"
