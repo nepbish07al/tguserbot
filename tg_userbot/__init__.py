@@ -37,6 +37,8 @@ if ENV:
     CLEAN_WELCOME = sb(os.environ.get("CLEAN_WELCOME", "True"))
     HOMIES = []
     GIRLFRIEND = None
+    GBANS = os.environ.get("GBANS", False)
+    GBAN_BOT = os.environ.get("GBAN_BOT", None)
     LANG = os.environ.get("LANG", 'en')
     AUTOMATION_ENABLED = False
     AUTOMATION_SENDERS = []
@@ -69,6 +71,8 @@ else:
     LANG = Config.LANG
     GIRLFRIEND = Config.GIRLFRIEND
     OWNER_ID = Config.OWNER_ID
+    GBANS = Config.GBANS
+    GBAN_BOT = Config.GBAN_BOT
     AUTOMATION_ENABLED = Config.AUTOMATION_ENABLED
     AUTOMATION_SENDERS = Config.AUTOMATION_SENDERS
     AUTOMATION_COMMANDS = Config.AUTOMATION_COMMANDS
@@ -92,4 +96,4 @@ COUNT_PM = {}
 LASTMSG = {}
 ENABLE_KILLME = True
 CMD_HELP = {}
-VERSION = "2.0.0-alpha"
+VERSION = "2.0.0-pa"
