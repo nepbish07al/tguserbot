@@ -67,7 +67,7 @@ async def bot_ver(event):
                              "` \n")
         else:
             await event.edit(
-                "Shame that you don't have git, you're running - 'v1.beta.4' anyway!"
+                "Shame that you don't have git, you're running - " + VERSION + " anyway!"
             )
 
 
