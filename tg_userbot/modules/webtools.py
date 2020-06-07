@@ -1,6 +1,6 @@
 from subprocess import check_output
 
-import speedtest
+import speedtest, os
 from telethon import functions
 
 from tg_userbot import CMD_HELP
@@ -54,7 +54,13 @@ async def neardc(event):
 @register(outgoing=True, pattern="^.ping$")
 async def pingme(pong):
     if not pong.text[0].isalpha() and pong.text[0] in ("."):
-        duration = check_output("ping -c 1 1.0.0.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
+        if os.name == "nt":
+            output = check_output("ping -n 1 1.0.0.1 | findstr time*", shell=True).decode()
+            outS = output.splitlines()
+            out = outS[0]
+        else:
+            out = check_output("ping -c 1 1.0.0.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
+        duration = out
         await pong.edit("`Ping speed is: %s`" % (duration))
 
 
