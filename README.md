@@ -45,6 +45,7 @@ In advance, thank you for your help.
  - [EBY](https://t.me/a52016benutzer)
  - [Soul Reaper](https://github.com/soulr344)
  - [Hitalo](https://github.com/HitaloSama)
+ - [SnowFuhrer] (https://github.com/SnowFuhrer)
 
 ## Licensing
 
