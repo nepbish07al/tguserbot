@@ -1,1 +1,1 @@
-This is a dummy file to test the updater
+This is a dummy update
