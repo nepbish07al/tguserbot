@@ -108,7 +108,7 @@ async def upstream(ups):
         await ups.edit('`New update found, updating...`')
         ups_rem.fetch(ac_br)
         repo.git.reset('--hard', 'FETCH_HEAD')
-        reqs_upgrade = await update_requirements()
+        # reqs_upgrade = await update_requirements()
         await ups.edit('`Successfully Updated!\n'
                        'Bot is restarting... Wait for a second!`')
         # Spin a new instance of bot
