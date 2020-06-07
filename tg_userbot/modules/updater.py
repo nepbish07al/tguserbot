@@ -4,7 +4,7 @@ This module updates the userbot based on Upstream revision
 
 import asyncio
 import sys
-from os import remove, environ
+from os import remove, environ, execle
 
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
@@ -113,7 +113,7 @@ async def upstream(ups):
                        'Bot is restarting... Wait for a second!`')
         # Spin a new instance of bot
         args = [sys.executable, "-m", "tg_userbot"]
-        execle(sys.executable, *args, environ)
+        os.execle(sys.executable, *args, environ)
         return
 
 
