@@ -82,7 +82,7 @@ async def neardc(event):
 @register(outgoing=True, pattern="^.ping$")
 async def pingme(pong):
     if not pong.text[0].isalpha() and pong.text[0] in ("."):
-        await pond.edit(pinger("1.0.0.1"))
+        await pong.edit(pinger("1.0.0.1"))
 
 @register(outgoing=True, pattern="^\.cping(?: |$)?")
 async def cping(args):
