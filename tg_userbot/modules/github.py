@@ -1,7 +1,7 @@
 import tg_userbot.modules.libs.git_api as api
 
 from tg_userbot import CMD_HELP
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 
 # do not async
@@ -32,7 +32,6 @@ def getData(url, index):
 
 
 @register(pattern=".git(?: |$)(.*)", outgoing=True)
-@errors_handler
 async def get_release(event):
     if not event.text[0].isalpha() and event.text[0] in ("."):
         commandArgs = event.text.split(" ")

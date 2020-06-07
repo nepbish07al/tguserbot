@@ -9,11 +9,10 @@ from telethon.tl.types import MessageActionChannelMigrateFrom, ChannelParticipan
 from telethon.utils import get_input_location
 
 from tg_userbot import CMD_HELP
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 
 @register(pattern="^\.chatinfo(?: |$)(.*)", outgoing=True)
-@errors_handler
 async def info(event):
     await event.edit("`Analysing the chat...`")
     chat = await get_chatinfo(event)

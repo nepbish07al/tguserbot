@@ -6,11 +6,10 @@ from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
 
 from tg_userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, HOMIES, GIRLFRIEND, OWNER_ID
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 
 @register(pattern="^\.info(?: |$)(.*)", outgoing=True)
-@errors_handler
 async def who(event):  # .info command
     if not event.text[0].isalpha() and event.text[0] in ("."):
         if event.fwd_from:

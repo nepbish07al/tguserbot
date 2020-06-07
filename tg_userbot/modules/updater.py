@@ -10,7 +10,7 @@ from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
 from tg_userbot import CMD_HELP, UPSTREAM_REPO_URL
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 
 async def gen_chlog(repo, diff):
@@ -42,7 +42,6 @@ async def update_requirements():
 
 
 @register(outgoing=True, pattern="^.update(?: |$)(.*)")
-@errors_handler
 async def upstream(ups):
     if not ups.text[0].isalpha() and ups.text[0] in ("."):
         await ups.edit("`Checking for updates, please wait....`")

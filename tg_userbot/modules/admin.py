@@ -10,7 +10,7 @@ from telethon.tl.types import ChannelParticipantsAdmins, ChatAdminRights, ChatBa
     MessageMediaPhoto, User
 
 from tg_userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, HOMIES
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 PP_TOO_SMOL = "`The image is too small`"
 PP_ERROR = "`Failure while processing the image`"
@@ -28,7 +28,6 @@ KICK_RIGHTS = ChatBannedRights(until_date=None, view_messages=True)
 
 
 @register(outgoing=True, pattern="^\.setgrouppic$")
-@errors_handler
 async def set_group_photo(gpic):  # sets new group "profile" picture
     if not gpic.text[0].isalpha() and gpic.text[0] in ("."):
         replymsg = await gpic.get_reply_message()
@@ -57,7 +56,6 @@ async def set_group_photo(gpic):  # sets new group "profile" picture
 
 
 @register(outgoing=True, pattern="^\.promote(?: |$)(.*)")
-@errors_handler
 async def promote(promt):
     if promt.text[0].isalpha() or promt.text[0] not in ("."):
         return
@@ -137,7 +135,6 @@ async def promote(promt):
 
 
 @register(outgoing=True, pattern="^\.demote(?: |$)(.*)")
-@errors_handler
 async def demote(dmod):
     if dmod.text[0].isalpha() or dmod.text[0] not in ("."):
         return
@@ -205,7 +202,6 @@ async def demote(dmod):
 
 
 @register(outgoing=True, pattern="^\.ban(?: |$)(.*)")
-@errors_handler
 async def ban(bon):  # bans tagged person
     if not bon.text[0].isalpha() and bon.text[0] in ("."):
         chat = await bon.get_chat()  # sanity check, you know the drill already
@@ -241,7 +237,6 @@ async def ban(bon):  # bans tagged person
 
 
 @register(outgoing=True, pattern="^\.unban(?: |$)(.*)")
-@errors_handler
 async def nothanos(unbon):  # unbans tagged person
     if not unbon.text[0].isalpha() and unbon.text[0] in ("."):
         chat = await unbon.get_chat()
@@ -270,7 +265,6 @@ async def nothanos(unbon):  # unbans tagged person
 
 
 @register(outgoing=True, pattern="^\.delusers(?: |$)(.*)")
-@errors_handler
 async def rm_deletedacc(show):  # lists/deletes deleted accounts
     if not show.text[0].isalpha() and show.text[0] in ("."):
         con = show.pattern_match.group(1)
@@ -323,7 +317,6 @@ async def rm_deletedacc(show):  # lists/deletes deleted accounts
 
 
 @register(outgoing=True, pattern="^\.adminlist$")
-@errors_handler
 async def get_admin(show):  # lists all chat admins
     if not show.text[0].isalpha() and show.text[0] in ("."):
         if not show.is_group:
@@ -347,7 +340,6 @@ async def get_admin(show):  # lists all chat admins
 
 
 @register(outgoing=True, pattern="^\.pin(?: |$)(.*)")
-@errors_handler
 async def pin(msg):  # pins message
     if not msg.text[0].isalpha() and msg.text[0] in ("."):
         chat = await msg.get_chat()
@@ -380,7 +372,6 @@ async def pin(msg):  # pins message
 
 
 @register(outgoing=True, pattern="^\.kick(?: |$)(.*)")
-@errors_handler
 async def kick(usr):  # kicks person
     if not usr.text[0].isalpha() and usr.text[0] in ("."):
         chat = await usr.get_chat()
@@ -410,7 +401,6 @@ async def kick(usr):  # kicks person
 
 
 @register(outgoing=True, pattern="^\.userslist ?(.*)")
-@errors_handler
 async def get_users(show):  # lists all users (warning: spam)
     if not show.text[0].isalpha() and show.text[0] in ("."):
         if not show.is_group:

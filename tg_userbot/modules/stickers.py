@@ -11,7 +11,7 @@ from telethon.tl.types import DocumentAttributeSticker
 from telethon.tl.types import InputStickerSetID
 
 from tg_userbot import bot, CMD_HELP
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 KANGING_STR = [
     "Using Witchery to kang this sticker...",
@@ -28,7 +28,6 @@ KANGING_STR = [
 
 
 @register(outgoing=True, pattern="^\.kang")
-@errors_handler
 async def kang(args):
     if not args.text[0].isalpha() and args.text[0] in ("."):
         user = await bot.get_me()
@@ -264,7 +263,6 @@ async def resize_photo(photo):
 
 
 @register(outgoing=True, pattern="^\.stkrinfo$")
-@errors_handler
 async def get_pack_info(event):
     if not event.text[0].isalpha() and event.text[0] in ("."):
         if not event.is_reply:

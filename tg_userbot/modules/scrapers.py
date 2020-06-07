@@ -6,11 +6,10 @@ from gtts import gTTS
 from requests import get
 
 from tg_userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, LANG
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 
 @register(outgoing=True, pattern="^\.currency (.*)")
-@errors_handler
 async def _(event):  # calculates exchange rates, no clue why you would need it, but sure
     if not event.text[0].isalpha() and event.text[0] in ("."):
         if event.fwd_from:
@@ -38,7 +37,6 @@ async def _(event):  # calculates exchange rates, no clue why you would need it,
 
 
 @register(outgoing=True, pattern=r"^\.tts(?: |$)([\s\S]*)")
-@errors_handler
 async def text_to_speech(query):  # text to speech
     if not query.text[0].isalpha() and query.text[0] in ("."):
         textx = await query.get_reply_message()
@@ -78,7 +76,6 @@ async def text_to_speech(query):  # text to speech
 
 
 @register(outgoing=True, pattern=r"^\.trt(?: |$)([\s\S]*)")
-@errors_handler
 async def translateme(trans):  # translator
     if not trans.text[0].isalpha() and trans.text[0] in ("."):
         translator = Translator()

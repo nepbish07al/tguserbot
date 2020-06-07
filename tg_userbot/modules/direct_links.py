@@ -9,11 +9,10 @@ from bs4 import BeautifulSoup
 from humanize import naturalsize
 
 from tg_userbot import CMD_HELP
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 
 @register(outgoing=True, pattern=r"^\.downlink(?: |$)([\s\S]*)")
-@errors_handler
 async def direct_link_generator(request):  # link processor
     if not request.text[0].isalpha() and request.text[0] in ("."):
         textx = await request.get_reply_message()

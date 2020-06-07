@@ -5,7 +5,7 @@ from pytz import country_timezones as c_tz, timezone as tz, country_names as c_n
 from requests import get
 
 from tg_userbot import OPEN_WEATHER_MAP_APPID as OWM_API, OPEN_WEATHER_MAP_DEFCITY as DEFCITY, CMD_HELP
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 
 async def get_tz(con):
@@ -20,7 +20,6 @@ async def get_tz(con):
 
 
 @register(outgoing=True, pattern="^\.weather(?: |$)(.*)")
-@errors_handler
 async def get_weather(weather):
     if not weather.text[0].isalpha() and weather.text[0] in ("."):
         if not OWM_API:

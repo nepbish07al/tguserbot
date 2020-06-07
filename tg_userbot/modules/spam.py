@@ -2,11 +2,10 @@ import asyncio
 from asyncio import sleep
 
 from tg_userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 
 @register(outgoing=True, pattern="^\.tspam (.*)")
-@errors_handler
 async def tmeme(e):
     if not e.text[0].isalpha() and e.text[0] in ("."):
         tspam = str(e.pattern_match.group(1))
@@ -19,7 +18,6 @@ async def tmeme(e):
 
 
 @register(outgoing=True, pattern="^\.wspam (.*)")
-@errors_handler
 async def wspam(e):
     if not e.text[0].isalpha() and e.text[0] in ("."):
         wspam = str(e.pattern_match.group(1))
@@ -33,7 +31,6 @@ async def wspam(e):
 
 
 @register(outgoing=True, pattern="^\.spam (.*)")
-@errors_handler
 async def spammer(e):
     if not e.text[0].isalpha() and e.text[0] in ("."):
         counter = int(e.pattern_match.group(1).split(' ', 1)[0])
@@ -45,7 +42,6 @@ async def spammer(e):
 
 
 @register(outgoing=True, pattern="^\.delayspam (.*)")
-@errors_handler
 async def spammer(e):
     if not e.text[0].isalpha() and e.text[0] in ("."):
         spamDelay = float(e.pattern_match.group(1).split(' ', 2)[0])

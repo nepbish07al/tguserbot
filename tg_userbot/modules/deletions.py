@@ -3,11 +3,10 @@ from asyncio import sleep
 from telethon.errors import rpcbaseerrors
 
 from tg_userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
-from tg_userbot.events import register, errors_handler
+from tg_userbot.events import register
 
 
 @register(outgoing=True, pattern="^\.purge$")
-@errors_handler
 async def fastpurger(purg):  # fast purge all messages up to tagged one
     if not purg.text[0].isalpha() and purg.text[0] in ("."):
         chat = await purg.get_input_chat()
@@ -32,7 +31,6 @@ async def fastpurger(purg):  # fast purge all messages up to tagged one
 
 
 @register(outgoing=True, pattern="^\.purgeme")
-@errors_handler
 async def purgeme(delme):  # same as fast purge, but only your messages
     if not delme.text[0].isalpha() and delme.text[0] in ("."):
         message = delme.text
@@ -52,7 +50,6 @@ async def purgeme(delme):  # same as fast purge, but only your messages
 
 
 @register(outgoing=True, pattern="^\.del$")
-@errors_handler
 async def delete_it(delme):
     if not delme.text[0].isalpha() and delme.text[0] in ("."):
         msg_src = await delme.get_reply_message()
