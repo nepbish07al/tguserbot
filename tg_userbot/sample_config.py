@@ -36,7 +36,7 @@ class Config(object):
     HOMIES = []  # Human Of Maximum Intelligence and Empathy, H.O.M.I.E.
     GIRLFRIEND = None
     GBANS = False
-    GBAN_BOTS = None
+    GBAN_BOT = None
     AUTOMATION_ENABLED = False
     AUTOMATION_SENDERS = []  # IDs
     AUTOMATION_COMMANDS = []  # strings
