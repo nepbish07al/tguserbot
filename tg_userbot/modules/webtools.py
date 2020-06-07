@@ -80,10 +80,10 @@ async def pingme(pong):
             newstr = newstra[1].split(' ')  # redundant split, but to try and not break windows ping
         ping_time = float(newstr[0])
         if os.name == 'nt' and under:
-            await pong.edit("Ping speed is <" + ping_time + " ms")
+            await pong.edit("Ping speed is <" + str(ping_time) + " ms")
             #update.effective_message.reply_text(" Round-trip time is <{}ms".format(ping_time))
         else:
-            await pong.edit("Ping speed is: " + ping_time + " ms")
+            await pong.edit("Ping speed is: " + str(ping_time) + " ms")
             #update.effective_message.reply_text(" Round-trip time: {}ms".format(ping_time))
         #await pong.edit("`Ping speed is: %s`" % (duration))
 
