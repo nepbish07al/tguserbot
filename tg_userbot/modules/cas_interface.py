@@ -1,12 +1,13 @@
-import tg_userbot.modules.libs.cas_api as cas_api
-
 from telethon.errors import ChatAdminRequiredError
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
-from tg_userbot.events import register, errors_handler
-from tg_userbot import CMD_HELP
 
-async def get_user(event): #kanged get user
+import tg_userbot.modules.libs.cas_api as cas_api
+from tg_userbot import CMD_HELP
+from tg_userbot.events import register, errors_handler
+
+
+async def get_user(event):  # kanged get user
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
         replied_user = await event.client(GetFullUserRequest(previous_message.from_id))
@@ -31,7 +32,8 @@ async def get_user(event): #kanged get user
             return None
     return replied_user
 
-@register(pattern=".cascheck(?: |$)(.*)", outgoing=True)
+
+@register(pattern="^\.cascheck(?: |$)(.*)", outgoing=True)
 @errors_handler
 async def caschecker(event):
     if not event.text[0].isalpha() and event.text[0] in ("."):
@@ -62,7 +64,7 @@ async def caschecker(event):
                 text += "\n"
             parsing = cas_api.timeadded(user_analysis.id)
             if parsing:
-                parseArray=str(parsing).split(", ")
+                parseArray = str(parsing).split(", ")
                 text += "Day added: "
                 text += str(parseArray[1])
                 text += "\nTime added: "
@@ -71,7 +73,8 @@ async def caschecker(event):
         await event.edit(text, parse_mode="html")
         return
 
-@register(pattern=".groupcheck$", outgoing=True)
+
+@register(pattern="^\.groupcheck$", outgoing=True)
 @errors_handler
 async def groupchecker(cas):
     if not cas.text[0].isalpha() and cas.text[0] in ("."):
@@ -83,7 +86,7 @@ async def groupchecker(cas):
             await cas.edit(str(err))
             return
         try:
-            cas_count, members_count = (0,)*2
+            cas_count, members_count = (0,) * 2
             banned_users = ""
             async for user in cas.client.iter_participants(info.id):
                 if cas_api.banchecker(user.id):
@@ -106,12 +109,9 @@ async def groupchecker(cas):
             print("BaseException:", be)
             return
         await cas.edit(text)
-            
-
-
 
 
 CMD_HELP.update({
-"cas_interface":
-".cascheck <reply/username/user id>\
-\nChecks the CAS Status of a specified user"})
+    "cas_interface":
+        "`.cascheck` <reply/username/user id>\
+        \nChecks the CAS Status of a specified user"})

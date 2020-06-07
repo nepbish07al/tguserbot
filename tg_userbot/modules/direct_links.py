@@ -1,17 +1,20 @@
-from os import popen
+import json
 import re
 import urllib.parse
-import json
+from os import popen
 from random import choice
+
 import requests
 from bs4 import BeautifulSoup
 from humanize import naturalsize
+
 from tg_userbot import CMD_HELP
 from tg_userbot.events import register, errors_handler
 
-@register(outgoing=True, pattern=r"^.downlink(?: |$)([\s\S]*)")
+
+@register(outgoing=True, pattern=r"^\.downlink(?: |$)([\s\S]*)")
 @errors_handler
-async def direct_link_generator(request): #link processor
+async def direct_link_generator(request):  # link processor
     if not request.text[0].isalpha() and request.text[0] in ("."):
         textx = await request.get_reply_message()
         message = request.pattern_match.group(1)
@@ -52,7 +55,8 @@ async def direct_link_generator(request): #link processor
                 reply += re.findall(r"\bhttps?://(.*?[^/]+)", link)[0] + 'is not supported'
         await request.edit(reply)
 
-def gdrive(url: str) -> str: #google drive link generator
+
+def gdrive(url: str) -> str:  # google drive link generator
     drive = 'https://drive.google.com'
     try:
         link = re.findall(r'\bhttps?://drive\.google\.com\S+', url)[0]
@@ -90,7 +94,8 @@ def gdrive(url: str) -> str: #google drive link generator
     reply += f'[{name}]({dl_url})\n'
     return reply
 
-def zippy_share(url: str) -> str: #zippyshare - based on https://github.com/LameLemon/ziggy
+
+def zippy_share(url: str) -> str:  # zippyshare - based on https://github.com/LameLemon/ziggy
     reply = ''
     dl_url = ''
     try:
@@ -114,7 +119,8 @@ def zippy_share(url: str) -> str: #zippyshare - based on https://github.com/Lame
     reply += f'[{name}]({dl_url})\n'
     return reply
 
-def yandex_disk(url: str) -> str: #yandex disk - based on https://github.com/wldhx/yadisk-direct
+
+def yandex_disk(url: str) -> str:  # yandex disk - based on https://github.com/wldhx/yadisk-direct
     reply = ''
     try:
         link = re.findall(r'\bhttps?://.*yadi\.sk\S+', url)[0]
@@ -131,7 +137,8 @@ def yandex_disk(url: str) -> str: #yandex disk - based on https://github.com/wld
         return reply
     return reply
 
-def mega_dl(url: str) -> str: #mega - https://github.com/tonikelope/megadown
+
+def mega_dl(url: str) -> str:  # mega - https://github.com/tonikelope/megadown
     reply = ''
     try:
         link = re.findall(r'\bhttps?://.*mega.*\.nz\S+', url)[0]
@@ -152,7 +159,8 @@ def mega_dl(url: str) -> str: #mega - https://github.com/tonikelope/megadown
     reply += f'[{name} ({size})]({dl_url})\n'
     return reply
 
-def cm_ru(url: str) -> str: #cloud.mail.ru - https://github.com/JrMasterModelBuilder/cmrudl.py
+
+def cm_ru(url: str) -> str:  # cloud.mail.ru - https://github.com/JrMasterModelBuilder/cmrudl.py
     reply = ''
     try:
         link = re.findall(r'\bhttps?://.*cloud\.mail\.ru\S+', url)[0]
@@ -173,7 +181,8 @@ def cm_ru(url: str) -> str: #cloud.mail.ru - https://github.com/JrMasterModelBui
     reply += f'[{name} ({size})]({dl_url})\n'
     return reply
 
-def mediafire(url: str) -> str: #mediafire link generator
+
+def mediafire(url: str) -> str:  # mediafire link generator
     try:
         link = re.findall(r'\bhttps?://.*mediafire\.com\S+', url)[0]
     except IndexError:
@@ -188,7 +197,8 @@ def mediafire(url: str) -> str: #mediafire link generator
     reply += f'[{name} {size}]({dl_url})\n'
     return reply
 
-def sourceforge(url: str) -> str: #sourceforge link generator
+
+def sourceforge(url: str) -> str:  # sourceforge link generator
     try:
         link = re.findall(r'\bhttps?://.*sourceforge\.net\S+', url)[0]
     except IndexError:
@@ -198,7 +208,7 @@ def sourceforge(url: str) -> str: #sourceforge link generator
     reply = f"Mirrors for __{file_path.split('/')[-1]}__\n"
     project = re.findall(r'projects?/(.*?)/files', link)[0]
     mirrors = f'https://sourceforge.net/settings/mirror_choices?' \
-        f'projectname={project}&filename={file_path}'
+              f'projectname={project}&filename={file_path}'
     page = BeautifulSoup(requests.get(mirrors).content, 'html.parser')
     info = page.find('ul', {'id': 'mirrorList'}).findAll('li')
     for mirror in info[1:]:
@@ -207,7 +217,8 @@ def sourceforge(url: str) -> str: #sourceforge link generator
         reply += f'[{name}]({dl_url}) '
     return reply
 
-def osdn(url: str) -> str: #osdn
+
+def osdn(url: str) -> str:  # osdn
     osdn_link = 'https://osdn.net'
     try:
         link = re.findall(r'\bhttps?://.*osdn\.net\S+', url)[0]
@@ -227,7 +238,8 @@ def osdn(url: str) -> str: #osdn
         reply += f'[{name}]({dl_url}) '
     return reply
 
-def github(url: str) -> str: #github
+
+def github(url: str) -> str:  # github
     try:
         link = re.findall(r'\bhttps?://.*github\.com.*releases\S+', url)[0]
     except IndexError:
@@ -244,7 +256,8 @@ def github(url: str) -> str: #github
     reply += f'[{name}]({dl_url}) '
     return reply
 
-def androidfilehost(url: str) -> str: #afh
+
+def androidfilehost(url: str) -> str:  # afh
     try:
         link = re.findall(r'\bhttps?://.*androidfilehost.*fid.*\S+', url)[0]
     except IndexError:
@@ -274,7 +287,8 @@ def androidfilehost(url: str) -> str: #afh
     reply = ''
     error = "`Error: Can't find Mirrors for the link`\n"
     try:
-        req = session.post('https://androidfilehost.com/libs/otf/mirrors.otf.php', headers=headers, data=data, cookies=res.cookies)
+        req = session.post('https://androidfilehost.com/libs/otf/mirrors.otf.php', headers=headers, data=data,
+                           cookies=res.cookies)
         mirrors = req.json()['MIRRORS']
     except (json.decoder.JSONDecodeError, TypeError):
         reply += error
@@ -287,6 +301,7 @@ def androidfilehost(url: str) -> str: #afh
         reply += f'[{name}]({dl_url}) '
     return reply
 
+
 def useragent():
     useragents = BeautifulSoup(
         requests.get(
@@ -296,11 +311,12 @@ def useragent():
     user_agent = choice(useragents)
     return user_agent.text
 
+
 CMD_HELP.update({
     "direct_lnk":
-    ".downlink <url>\n"
-    "Usage: Reply to a link or paste a URL to\n"
-    "generate a direct download link\n\n"
-    "List of supported URLs:\n"
-    "`Google Drive - MEGA.nz - Cloud Mail - Yandex.Disk - AFH - "
-    "ZippyShare - MediaFire - SourceForge - OSDN - GitHub`"})
+        ".downlink <url>\n"
+        "Usage: Reply to a link or paste a URL to\n"
+        "generate a direct download link\n\n"
+        "List of supported URLs:\n"
+        "`Google Drive - MEGA.nz - Cloud Mail - Yandex.Disk - AFH - "
+        "ZippyShare - MediaFire - SourceForge - OSDN - GitHub`"})

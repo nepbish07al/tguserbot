@@ -1,6 +1,8 @@
 from importlib import import_module
 from sys import argv
+
 from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
+
 from tg_userbot import LOGS, bot, VERSION
 from tg_userbot.modules import ALL_MODULES
 
@@ -17,7 +19,7 @@ except PhoneNumberInvalidError:
 for module_name in ALL_MODULES:
     imported_module = import_module("tg_userbot.modules." + module_name)
 
-LOGS.info("tg_userbot "+VERSION+": operational")
+LOGS.info("tg_userbot " + VERSION + ": operational")
 
 if len(argv) not in (1, 3, 4):
     bot.disconnect()

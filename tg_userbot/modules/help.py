@@ -1,9 +1,10 @@
 from tg_userbot import CMD_HELP
 from tg_userbot.events import register, errors_handler
 
+
 @register(outgoing=True, pattern="^.help(?: |$)(.*)")
 @errors_handler
-async def help(event): #generates help message
+async def help(event):  # generates help message
     if not event.text[0].isalpha() and event.text[0] in ("."):
         args = event.pattern_match.group(1)
         if args:

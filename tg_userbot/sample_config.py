@@ -13,34 +13,41 @@
 
 if not __name__.endswith("sample_config"):
     import sys
-    print("Extend this sample config to a config file, don't just rename and change values here. Doing that WILL backfire on you.\nBot quitting.", file=sys.stderr)
+
+    print(
+        "Extend this sample config to a config file, don't just rename and change values here. Doing that WILL backfire on you.\nBot quitting.",
+        file=sys.stderr)
     quit(1)
+
 
 # Create a new config.py file in same dir and import, then extend this class.
 class Config(object):
-    OWNER_ID = None # required OWNER ID
-    API_KEY = None # required tg Key
-    API_HASH = None # required tg hash
-    STRING_SESSION = None # Userbot Session String
-    BOTLOG_CHATID = 0 # Logging channel/group configuration.
-    BOTLOG = False # Logging channel/group configuration.
-    CONSOLE_LOGGER_VERBOSE = False # Console verbose logging
-    ALIVE_NAME = None # Default .status name
-    CLEAN_WELCOME = True # Clean Welcome
-    GREET_STICKER='CAADAgAD0QMAAjq5FQKizo2AiTQCBQI' # Comming soon
-    LANG = 'en' #translator language
-    HOMIES = [] #Human Of Maximum Intelligence and Empathy, H.O.M.I.E.
+    OWNER_ID = None  # required OWNER ID
+    API_KEY = None  # required tg Key
+    API_HASH = None  # required tg hash
+    STRING_SESSION = None  # Userbot Session String
+    BOTLOG_CHATID = 0  # Logging channel/group configuration.
+    BOTLOG = False  # Logging channel/group configuration.
+    CONSOLE_LOGGER_VERBOSE = False  # Console verbose logging
+    ALIVE_NAME = None  # Default .status name
+    CLEAN_WELCOME = True  # Clean Welcome
+    GREET_STICKER = 'CAADAgAD0QMAAjq5FQKizo2AiTQCBQI'  # Comming soon
+    LANG = 'en'  # translator language
+    HOMIES = []  # Human Of Maximum Intelligence and Empathy, H.O.M.I.E.
     GIRLFRIEND = None
     GBANS = False
     GBAN_BOTS = None
     AUTOMATION_ENABLED = False
-    AUTOMATION_SENDERS = [] #IDs
-    AUTOMATION_COMMANDS = [] #strings
-    AUTOMATION_TRIGGERS = [] #strings
-    Q_API_TOKEN = None # Quotly API key http://antiddos.systems
-    OPEN_WEATHER_MAP_APPID = None # OWM API key https://openweathermap.org/
-    OPEN_WEATHER_MAP_DEFCITY = None # default city to be used for weather
+    AUTOMATION_SENDERS = []  # IDs
+    AUTOMATION_COMMANDS = []  # strings
+    AUTOMATION_TRIGGERS = []  # strings
+    Q_API_TOKEN = None  # Quotly API key http://antiddos.systems
+    OPEN_WEATHER_MAP_APPID = None  # OWM API key https://openweathermap.org/
+    OPEN_WEATHER_MAP_DEFCITY = None  # default city to be used for weather
+    UPSTREAM_REPO_URL = "https://github.com/nunopenim/tguserbot.git"  # Custom (forked) repo URL for updater.
+    GBANS = ""
+    GBAN_BOT = ""
+
 
 class Development(Config):
     LOGGER = True
-  

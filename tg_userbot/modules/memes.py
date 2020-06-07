@@ -2,11 +2,11 @@ import asyncio
 import random
 import re
 import time
-from collections import deque
+
 import requests
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
-from cowpy import cow
+
 from tg_userbot import CMD_HELP
 from tg_userbot.events import register, errors_handler
 
@@ -50,77 +50,77 @@ ZALG_LIST = [[
     " ͖",
     " ͙",
     " ͚",
-    " ",],
-             [
-                 " ̍",
-                 " ̎",
-                 " ̄",
-                 " ̅",
-                 " ̿",
-                 " ̑",
-                 " ̆",
-                 " ̐",
-                 " ͒",
-                 " ͗",
-                 " ͑",
-                 " ̇",
-                 " ̈",
-                 " ̊",
-                 " ͂",
-                 " ̓",
-                 " ̈́",
-                 " ͊",
-                 " ͋",
-                 " ͌",
-                 " ̃",
-                 " ̂",
-                 " ̌",
-                 " ͐",
-                 " ́",
-                 " ̋",
-                 " ̏",
-                 " ̽",
-                 " ̉",
-                 " ͣ",
-                 " ͤ",
-                 " ͥ",
-                 " ͦ",
-                 " ͧ",
-                 " ͨ",
-                 " ͩ",
-                 " ͪ",
-                 " ͫ",
-                 " ͬ",
-                 " ͭ",
-                 " ͮ",
-                 " ͯ",
-                 " ̾",
-                 " ͛",
-                 " ͆",
-                 " ̚",
-             ],
-             [
-                 " ̕",
-                 " ̛",
-                 " ̀",
-                 " ́",
-                 " ͘",
-                 " ̡",
-                 " ̢",
-                 " ̧",
-                 " ̨",
-                 " ̴",
-                 " ̵",
-                 " ̶",
-                 " ͜",
-                 " ͝",
-                 " ͞",
-                 " ͟",
-                 " ͠",
-                 " ͢",
-                 " ̸",
-                 " ̷",
-                 " ͡",]]
+    " ", ],
+    [
+        " ̍",
+        " ̎",
+        " ̄",
+        " ̅",
+        " ̿",
+        " ̑",
+        " ̆",
+        " ̐",
+        " ͒",
+        " ͗",
+        " ͑",
+        " ̇",
+        " ̈",
+        " ̊",
+        " ͂",
+        " ̓",
+        " ̈́",
+        " ͊",
+        " ͋",
+        " ͌",
+        " ̃",
+        " ̂",
+        " ̌",
+        " ͐",
+        " ́",
+        " ̋",
+        " ̏",
+        " ̽",
+        " ̉",
+        " ͣ",
+        " ͤ",
+        " ͥ",
+        " ͦ",
+        " ͧ",
+        " ͨ",
+        " ͩ",
+        " ͪ",
+        " ͫ",
+        " ͬ",
+        " ͭ",
+        " ͮ",
+        " ͯ",
+        " ̾",
+        " ͛",
+        " ͆",
+        " ̚",
+    ],
+    [
+        " ̕",
+        " ̛",
+        " ̀",
+        " ́",
+        " ͘",
+        " ̡",
+        " ̢",
+        " ̧",
+        " ̨",
+        " ̴",
+        " ̵",
+        " ̶",
+        " ͜",
+        " ͝",
+        " ͞",
+        " ͟",
+        " ͠",
+        " ͢",
+        " ̸",
+        " ̷",
+        " ͡", ]]
 
 EMOJIS = [
     "😂",
@@ -286,9 +286,10 @@ EMOJI = (
     "\U0001F9D0",
     "\U0001F632")
 
+
 @register(outgoing=True, pattern=r"^.coinflip$")
 @errors_handler
-async def coin(event): #coinflip
+async def coin(event):  # coinflip
     if not event.text[0].isalpha() and event.text[0] in ("."):
         r = random.randint(1, 10000)
         await event.edit("`Throwing the coin...`")
@@ -300,9 +301,10 @@ async def coin(event): #coinflip
         else:
             await event.edit("`Mate, this is a beer bottle cap, give me a coin!`")
 
+
 @register(pattern="^.slap(?: |$)(.*)", outgoing=True)
 @errors_handler
-async def who(event): #slap
+async def who(event):  # slap
     if not event.text[0].isalpha() and event.text[0] in ("."):
         if event.fwd_from:
             return
@@ -315,6 +317,7 @@ async def who(event): #slap
             await event.edit(caption)
         except BaseException:
             await event.edit("`Can't slap this person, loading 12 gauge buckshot in my shotgun!!`")
+
 
 async def get_user(event):
     if event.reply_to_msg_id:
@@ -341,7 +344,8 @@ async def get_user(event):
             return None
     return replied_user
 
-async def slap(replied_user, event): #builds the slap msg itself
+
+async def slap(replied_user, event):  # builds the slap msg itself
     user_id = replied_user.user.id
     first_name = replied_user.user.first_name
     username = replied_user.user.username
@@ -357,9 +361,10 @@ async def slap(replied_user, event): #builds the slap msg itself
     caption = "..." + temp.format(victim=slapped, item=item, hits=hit, throws=throw, emoji=emoji)
     return caption
 
+
 @register(outgoing=True, pattern="^.decide(?: |$)(.*)")
 @errors_handler
-async def decide(event): #yes/no
+async def decide(event):  # yes/no
     if not event.text[0].isalpha() and event.text[0] in ("."):
         if event.fwd_from:
             return
@@ -378,15 +383,17 @@ async def decide(event): #yes/no
         await event.client.send_message(event.chat_id, str(r["answer"]).upper(), reply_to=message_id, file=r["image"])
         await event.delete()
 
+
 @register(outgoing=True, pattern="^.insult$")
 @errors_handler
-async def insult(e): #insult from insult structure
+async def insult(e):  # insult from insult structure
     if not e.text[0].isalpha() and e.text[0] in ("."):
         await e.edit(random.choice(INSULT_STRINGS))
 
+
 @register(outgoing=True, pattern="^.vapor(?: |$)(.*)")
 @errors_handler
-async def vapor(vpr): #vapor
+async def vapor(vpr):  # vapor
     if not vpr.text[0].isalpha() and vpr.text[0] in ("."):
         reply_text = list()
         textx = await vpr.get_reply_message()
@@ -407,9 +414,10 @@ async def vapor(vpr): #vapor
                 reply_text.append(charac)
         await vpr.edit("".join(reply_text))
 
+
 @register(outgoing=True, pattern="^.str(?: |$)(.*)")
 @errors_handler
-async def stretch(stret): #stretch
+async def stretch(stret):  # stretch
     if not stret.text[0].isalpha() and stret.text[0] in ("."):
         textx = await stret.get_reply_message()
         message = stret.text
@@ -425,9 +433,10 @@ async def stretch(stret): #stretch
         reply_text = re.sub(r"([aeiouAEIOUａｅｉｏｕＡＥＩＯＵаеиоуюяыэё])", (r"\1" * count), message)
         await stret.edit(reply_text)
 
+
 @register(outgoing=True, pattern="^.zal(?: |$)(.*)")
 @errors_handler
-async def zal(zgfy): #chaotic
+async def zal(zgfy):  # chaotic
     if not zgfy.text[0].isalpha() and zgfy.text[0] in ("."):
         reply_text = list()
         textx = await zgfy.get_reply_message()
@@ -454,11 +463,13 @@ async def zal(zgfy): #chaotic
             reply_text.append(charac)
         await zgfy.edit("".join(reply_text))
 
+
 @register(outgoing=True, pattern="^.hi$")
 @errors_handler
-async def hoi(hello): #hi
+async def hoi(hello):  # hi
     if not hello.text[0].isalpha() and hello.text[0] in ("."):
         await hello.edit(random.choice(HELLOSTR))
+
 
 @register(outgoing=True, pattern="^.oof$")
 @errors_handler
@@ -468,6 +479,7 @@ async def Oof(e):
         for j in range(15):
             t = t[:-1] + "of"
             await e.edit(t)
+
 
 @register(outgoing=True, pattern="^.mock(?: |$)(.*)")
 @errors_handler
@@ -491,9 +503,10 @@ async def spongemocktext(mock):
                 reply_text.append(charac)
         await mock.edit("".join(reply_text))
 
+
 @register(outgoing=True, pattern="^.clap(?: |$)(.*)")
 @errors_handler
-async def claptext(memereview): #clap
+async def claptext(memereview):  # clap
     if not memereview.text[0].isalpha() and memereview.text[0] in ("."):
         textx = await memereview.get_reply_message()
         message = memereview.pattern_match.group(1)
@@ -508,6 +521,7 @@ async def claptext(memereview): #clap
         reply_text += message.replace(" ", " 👏 ")
         reply_text += " 👏"
         await memereview.edit(reply_text)
+
 
 @register(outgoing=True, pattern="^.bt$")
 @errors_handler
@@ -534,7 +548,7 @@ async def payf(event):
 
 @register(outgoing=True, pattern="^.lfy (.*)")
 @errors_handler
-async def let_me_google_that_for_you(lmgtfy_q): #img.gtfy
+async def let_me_google_that_for_you(lmgtfy_q):  # img.gtfy
     if not lmgtfy_q.text[0].isalpha() and lmgtfy_q.text[0] in ("."):
         textx = await lmgtfy_q.get_reply_message()
         qry = lmgtfy_q.pattern_match.group(1)
@@ -548,6 +562,7 @@ async def let_me_google_that_for_you(lmgtfy_q): #img.gtfy
         payload = {'format': 'json', 'url': lfy_url}
         r = requests.get('http://is.gd/create.php', params=payload)
         await lmgtfy_q.edit(f"[{query}]({r.json()['shorturl']})")
+
 
 @register(pattern=r".scam(?: |$)(.*)", outgoing=True)
 @errors_handler
@@ -582,6 +597,7 @@ async def scam(event):
         except BaseException:
             return
 
+
 @register(pattern=r".type(?: |$)(.*)", outgoing=True)
 @errors_handler
 async def typewriter(typew):
@@ -608,19 +624,20 @@ async def typewriter(typew):
             await typew.edit(old_text)
             await asyncio.sleep(sleep_time)
 
+
 @register(outgoing=True, pattern="^.gei$")
 @errors_handler
 async def isgei(gei):
     if not gei.text[0].isalpha() and gei.text[0] in ("."):
         if await gei.get_reply_message() and gei.is_group or gei.to_id:
             await gei.edit("`┈┈┈╭━━━━━╮┈┈┈┈┈\n"
-"┈┈┈┃┊┊┊┊┊┃┈┈┈┈┈\n"
-"┈┈┈┃┊┊╭━╮┻╮┈┈┈┈\n"
-"┈┈┈╱╲┊┃▋┃▋┃┈┈┈┈\n"
-"┈┈╭┻┊┊╰━┻━╮┈┈┈┈\n"
-"┈┈╰┳┊╭━━━┳╯┈┈┈┈\n"
-"┈┈┈┃┊┃╰━━┫┈NIGGA U GEY\n"
-"┈┈┈┈┈┈┏━┓┈┈┈┈┈┈`")
+                           "┈┈┈┃┊┊┊┊┊┃┈┈┈┈┈\n"
+                           "┈┈┈┃┊┊╭━╮┻╮┈┈┈┈\n"
+                           "┈┈┈╱╲┊┃▋┃▋┃┈┈┈┈\n"
+                           "┈┈╭┻┊┊╰━┻━╮┈┈┈┈\n"
+                           "┈┈╰┳┊╭━━━┳╯┈┈┈┈\n"
+                           "┈┈┈┃┊┃╰━━┫┈NIGGA U GEY\n"
+                           "┈┈┈┈┈┈┏━┓┈┈┈┈┈┈`")
 
 
 @register(outgoing=True, pattern="^.nou$")
@@ -629,14 +646,15 @@ async def isgei(gei):
     if not gei.text[0].isalpha() and gei.text[0] in ("."):
         if await gei.get_reply_message() and gei.is_group or gei.to_id:
             await gei.edit("`┈╭╮╭╮\n"
-"┈┃┃┃┃\n"
-"╭┻┗┻┗╮\n"
-"┃┈▋┈▋┃\n"
-"┃┈╭▋━╮━╮\n"
-"┃┈┈╭╰╯╰╯╮\n"
-"┫┈┈  NoU\n"
-"┃┈╰╰━━━━╯\n"
-"┗━━┻━┛`")
+                           "┈┃┃┃┃\n"
+                           "╭┻┗┻┗╮\n"
+                           "┃┈▋┈▋┃\n"
+                           "┃┈╭▋━╮━╮\n"
+                           "┃┈┈╭╰╯╰╯╮\n"
+                           "┫┈┈  NoU\n"
+                           "┃┈╰╰━━━━╯\n"
+                           "┗━━┻━┛`")
+
 
 @register(outgoing=True, pattern=r"^.caps(?: |$)([\s\S]*)")
 @errors_handler
@@ -655,6 +673,7 @@ async def to_upper(request):
         reply += message.upper()
         await request.edit(reply)
 
+
 @register(outgoing=True, pattern=r"^.small(?: |$)([\s\S]*)")
 @errors_handler
 async def to_lower(request):
@@ -671,7 +690,8 @@ async def to_lower(request):
         reply = ''
         reply += message.lower()
         await request.edit(reply)
-        
+
+
 @register(outgoing=True, pattern=r"^.noformat(?: |$)([\s\S]*)")
 @errors_handler
 async def noformat(request):
@@ -686,51 +706,51 @@ async def noformat(request):
             await request.edit("`Usage: .noformat <text>/<reply>`")
             return
         reply = ''
-        reply += '```'+message+'```'
+        reply += '```' + message + '```'
         await request.edit(reply)
 
 
 CMD_HELP.update({
     "memes":
-    ".vapor\
-\nUsage: Vaporize everything!\
-\n\n.str\
-\nUsage: Stretch it.\
-\n\n.zal\
-\nUsage: Invoke the feeling of chaos.\
-\n\n.oof\
-\nUsage: Ooooof\
-\n\n.caps <text>\
-\nUsage: Converts text to uppercase.\
-\n\n.small <text>\
-\nUsage: Converts text to uppercase.\
-\n\n.hi\
-\nUsage: Greet everyone!\
-\n\n.coinflip <heads/tails>\
-\nUsage: Flip a coin !!\
-\n\n.slap\
-\nUsage: reply to slap them with random objects !!\
-\n\n.mock\
-\nUsage: Do it and find the real fun.\
-\n\n.clap\
-\nUsage: Praise people!\
-\n\n.f <emoji/character>\
-\nUsage: Pay Respects.\
-\n\n.bt\
-\nUsage: Believe me, you will find this useful.\
-\n\n.noformat\
-\nUsage: Returns text without formatting.\
-\n\n.gei\
-\nUsage: Use this as a reply if your friend does something gei.\
-\n\n.nou\
-\nUsage: Return whatever someone said to themselfi.\
-\n\n.type\
-\nUsage: Just a small command to make your keyboard become a typewriter!\
-\n\n.lfy <query>\
-\nUsage: Let me Google that for you real quick !!\
-\n\n.decide [Optional: (yes, no, maybe)]\
-\nUsage: Make a quick decision.\
-\n\n.scam <action> <time>\
-\n[Available Actions: (typing, contact, game, location, voice, round, video, photo, document, cancel)]\
-\nUsage: Create fake chat actions, for fun. (Default action: typing)\
-\n\n\nThanks to 🅱️ottom🅱️ext🅱️ot (@NotAMemeBot) for some of these."})
+        ".vapor\
+    \nUsage: Vaporize everything!\
+    \n\n.str\
+    \nUsage: Stretch it.\
+    \n\n.zal\
+    \nUsage: Invoke the feeling of chaos.\
+    \n\n.oof\
+    \nUsage: Ooooof\
+    \n\n.caps <text>\
+    \nUsage: Converts text to uppercase.\
+    \n\n.small <text>\
+    \nUsage: Converts text to uppercase.\
+    \n\n.hi\
+    \nUsage: Greet everyone!\
+    \n\n.coinflip <heads/tails>\
+    \nUsage: Flip a coin !!\
+    \n\n.slap\
+    \nUsage: reply to slap them with random objects !!\
+    \n\n.mock\
+    \nUsage: Do it and find the real fun.\
+    \n\n.clap\
+    \nUsage: Praise people!\
+    \n\n.f <emoji/character>\
+    \nUsage: Pay Respects.\
+    \n\n.bt\
+    \nUsage: Believe me, you will find this useful.\
+    \n\n.noformat\
+    \nUsage: Returns text without formatting.\
+    \n\n.gei\
+    \nUsage: Use this as a reply if your friend does something gei.\
+    \n\n.nou\
+    \nUsage: Return whatever someone said to themselfi.\
+    \n\n.type\
+    \nUsage: Just a small command to make your keyboard become a typewriter!\
+    \n\n.lfy <query>\
+    \nUsage: Let me Google that for you real quick !!\
+    \n\n.decide [Optional: (yes, no, maybe)]\
+    \nUsage: Make a quick decision.\
+    \n\n.scam <action> <time>\
+    \n[Available Actions: (typing, contact, game, location, voice, round, video, photo, document, cancel)]\
+    \nUsage: Create fake chat actions, for fun. (Default action: typing)\
+    \n\n\nThanks to 🅱️ottom🅱️ext🅱️ot (@NotAMemeBot) for some of these."})

@@ -1,15 +1,17 @@
 import io
 import math
+import random
 import urllib.request
 from os import remove
+
 from PIL import Image
-import random
+from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.types import DocumentAttributeFilename, MessageMediaPhoto
+from telethon.tl.types import DocumentAttributeSticker
+from telethon.tl.types import InputStickerSetID
+
 from tg_userbot import bot, CMD_HELP
 from tg_userbot.events import register, errors_handler
-from telethon.tl.functions.messages import GetStickerSetRequest
-from telethon.tl.types import InputStickerSetID
-from telethon.tl.types import DocumentAttributeSticker
 
 KANGING_STR = [
     "Using Witchery to kang this sticker...",
@@ -25,7 +27,7 @@ KANGING_STR = [
 ]
 
 
-@register(outgoing=True, pattern="^.kang")
+@register(outgoing=True, pattern="^\.kang")
 @errors_handler
 async def kang(args):
     if not args.text[0].isalpha() and args.text[0] in ("."):
@@ -261,7 +263,7 @@ async def resize_photo(photo):
     return image
 
 
-@register(outgoing=True, pattern="^.stkrinfo$")
+@register(outgoing=True, pattern="^\.stkrinfo$")
 @errors_handler
 async def get_pack_info(event):
     if not event.text[0].isalpha() and event.text[0] in ("."):
@@ -297,25 +299,25 @@ async def get_pack_info(event):
                 pack_emojis.append(document_sticker.emoticon)
 
         OUTPUT = f"**Sticker Title:** `{get_stickerset.set.title}\n`" \
-            f"**Sticker Short Name:** `{get_stickerset.set.short_name}`\n" \
-            f"**Official:** `{get_stickerset.set.official}`\n" \
-            f"**Archived:** `{get_stickerset.set.archived}`\n" \
-            f"**Stickers In Pack:** `{len(get_stickerset.packs)}`\n" \
-            f"**Emojis In Pack:**\n{' '.join(pack_emojis)}"
+                 f"**Sticker Short Name:** `{get_stickerset.set.short_name}`\n" \
+                 f"**Official:** `{get_stickerset.set.official}`\n" \
+                 f"**Archived:** `{get_stickerset.set.archived}`\n" \
+                 f"**Stickers In Pack:** `{len(get_stickerset.packs)}`\n" \
+                 f"**Emojis In Pack:**\n{' '.join(pack_emojis)}"
 
         await event.edit(OUTPUT)
 
 
 CMD_HELP.update({
     "stickers":
-    ".kang\
-\nUsage: Reply .kang to a sticker or an image to kang it to your userbot pack.\
-\n\n.kang [emoji('s)]\
-\nUsage: Works just like .kang but uses the emoji('s) you picked.\
-\n\n.kang [number]\
-\nUsage: Kang's the sticker/image to the specified pack but uses 🤔 as emoji.\
-\n\n.kang [emoji('s)] [number]\
-\nUsage: Kang's the sticker/image to the specified pack and uses the emoji('s) you picked.\
-\n\n.stkrinfo\
-\nUsage: Gets info about the sticker pack."
+        "`.kang`\
+    \nUsage: Reply .kang to a sticker or an image to kang it to your userbot pack.\
+    \n\n`.kang [emoji('s)]`\
+    \nUsage: Works just like .kang but uses the emoji('s) you picked.\
+    \n\n`.kang [number]`\
+    \nUsage: Kang's the sticker/image to the specified pack but uses 🤔 as emoji.\
+    \n\n`.kang [emoji('s)] [number]`\
+    \nUsage: Kang's the sticker/image to the specified pack and uses the emoji('s) you picked.\
+    \n\n`.stkrinfo`\
+    \nUsage: Gets info about the sticker pack."
 })
