@@ -67,9 +67,9 @@ def pinger(address):
         newstr = newstra[1].split(' ')  # redundant split, but to try and not break windows ping
     ping_time = float(newstr[0])
     if os.name == 'nt' and under:
-        return "Ping speed is <" + str(ping_time) + " ms"
+        return "<" + str(ping_time) + " ms"
     else:
-        return "Ping speed is: " + str(ping_time) + " ms"
+        return str(ping_time) + " ms"
 
 @register(outgoing=True, pattern="^\.dc$")
 async def neardc(event):
@@ -82,7 +82,7 @@ async def neardc(event):
 @register(outgoing=True, pattern="^.ping$")
 async def pingme(pong):
     if not pong.text[0].isalpha() and pong.text[0] in ("."):
-        await pong.edit(pinger("1.0.0.1"))
+        await pong.edit("Ping speed is: " + pinger("1.0.0.1"))
 
 @register(outgoing=True, pattern="^\.cping(?: |$)?")
 async def cping(args):
@@ -93,7 +93,7 @@ async def cping(args):
         else:
             dns = commandParser[1]
             try:
-                duration = check_output("ping -c 1 " + dns + " | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
+                duration = pinger(dns)
             except:
                 await args.edit("`There was a problem parsing the IP/Hostname`")
                 return
