@@ -14,7 +14,6 @@ from time import gmtime, strftime
 from traceback import format_exc
 
 from telethon import events
-from telethon.tl.types import ChannelParticipantsAdmins
 
 from tg_userbot import bot, BOTLOG, BOTLOG_CHATID, LOGS
 
@@ -118,7 +117,7 @@ def register(**args):
                                                   stderr=asyncsub.PIPE)
                     stdout, stderr = await process.communicate()
                     result = str(stdout.decode().strip()) \
-                        + str(stderr.decode().strip())
+                             + str(stderr.decode().strip())
 
                     ftext += result
 

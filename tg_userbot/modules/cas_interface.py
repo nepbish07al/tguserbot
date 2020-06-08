@@ -33,7 +33,7 @@ async def get_user(event):  # kanged get user
     return replied_user
 
 
-@register(pattern="^\.cascheck(?: |$)(.*)", outgoing=True)
+@register(pattern="^.cascheck(?: |$)(.*)", outgoing=True)
 async def caschecker(event):
     if not event.text[0].isalpha() and event.text[0] in ("."):
         if event.fwd_from:
@@ -73,7 +73,7 @@ async def caschecker(event):
         return
 
 
-@register(pattern="^\.groupcheck$", outgoing=True)
+@register(pattern="^.groupcheck$", outgoing=True)
 async def groupchecker(cas):
     if not cas.text[0].isalpha() and cas.text[0] in ("."):
         text = ""
