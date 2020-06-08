@@ -1,10 +1,10 @@
 # tguserbot Owner's Manual
 
-# Preface
+## Preface
 
 This document contains instructions in how to use every command in every module provided in the vanilla distribution of this bot. This manual does not include any possible clones that can appear of this bot.
 
-# Admin
+## Admin
 
 .promote: while replying to someone's message, promote that user.
 
@@ -22,7 +22,7 @@ This document contains instructions in how to use every command in every module 
 
 .kick: while replying to someone's message, kick that user
 
-# Chat
+## Chat
 
 .chatid: gets the current chat id
 
@@ -30,21 +30,21 @@ This document contains instructions in how to use every command in every module 
 
 .log: forwards the replied message to the log channel/group
 
-# Deletions
+## Deletions
 
 .purge: purges all message starting from the replied point
 
 .purgeme "x": deletes the latest x messages by you
 
-# Direct Links
+## Direct Links
 
 .downlink "url": replying to a link or with a URL as argument, generate a shorter link.
 
-# Help
+## Help
 
 .help: shows help for all modules
 
-# Memes
+## Memes
 
 .vapor: make everything in style of vaporwave
 
@@ -70,13 +70,13 @@ This document contains instructions in how to use every command in every module 
 
 .scam: creates fake actions, like writting and such
 
-# QR Code
+## QR Code
 
 .decode: decodes a barcode or qrcode
 
 .makeqr: makes a QR Code with the given content
 
-# Scrappers
+## Scrappers
 
 .currency "amount" "from" "to": converts multiple currencies for you
 
@@ -84,13 +84,13 @@ This document contains instructions in how to use every command in every module 
 
 .trt: translates text to the default language set in config files
 
-# Spam
+## Spam
 
 .tspam "text": spam letter by letter
 
 .spam "count" "text": floods the chat with your message
 
-# Systools
+## Systools
 
 .sysd: Shows system information, requires neofetch
 
@@ -98,17 +98,17 @@ This document contains instructions in how to use every command in every module 
 
 .shutdown: shuts down the bot
 
-# Terminal
+## Terminal
 
 .exec: Execute small python scripts
 
 .term "bash_command": run Bash terminal commands directly in a supported host
 
-# User info
+## User info
 
 .info "username" or as a reply: gets info about the specific user
 
-# Webtools
+## Webtools
 
 .speedtest: does a speedtest
 
