@@ -118,8 +118,7 @@ async def statuschecker(msg):  # .status, .alive, you name it
                 "git",
                 "describe",
                 "--all",
-                "--long",
-                stdout=asyncPIPE)
+                "--long")
             stdout, stderr = await ver.communicate()
             verout = str(stdout.decode().strip()) \
                      + str(stderr.decode().strip())
