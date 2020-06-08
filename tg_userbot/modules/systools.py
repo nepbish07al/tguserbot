@@ -28,6 +28,36 @@ async def sysdetails(sysd):  # sysd command, requires neofetch
         except FileNotFoundError:
             await sysd.edit("`Install neofetch first !!`")
 
+def pinger(address):
+    if os.name == "nt":
+        output = check_output("ping -n 1 " + address + " | findstr time*", shell=True).decode()
+        outS = output.splitlines()
+        out = outS[0]
+    else:
+        # out = check_output("ping -c 1 1.0.0.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
+        out = check_output("ping -c 1 " + address + " | grep time=", shell=True).decode()
+    # duration = out
+    splitOut = out.split(' ')
+    under = False
+    stringtocut = ""
+    for line in splitOut:
+        if (line.startswith('time=') or line.startswith('time<')):
+            stringtocut = line
+            break
+    newstra = stringtocut.split('=')
+    if len(newstra) == 1:
+        under = True
+        newstra = stringtocut.split('<')
+    newstr = ""
+    if os.name == 'nt':
+        newstr = newstra[1].split('ms')
+    else:
+        newstr = newstra[1].split(' ')  # redundant split, but to try and not break windows ping
+    ping_time = float(newstr[0])
+    if os.name == 'nt' and under:
+        return "<" + str(ping_time) + " ms"
+    else:
+        return str(ping_time) + " ms"
 
 @register(outgoing=True, pattern="^\.botver$")
 async def bot_ver(event):
@@ -77,7 +107,7 @@ async def statuschecker(msg):  # .status, .alive, you name it
     if not msg.text[0].isalpha() and msg.text[0] in ("."):
         gitver = git.vercheck()
         casver = cas.vercheck()
-        rtt = check_output("ping -c 1 1.1.1.1 | grep -oP '.*time=\K(\d*\.\d*).*'", shell=True).decode()
+        rtt = pinger("1.0.0.1")
         automationData = "Disabled"
         commit = "N/A"
         if which("git") is not None:
