@@ -7,6 +7,8 @@ from shutil import which
 
 from telethon import version
 
+import os
+
 import tg_userbot.modules.libs.cas_api as cas
 import tg_userbot.modules.libs.git_api as git
 from tg_userbot import CMD_HELP, ALIVE_NAME, BOTLOG, BOTLOG_CHATID, VERSION, AUTOMATION_ENABLED
