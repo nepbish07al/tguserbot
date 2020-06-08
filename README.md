@@ -38,14 +38,14 @@ If the volume of issues or general traffic to the repo justifies it, a Telegram 
 
 In advance, thank you for your help.
 
-## Special Thanks to my contributors and friends:
+## Special Thanks to my contributors and friends
 
- - [corsicanu](https://github.com/corsicanu)
- - [prototype74](https://github.com/prototype74)
- - [EBY](https://t.me/a52016benutzer)
- - [Soul Reaper](https://github.com/soulr344)
- - [Hitalo](https://github.com/HitaloSama)
- - [SnowFuhrer](https://github.com/SnowFuhrer)
+- [corsicanu](https://github.com/corsicanu)
+- [prototype74](https://github.com/prototype74)
+- [EBY](https://t.me/a52016benutzer)
+- [Soul Reaper](https://github.com/soulr344)
+- [Hitalo](https://github.com/HitaloSama)
+- [SnowFuhrer](https://github.com/SnowFuhrer)
 
 ## Licensing
 
