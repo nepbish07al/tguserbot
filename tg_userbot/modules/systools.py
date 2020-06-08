@@ -19,7 +19,7 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 async def sysdetails(sysd):  # sysd command, requires neofetch
     if not sysd.text[0].isalpha() and sysd.text[0] in ("."):
         #try:
-        neo = "neofetch --stdout"
+        neo = "/usr/bin/neofetch --stdout"
         fetch = await asyncrunapp(neo, stdout=asyncPIPE, stderr=None)
         stdout = await fetch.communicate()
         result = str(stdout.decode().strip())
