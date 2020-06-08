@@ -1,4 +1,5 @@
 import os
+from asyncio import create_subprocess_shell as asyncrunapp
 from asyncio import create_subprocess_exec as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 from platform import python_version, uname
@@ -117,7 +118,10 @@ async def statuschecker(msg):  # .status, .alive, you name it
                 "git",
                 "describe",
                 "--all",
-                "--long")
+                "--long",
+                stdout=asyncPIPE,
+                stderr=asyncPIPE,
+            )
             stdout, stderr = await ver.communicate()
             verout = str(stdout.decode().strip()) \
                      + str(stderr.decode().strip())
