@@ -27,7 +27,7 @@ UNBAN_RIGHTS = ChatBannedRights(until_date=None, send_messages=None, send_media=
 KICK_RIGHTS = ChatBannedRights(until_date=None, view_messages=True)
 
 
-@register(outgoing=True, pattern="^.setgrouppic$")
+@register(outgoing=True, pattern="^\.setgrouppic$")
 async def set_group_photo(gpic):  # sets new group "profile" picture
     if not gpic.text[0].isalpha() and gpic.text[0] in ("."):
         replymsg = await gpic.get_reply_message()
@@ -55,7 +55,7 @@ async def set_group_photo(gpic):  # sets new group "profile" picture
                 await gpic.edit(PP_ERROR)
 
 
-@register(outgoing=True, pattern="^.promote(?: |$)(.*)")
+@register(outgoing=True, pattern="^\.promote(?: |$)(.*)")
 async def promote(promt):
     if promt.text[0].isalpha() or promt.text[0] not in ("."):
         return
@@ -134,7 +134,7 @@ async def promote(promt):
                            f"CHAT: {promt.chat.title}(`{promt.chat_id}`)")
 
 
-@register(outgoing=True, pattern="^.demote(?: |$)(.*)")
+@register(outgoing=True, pattern="^\.demote(?: |$)(.*)")
 async def demote(dmod):
     if dmod.text[0].isalpha() or dmod.text[0] not in ("."):
         return
@@ -201,7 +201,7 @@ async def demote(dmod):
                            f"CHAT: {dmod.chat.title}(`{dmod.chat_id}`)")
 
 
-@register(outgoing=True, pattern="^.ban(?: |$)(.*)")
+@register(outgoing=True, pattern="^\.ban(?: |$)(.*)")
 async def ban(bon):  # bans tagged person
     if not bon.text[0].isalpha() and bon.text[0] in ("."):
         chat = await bon.get_chat()  # sanity check, you know the drill already
@@ -236,7 +236,7 @@ async def ban(bon):  # bans tagged person
                                f"CHAT: {bon.chat.title}(`{bon.chat_id}`)")
 
 
-@register(outgoing=True, pattern="^.unban(?: |$)(.*)")
+@register(outgoing=True, pattern="^\.unban(?: |$)(.*)")
 async def nothanos(unbon):  # unbans tagged person
     if not unbon.text[0].isalpha() and unbon.text[0] in ("."):
         chat = await unbon.get_chat()
@@ -264,7 +264,7 @@ async def nothanos(unbon):  # unbans tagged person
             await unbon.edit("`Shit hit the fan! Ban failed!`")
 
 
-@register(outgoing=True, pattern="^.delusers(?: |$)(.*)")
+@register(outgoing=True, pattern="^\.delusers(?: |$)(.*)")
 async def rm_deletedacc(show):  # lists/deletes deleted accounts
     if not show.text[0].isalpha() and show.text[0] in ("."):
         con = show.pattern_match.group(1)
@@ -316,7 +316,7 @@ async def rm_deletedacc(show):  # lists/deletes deleted accounts
                                f"Cleaned **{del_u}** deleted account(s) !!")
 
 
-@register(outgoing=True, pattern="^.adminlist$")
+@register(outgoing=True, pattern="^\.adminlist$")
 async def get_admin(show):  # lists all chat admins
     if not show.text[0].isalpha() and show.text[0] in ("."):
         if not show.is_group:
@@ -339,7 +339,7 @@ async def get_admin(show):  # lists all chat admins
         await show.edit(mentions, parse_mode="html")
 
 
-@register(outgoing=True, pattern="^.pin(?: |$)(.*)")
+@register(outgoing=True, pattern="^\.pin(?: |$)(.*)")
 async def pin(msg):  # pins message
     if not msg.text[0].isalpha() and msg.text[0] in ("."):
         chat = await msg.get_chat()
@@ -371,7 +371,7 @@ async def pin(msg):  # pins message
                                f"LOUD: {not is_silent}")
 
 
-@register(outgoing=True, pattern="^.kick(?: |$)(.*)")
+@register(outgoing=True, pattern="^\.kick(?: |$)(.*)")
 async def kick(usr):  # kicks person
     if not usr.text[0].isalpha() and usr.text[0] in ("."):
         chat = await usr.get_chat()
@@ -400,7 +400,7 @@ async def kick(usr):  # kicks person
                                f"CHAT: {usr.chat.title}(`{usr.chat_id}`)\n")
 
 
-@register(outgoing=True, pattern="^.userslist ?(.*)")
+@register(outgoing=True, pattern="^\.userslist ?(.*)")
 async def get_users(show):  # lists all users (warning: spam)
     if not show.text[0].isalpha() and show.text[0] in ("."):
         if not show.is_group:

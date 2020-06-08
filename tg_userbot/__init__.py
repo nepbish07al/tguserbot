@@ -3,7 +3,9 @@ from distutils.util import strtobool as sb
 from logging import basicConfig, getLogger, INFO, DEBUG
 from sys import version_info
 
+import pylast
 from dotenv import load_dotenv
+from requests import get
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 
