@@ -20,6 +20,7 @@ async def sysdetails(sysd):  # sysd command, requires neofetch
     if not sysd.text[0].isalpha() and sysd.text[0] in ("."):
         #try:
         neo = "neofetch --stdout"
+        print(neo)
         fetch = await asyncrunapp(neo, stdout=asyncPIPE, stderr=asyncPIPE)
         stdout, stderr = await fetch.communicate()
         result = str(stdout.decode().strip()) + str(stderr.decode().strip())
