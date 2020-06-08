@@ -1,8 +1,9 @@
-import io
+from telethon.tl.functions.users import GetFullUserRequest
+
 from tg_userbot import bot, CMD_HELP, GBAN_BOT, GBANS
 from tg_userbot.events import register
 from tg_userbot.modules.libs.get_id import get_id
-from telethon.tl.functions.users import GetFullUserRequest
+
 
 @register(outgoing=True, pattern=r"^.gban(?: |$)([\s\S]*)")
 async def gban(request):
@@ -35,7 +36,7 @@ async def gban(request):
             async with bot.conversation(GBAN_BOT) as conv:
                 await conv.send_message(gbantext)
                 x = await conv.get_response()
-                response = x.text.replace("**","").replace("`","").replace("tg://user?id=","")
+                response = x.text.replace("**", "").replace("`", "").replace("tg://user?id=", "")
                 await request.edit("```"+response+"```")
         else:
             await request.edit("`You haven't enabled GBANS!`")
@@ -66,7 +67,7 @@ async def ungban(request):
             async with bot.conversation(GBAN_BOT) as conv:
                 await conv.send_message(gbantext)
                 x = await conv.get_response()
-                response = x.text.replace("**","").replace("`","").replace("tg://user?id=","")
+                response = x.text.replace("**", "").replace("`", "").replace("tg://user?id=", "")
                 await request.edit("```"+response+"```")
         else:
             await request.edit("`You haven't enabled GBANS!`")
@@ -103,10 +104,11 @@ async def gkick(request):
             async with bot.conversation(GBAN_BOT) as conv:
                 await conv.send_message(gbantext)
                 x = await conv.get_response()
-                response = x.text.replace("**","").replace("`","").replace("tg://user?id=","")
+                response = x.text.replace("**", "").replace("`", "").replace("tg://user?id=", "")
                 await request.edit("```"+response+"```")
         else:
             await request.edit("`You haven't enabled GBANS!`")
+
 
 CMD_HELP.update({
     'gbans':
