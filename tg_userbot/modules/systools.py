@@ -19,10 +19,11 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 async def sysdetails(sysd):  # sysd command, requires neofetch
     if not sysd.text[0].isalpha() and sysd.text[0] in ("."):
         try:
-            neo = "/usr/bin/neofetch --stdout"
-            fetch = await asyncrunapp(neo, stdout=asyncPIPE, stderr=asyncPIPE)
-            stdout, stderr = await fetch.communicate()
-            result = str(stdout.decode().strip()) + str(stderr.decode().strip())
+            #neo = "neofetch --stdout"
+            #fetch = await asyncrunapp(neo, stdout=asyncPIPE, stderr=asyncPIPE)
+            #stdout, stderr = await fetch.communicate()
+            #result = str(stdout.decode().strip()) + str(stderr.decode().strip())
+            result = check_output("neofetch --stdout", shell=True).decode()
             await sysd.edit("`" + result + "`")
         except FileNotFoundError:
             await sysd.edit("`Install neofetch first !!`")
