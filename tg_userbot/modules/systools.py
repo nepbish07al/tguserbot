@@ -120,7 +120,7 @@ async def statuschecker(msg):  # .status, .alive, you name it
                 "--all",
                 "--long",
                 stdout=asyncPIPE,
-                stderr=asyncPIPE
+                stderr=asyncPIPE,
             )
             stdout, stderr = await ver.communicate()
             verout = str(stdout.decode().strip()) \
