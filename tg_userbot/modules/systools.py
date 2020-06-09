@@ -1,12 +1,13 @@
-import os
 from asyncio import create_subprocess_shell as asyncrunapp
 from asyncio import create_subprocess_exec as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 from platform import python_version, uname
-from shutil import which
 from subprocess import check_output
+from shutil import which
 
 from telethon import version
+
+import os
 
 import tg_userbot.modules.libs.cas_api as cas
 import tg_userbot.modules.libs.git_api as git
@@ -20,15 +21,14 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 async def sysdetails(sysd):  # sysd command, requires neofetch
     if not sysd.text[0].isalpha() and sysd.text[0] in ("."):
         try:
-            # neo = "neofetch --stdout"
-            # fetch = await asyncrunapp(neo, stdout=asyncPIPE, stderr=asyncPIPE)
-            # stdout, stderr = await fetch.communicate()
-            # result = str(stdout.decode().strip()) + str(stderr.decode().strip())
+            #neo = "neofetch --stdout"
+            #fetch = await asyncrunapp(neo, stdout=asyncPIPE, stderr=asyncPIPE)
+            #stdout, stderr = await fetch.communicate()
+            #result = str(stdout.decode().strip()) + str(stderr.decode().strip())
             result = check_output("neofetch --stdout", shell=True).decode()
             await sysd.edit("`" + result + "`")
         except FileNotFoundError:
             await sysd.edit("`Install neofetch first !!`")
-
 
 def pinger(address):
     if os.name == "nt":
@@ -61,7 +61,6 @@ def pinger(address):
     else:
         return str(ping_time) + " ms"
 
-
 @register(outgoing=True, pattern="^\.botver$")
 async def bot_ver(event):
     """ For .botver command, get the bot version. """
@@ -78,8 +77,8 @@ async def bot_ver(event):
             )
             stdout, stderr = await ver.communicate()
             verout = str(stdout.decode().strip()) \
-                     + str(stderr.decode().strip())
-
+                + str(stderr.decode().strip())
+ 
             rev = await asyncrunapp(
                 "git",
                 "rev-list",
@@ -90,8 +89,8 @@ async def bot_ver(event):
             )
             stdout, stderr = await rev.communicate()
             revout = str(stdout.decode().strip()) \
-                     + str(stderr.decode().strip())
-
+                + str(stderr.decode().strip())
+ 
             await event.edit("`UserBot Version: "
                              f"{verout}"
                              "` \n"
@@ -124,7 +123,7 @@ async def statuschecker(msg):  # .status, .alive, you name it
             )
             stdout, stderr = await ver.communicate()
             verout = str(stdout.decode().strip()) \
-                     + str(stderr.decode().strip())
+                + str(stderr.decode().strip())
             verdiv = verout.split("-")
             commit = verdiv[2]
         if AUTOMATION_ENABLED:
