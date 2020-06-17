@@ -49,7 +49,7 @@ async def text_to_speech(query):  # text to speech
             await query.edit("`Give a text or reply to a message for Text-to-Speech!`")
             return
         try:
-            gTTS(message, LANG)
+            gTTS(message, lang=LANG)
         except AssertionError:
             await query.edit('The text is empty.\nNothing left to speak after pre-precessing, tokenizing and cleaning.')
             return
@@ -59,13 +59,13 @@ async def text_to_speech(query):  # text to speech
         except RuntimeError:
             await query.edit('Error loading the languages dictionary.')
             return
-        tts = gTTS(message, LANG)
+        tts = gTTS(message, lang=LANG)
         tts.save("k.mp3")
         with open("k.mp3", "rb") as audio:
             linelist = list(audio)
             linecount = len(linelist)
         if linecount == 1:
-            tts = gTTS(message, LANG)
+            tts = gTTS(message, lang=LANG)
             tts.save("k.mp3")
         with open("k.mp3", "r"):
             await query.client.send_file(query.chat_id, "k.mp3", voice_note=True)
