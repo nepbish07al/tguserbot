@@ -2,10 +2,10 @@ import os
 
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
-from telethon.tl.types import MessageEntityMentionName
+from telethon.tl.types import MessageEntityMentionName, User, Chat, Channel
 from telethon.utils import get_input_location
 
-from tg_userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, HOMIES, GIRLFRIEND, OWNER_ID
+from tg_userbot import bot, CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, HOMIES, GIRLFRIEND, OWNER_ID
 from tg_userbot.events import register
 
 
@@ -105,7 +105,46 @@ async def fetch_info(replied_user, event):
     return caption
 
 
+@register(outgoing=True, pattern="^\.stats$")
+async def count(event):
+    """ For .count command, get profile stats. """
+    u = 0
+    g = 0
+    c = 0
+    bc = 0
+    b = 0
+    result = ""
+    await event.edit("`Processing..`")
+    dialogs = await bot.get_dialogs(limit=None, ignore_migrated=True)
+    for d in dialogs:
+        currrent_entity = d.entity
+        if isinstance(currrent_entity, User):
+            if currrent_entity.bot:
+                b += 1
+            else:
+                u += 1
+        elif isinstance(currrent_entity, Chat):
+            g += 1
+        elif isinstance(currrent_entity, Channel):
+            if currrent_entity.broadcast:
+                bc += 1
+            else:
+                c += 1
+        else:
+            print(d)
+
+    result += f"`Users:`\t**{u}**\n"
+    result += f"`Groups:`\t**{g}**\n"
+    result += f"`Super Groups:`\t**{c}**\n"
+    result += f"`Channels:`\t**{bc}**\n"
+    result += f"`Bots:`\t**{b}**"
+
+    await event.edit(result)
+
+
 CMD_HELP.update({
     "user_info":
         "`.info <username>` or as a reply to someones text\
-        \nUsage: Gets info of an user."})
+        \nUsage: Gets info of an user.\
+        \n\n.stats\
+        \nUsage: Gets your stats."})

@@ -59,7 +59,7 @@ async def log(log_text):  # forwards stuff to log channel/group
 @register(outgoing=True, pattern="^\.count(?: |$)(.*)")
 async def countmessages(event):
     """ For .count, counts the total amount of messages from a certain user has sent in a chat. """
-    if not log_text.text[0].isalpha() and log_text.text[0] in ("."):
+    if not event.text[0].isalpha() and event.text[0] in ("."):
         if not hasattr(event.message.to_id, "channel_id"):
             await event.edit("`Nope, it works in a channel or group only.`")
             return
@@ -132,7 +132,7 @@ async def countmessages(event):
 @register(outgoing=True, pattern="^\.topusers(?: |$)(.*)")
 async def topusers(event):
     """ For .topusers, lists the top active members in a chat. """
-    if not log_text.text[0].isalpha() and log_text.text[0] in ("."):
+    if not event.text[0].isalpha() and event.text[0] in ("."):
         arg = event.pattern_match.group(1)
         chat = None
 

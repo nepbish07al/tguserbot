@@ -39,7 +39,7 @@ if ENV:
     HOMIES = []
     GIRLFRIEND = None
     GBANS = os.environ.get("GBANS", False)
-    GBAN_BOT = os.environ.get("GBAN_BOT", None)
+    GBAN_BOTS = os.environ.get("GBAN_BOTS", None)
     LANG = os.environ.get("LANG", 'en')
     AUTOMATION_ENABLED = False
     AUTOMATION_SENDERS = []
@@ -78,7 +78,7 @@ else:
     GIRLFRIEND = Config.GIRLFRIEND
     OWNER_ID = Config.OWNER_ID
     GBANS = Config.GBANS
-    GBAN_BOT = Config.GBAN_BOT
+    GBAN_BOTS = Config.GBAN_BOTS
     AUTOMATION_ENABLED = Config.AUTOMATION_ENABLED
     AUTOMATION_SENDERS = Config.AUTOMATION_SENDERS
     AUTOMATION_COMMANDS = Config.AUTOMATION_COMMANDS
