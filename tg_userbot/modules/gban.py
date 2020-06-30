@@ -2,7 +2,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 
 from tg_userbot import bot, CMD_HELP, GBAN_BOTS, GBANS
 from tg_userbot.events import register
-from tg_userbot.modules.libs.get_id import get_id
+from tg_userbot.modules.user_info import get_user
 
 
 @register(outgoing=True, pattern=r"^.gban(?: |$)([\s\S]*)")
@@ -14,26 +14,21 @@ async def gban(request):
             user = ''
             reason = ''
             response = ''
-            if request.reply_to_msg_id:
-                previous_message = await request.get_reply_message()
-                user = await request.client(GetFullUserRequest(previous_message.from_id))
-                user = str(user.user.id)
-                reason = message
-                gbantext = '/gban ' + user + ' ' + reason
+            user = await get_user(request)
+            if str(type(user)) != '<class \'telethon.tl.types.UserFull\'>':
+                await request.edit("`Lemme gban you for not giving a proper username!`")
+                return
+            user = str(user.user.id)
+            if len(args) >= 2 and not request.reply_to_msg_id:
+                reason = str(message.split(' ', 1)[1])
+            elif len(args) == 1 and not request.reply_to_msg_id:
+                reason = ""
+            elif len(args) == 0 and not request.reply_to_msg_id:
+                await request.edit("`Lemme gban you for not giving a proper username!`")
+                return
             else:
-                user = str(message.split(' ', 1)[0])
-                user = await get_id(request, user)
-                if str(type(user)) != '<class \'telethon.tl.types.UserFull\'>':
-                    await request.edit("`Lemme gban you for not giving a proper username!`")
-                    return
-                user = str(user.user.id)
-                if len(args) == 2:
-                    reason = str(message.split(' ', 1)[1])
-                if len(args) == 1:
-                    reason = ""
-                if len(args) == 0:
-                    await request.edit("`Lemme gban you for not giving a proper username!`")
-                gbantext = '/gban ' + user + ' ' + reason
+                reason = message
+            gbantext = '/gban ' + user + ' ' + reason
             for GBAN_BOT in GBAN_BOTS:
                 async with bot.conversation(GBAN_BOT) as conv:
                     await conv.send_message(gbantext)
@@ -42,7 +37,7 @@ async def gban(request):
                         pass
                     else:
                         x = GBAN_BOT + '  didn\'t respond'
-                    response += GBAN_BOT + ': ' + x.text.replace("**", "").replace("`", "").replace("tg://user?id=", "") + '\n\n'
+                response += GBAN_BOT + ': ' + x.text.replace("**", "").replace("`", "").replace("tg://user?id=", "") + '\n\n'
             await request.edit("```" + response + "```")
         else:
             await request.edit("`You haven't enabled GBANS!`")
@@ -55,22 +50,23 @@ async def ungban(request):
             message = request.pattern_match.group(1)
             args = message.split()
             user = ''
+            reason = message
             response = ''
-            if request.reply_to_msg_id:
-                previous_message = await request.get_reply_message()
-                user = await request.client(GetFullUserRequest(previous_message.from_id))
-                user = str(user.user.id)
-                gbantext = '/ungban ' + user
+            user = await get_user(request)
+            if str(type(user)) != '<class \'telethon.tl.types.UserFull\'>':
+                await request.edit("`Lemme gban you for not giving a proper username!`")
+                return
+            user = str(user.user.id)
+            if len(args) >= 2 and not request.reply_to_msg_id:
+                reason = str(message.split(' ', 1)[1])
+            elif len(args) == 1 and not request.reply_to_msg_id:
+                reason = ""
+            elif len(args) == 0 and not request.reply_to_msg_id:
+                await request.edit("`Lemme gban you for not giving a proper username!`")
+                return
             else:
-                user = str(message.split(' ', 1)[0])
-                user = await get_id(request, user)
-                if str(type(user)) != '<class \'telethon.tl.types.UserFull\'>':
-                    await request.edit("`Lemme gban you instead for not giving a proper username!`")
-                    return
-                user = str(user.user.id)
-                if len(args) == 0:
-                    await request.edit("`Lemme gban you instead for not giving a proper username!`")
-                gbantext = '/ungban ' + user
+                reason = message 
+            gbantext = '/ungban ' + user + ' ' + reason
             for GBAN_BOT in GBAN_BOTS:
                 async with bot.conversation(GBAN_BOT) as conv:
                     await conv.send_message(gbantext)
@@ -79,11 +75,10 @@ async def ungban(request):
                         pass
                     else:
                         x = GBAN_BOT + '  didn\'t respond'
-                    response += GBAN_BOT + ': ' + x.text.replace("**", "").replace("`", "").replace("tg://user?id=", "") + '\n\n'
+                response += GBAN_BOT + ': ' + x.text.replace("**", "").replace("`", "").replace("tg://user?id=", "") + '\n\n'
             await request.edit("```" + response + "```")
         else:
             await request.edit("`You haven't enabled GBANS!`")
-
 
 @register(outgoing=True, pattern=r"^.gkick(?: |$)([\s\S]*)")
 async def gkick(request):
@@ -94,26 +89,21 @@ async def gkick(request):
             user = ''
             reason = ''
             response = ''
-            if request.reply_to_msg_id:
-                previous_message = await request.get_reply_message()
-                user = await request.client(GetFullUserRequest(previous_message.from_id))
-                user = str(user.user.id)
-                reason = message
-                gbantext = '/gkick ' + user + ' ' + reason
+            user = await get_user(request)
+            if str(type(user)) != '<class \'telethon.tl.types.UserFull\'>':
+                await request.edit("`Lemme gban you for not giving a proper username!`")
+                return
+            user = str(user.user.id)
+            if len(args) >= 2 and not request.reply_to_msg_id:
+                reason = str(message.split(' ', 1)[1])
+            elif len(args) == 1 and not request.reply_to_msg_id:
+                reason = ""
+            elif len(args) == 0 and not request.reply_to_msg_id:
+                await request.edit("`Lemme gban you for not giving a proper username!`")
+                return
             else:
-                user = str(message.split(' ', 1)[0])
-                user = await get_id(request, user)
-                if str(type(user)) != '<class \'telethon.tl.types.UserFull\'>':
-                    await request.edit("`Dafaq am i gonna gkick you?!`")
-                    return
-                user = str(user.user.id)
-                if len(args) == 2:
-                    reason = str(message.split(' ', 1)[1])
-                if len(args) == 1:
-                    reason = ""
-                if len(args) == 0:
-                    await request.edit("`Dafaq am i gonna gkick you?!`")
-                gbantext = '/gkick ' + user + ' ' + reason
+                reason = message
+            gbantext = '/gkick ' + user + ' ' + reason
             for GBAN_BOT in GBAN_BOTS:
                 async with bot.conversation(GBAN_BOT) as conv:
                     await conv.send_message(gbantext)
@@ -122,11 +112,10 @@ async def gkick(request):
                         pass
                     else:
                         x = GBAN_BOT + '  didn\'t respond'
-                    response += GBAN_BOT + ': ' + x.text.replace("**", "").replace("`", "").replace("tg://user?id=", "") + '\n\n'
+                response += GBAN_BOT + ': ' + x.text.replace("**", "").replace("`", "").replace("tg://user?id=", "") + '\n\n'
             await request.edit("```" + response + "```")
         else:
             await request.edit("`You haven't enabled GBANS!`")
-
 
 CMD_HELP.update({
     'gbans':

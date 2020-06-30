@@ -115,6 +115,13 @@ async def upstream(ups):
         execle(sys.executable, *args, environ)
         return
 
+@register(outgoing=True, pattern="^.reboot(?: |$)(.*)")
+async def upstream(ups):
+    await ups.edit('`Rebooting...`')
+    args = [sys.executable, "-m", "tg_userbot"]
+    execle(sys.executable, *args, environ)
+    await ups.edit("`Sucessfully rebooted!`")
+    return
 
 CMD_HELP.update(
     {"updater": "`.update`: Check if the main repository has any updates and show changelog if so.\
