@@ -35,7 +35,7 @@ async def get_user(event):  # fetch user, Zuckerburg's phone call
         previous_message = await event.get_reply_message()
         replied_user = await event.client(GetFullUserRequest(previous_message.from_id))
     else:
-        user = event.pattern_match.group(1)
+        user = event.pattern_match.group(1).split(' ', 2)[0]
         if user.isnumeric():
             user = int(user)
         if not user:
